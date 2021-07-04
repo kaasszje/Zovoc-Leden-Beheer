@@ -1,6 +1,6 @@
 @startuml
 'https://plantuml.com/class-diagram
-!theme materia
+'!theme materia
 class Lid {
     lidid: string
     achternaam: string
@@ -45,7 +45,11 @@ enum eKlasse {
 
 Team - eKlasse
 Lid "6..*" o-- "1" Team : Lid van
-
+TrainMoment "1" --o "*" Lid : Traint op
+Lid "0..1" --o "1" TrainMoment :  : Geeft training aan
+Lid - Adres
+TrainMoment - Adres
+Team "1" --o "1" TrainMoment
 
 
 'abstract class AbstractList
