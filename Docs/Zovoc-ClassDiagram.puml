@@ -1,0 +1,74 @@
+@startuml
+'https://plantuml.com/class-diagram
+!theme materia
+class Lid {
+    lidid: string
+    achternaam: string
+    voornaam: string
+    tussenvoegsel: strnig
+    adres: Adres
+    telefoonnummer: string
+    email: String
+    team: Team
+}
+
+class Team {
+    teamid: string
+    naam: string
+    klass: eKlasse
+    trainMoment: TrainMoment
+}
+
+class Adres {
+    straatnaam: string
+    huisnummer: int
+    huisnummertoevoeging: string
+    postcode: string
+    plaats: string
+}
+
+class TrainMoment {
+    locatieNaam: string
+    adres: Adres
+    telefoonnummer: string
+    trainDag: string
+    trainTijd: string
+    trainer: Lid
+}
+
+enum eKlasse {
+    JUNIOR
+      SENIOR
+      PROMOTIE
+      EREDIVISIE
+}
+
+Team - eKlasse
+Lid "6..*" o-- "1" Team : Lid van
+
+
+
+'abstract class AbstractList
+'abstract AbstractCollection
+'interface List
+'interface Collection
+'
+'List <|-- AbstractList
+'Collection <|-- AbstractCollection
+'
+'Collection <|- List
+'AbstractCollection <|- AbstractList
+'AbstractList <|-- ArrayList
+'
+'class ArrayList {
+'Object[] elementData
+'size()
+'}
+'
+'enum TimeUnit {
+'DAYS
+'HOURS
+'MINUTES
+'}
+
+@enduml
