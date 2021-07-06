@@ -1,9 +1,11 @@
-package nl.fam_krijgsman.zovoc.testdata;
+package nl.fam_krijgsman.zovoctester.model;
 
-public class UserLoginTest {
-    static Users users = new Users();
+import nl.fam_krijgsman.zovoc.model.UserLoginModel;
 
-    public static void main(String[] args) {
+public class UserLoginModelTest {
+    static UserLoginModel userLoginModel = new UserLoginModel();
+
+    public static void test() {
         // test 1 niet bestaande gebruiker
         String user = "test";
         String password = "test";
@@ -31,8 +33,8 @@ public class UserLoginTest {
 
     }
 
-    public static void checkLogin(String user, String password) {
-        if (users.checkLogin(user, password)) {
+    private static void checkLogin(String user, String password) {
+        if (userLoginModel.isValidLogin(user, password)) {
             System.out.println("goed");
         } else {
             System.out.println("fout");

@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoc.enums;
+package nl.fam_krijgsman.zovoc.model.enums;
 
 public enum eKlasse {
     JUNIOR,
