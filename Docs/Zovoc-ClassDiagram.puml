@@ -43,6 +43,11 @@ enum eKlasse {
       EREDIVISIE
 }
 
+class User {
+    gebruikersnaam: string
+    wachtwoord: string
+}
+
 Team - eKlasse
 Lid "6..*" o-- "1" Team : Lid van
 TrainMoment "1" --o "*" Lid : Traint op

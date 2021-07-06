@@ -1,5 +1,7 @@
 package nl.fam_krijgsman.zovoc.gui;
 
+import nl.fam_krijgsman.zovoc.testdata.Users;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,19 +9,22 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class LoginScreenFrame extends JFrame {
+public class LoginScreenFrame extends JFrame implements ActionListener {
+    private Users users;
     static ImageIcon logo, icon;
     static JButton loginButton;
     static JTextField userField;
     static JPasswordField passField;
-    static JLabel userLabel, passLabel, logoLabel;
+    static JLabel userLabel, passLabel, logoLabel, alertLabel;
     static JPanel topPanel, centerPanel, bottomPanel;
 
-    public LoginScreenFrame(){
+    public LoginScreenFrame(Users users){
+        this.users = users;
         topPanel = new JPanel();
 
         //Create logo fot label en setup label
-        logo = new ImageIcon("Images/Zovoc_logo.png", "Zovoc Logo");
+        logo = new ImageIcon(LoginScreenFrame.class.getResource("/Images/Zovoc_logo.png"));
+
         logoLabel = new JLabel();
         logoLabel.setIcon(logo);
         logoLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -73,22 +78,21 @@ public class LoginScreenFrame extends JFrame {
         loginButton = new JButton("Login");
         loginButton.setHorizontalAlignment(JButton.CENTER);
         loginButton.setSize(30,20);
-        loginButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // Validate login
-                JOptionPane.showMessageDialog(null,"You are logged in.");
-            }
-        });
+        loginButton.addActionListener(this);
+
+        alertLabel = new JLabel("");
+        alertLabel.setHorizontalAlignment(JLabel.RIGHT);
+        alertLabel.setHorizontalTextPosition(JLabel.RIGHT);
 
         bottomPanel = new JPanel();
         bottomPanel.setLayout(new FlowLayout());
         bottomPanel.add(loginButton);
+        bottomPanel.add(alertLabel);
 
 
 
         //Setup frame
-        icon = new ImageIcon("Images/Icon.PNG");
+        icon = new ImageIcon(LoginScreenFrame.class.getResource("/Images/Icon.PNG"));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLayout(new BorderLayout());
         this.setIconImage(icon.getImage());
@@ -101,5 +105,22 @@ public class LoginScreenFrame extends JFrame {
         this.pack();
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        alertLabel.setText("");
+        if (e.getSource()==loginButton) {
+            String user = userField.getText();
+            String password = String.valueOf(passField.getPassword());
+            if (users.checkLogin(user, password)) {
+                new BeheerScreenFrame(user);
+                dispose();
+            } else {
+                alertLabel.setText("Bad login.");
+                alertLabel.setForeground(Color.RED);
+            }
+
+        }
     }
 }
