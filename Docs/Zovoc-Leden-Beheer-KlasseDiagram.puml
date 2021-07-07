@@ -1,0 +1,84 @@
+@startuml
+'https://plantuml.com/class-diagram
+'!theme materia
+left to right direction
+class Vereniging {
+    -naam: String
+    -leden: ArrayList<Lid>
+    -teams: ArrayList<Team>
+    +Vereniging(naam): void
+    +getLeden(): ArrayList<Lid>
+    +addLid(Lid): boolean
+    +removeLid(Lid): boolean
+    +findLid(achternaam, geboorteDatum): Lid
+    +findLid(achternaam): ArrayList<Lid>
+    +addTeam(Team): boolean
+    +removeTeam(Team): boolean
+    +findTeam(naam): Team
+    +aantalLeden(): Integer
+}
+
+class Lid {
+    -achterNaam: String
+    -voorNaam: String
+    -tussenVoegsel: String
+    -adres: Adres
+    -telefoonNummer: String
+    -email: String
+    -geboorteDatum: Date
+    -team: Team
+    +Lid(alle attributen - team): void
+    +getSamenGesteldeNaam(): String
+    +getAchterNaam(): String
+    +getVoorNaam(): String
+    +gettussenVoegsel(): String
+    +getAdres(): Adres
+    +getTelefoonnummer(): String
+    +getEmail(): String
+    +getGeboorteDatum(): Date
+    +getTeam(): Team
+    +setTeam(team): boolean
+}
+
+class Team {
+    -naam: String
+    -klasse: eKlasse
+    +Team(naam, klasse): void
+    +getNaam(): String
+    +getKlasse(): eKlasse
+}
+
+class Adres {
+    -straatNaam: String
+    -huisNummer: Integer
+    -huisNummertoevoeging: String
+    -postCode: String
+    -plaats: String
+    +Adres(alle attributen): void
+    +getAdres(): Adres
+    +getStraatNaam(): String
+    +getHuisNummer(): Integer
+    +getHuisNummerToevoeging(): String
+    +getPostCode(): String
+    +getPlaats(): String
+}
+
+enum eKlasse {
+      JUNIOR
+      SENIOR
+      PROMOTIE
+      EREDIVISIE
+      +toString(): String
+}
+
+class User {
+    gebruikersnaam: String
+    wachtwoord: String
+}
+
+Team <|- eKlasse
+Lid "6..*" *-- "1" Team : > Onderdeel van
+Vereniging "1" *-- "*" Lid : < Lid van
+Lid "*" o- "1" Adres
+
+@enduml
