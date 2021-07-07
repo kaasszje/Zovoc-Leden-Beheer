@@ -3,12 +3,12 @@ package nl.fam_krijgsman.zovoc.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class BeheerScreenFrame extends JFrame {
+public class BeheerView extends JFrame {
     JLabel text, header;
     ImageIcon icon;
     String user;
 
-    public BeheerScreenFrame(String user) {
+    public BeheerView(String user) {
         this.user = user.substring(0,1).toUpperCase() + user.substring(1).toLowerCase();
         text = new JLabel("Succesvol ingelogt");
         text.setBackground(Color.GREEN);
@@ -22,7 +22,7 @@ public class BeheerScreenFrame extends JFrame {
         add(header, BorderLayout.NORTH);
 
         try {
-            icon = new ImageIcon(BeheerScreenFrame.class.getResource("/Images/Icon.PNG"));
+            icon = new ImageIcon(BeheerView.class.getResource("/Images/Icon.PNG"));
         } catch (NullPointerException e) {
             icon = null;
         }

@@ -2,19 +2,20 @@
 'https://plantuml.com/class-diagram
 '!theme materia
 left to right direction
+package DataModel {
 class Vereniging {
     -naam: String
     -leden: ArrayList<Lid>
     -teams: ArrayList<Team>
-    +Vereniging(naam): void
+    +Vereniging(naam)
+    +getNaam(): String
     +getLeden(): ArrayList<Lid>
+    -findLid(Lid): boolean
     +addLid(Lid): boolean
     +removeLid(Lid): boolean
-    +findLid(achternaam, geboorteDatum): Lid
-    +findLid(achternaam): ArrayList<Lid>
+    -findTeam(naam): Team
     +addTeam(Team): boolean
-    +removeTeam(Team): boolean
-    +findTeam(naam): Team
+    +removeTeam(naam): boolean
     +aantalLeden(): Integer
 }
 
@@ -27,7 +28,7 @@ class Lid {
     -email: String
     -geboorteDatum: Date
     -team: Team
-    +Lid(alle attributen - team): void
+    +Lid(alle attributen - team)
     +getSamenGesteldeNaam(): String
     +getAchterNaam(): String
     +getVoorNaam(): String
@@ -43,7 +44,7 @@ class Lid {
 class Team {
     -naam: String
     -klasse: eKlasse
-    +Team(naam, klasse): void
+    +Team(naam, klasse)
     +getNaam(): String
     +getKlasse(): eKlasse
 }
@@ -51,14 +52,12 @@ class Team {
 class Adres {
     -straatNaam: String
     -huisNummer: Integer
-    -huisNummertoevoeging: String
     -postCode: String
     -plaats: String
-    +Adres(alle attributen): void
+    +Adres(alle attributen)
     +getAdres(): Adres
     +getStraatNaam(): String
     +getHuisNummer(): Integer
-    +getHuisNummerToevoeging(): String
     +getPostCode(): String
     +getPlaats(): String
 }
@@ -70,10 +69,6 @@ enum eKlasse {
       EREDIVISIE
       +toString(): String
 }
-
-class User {
-    gebruikersnaam: String
-    wachtwoord: String
 }
 
 Team <|- eKlasse
