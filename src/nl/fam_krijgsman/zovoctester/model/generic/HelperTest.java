@@ -1,25 +1,30 @@
 package nl.fam_krijgsman.zovoctester.model.generic;
 
+import nl.fam_krijgsman.zovoc.generic.Helper;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelperTester {
-    public static void emailCheck() {
-        System.out.println("Email checks:");
+import static org.junit.jupiter.api.Assertions.*;
+
+class HelperTest {
+
+    @org.junit.jupiter.api.Test
+    void checkEmail() {
         List<String> emails = new ArrayList<>();
         //Valid emails
+
+
         emails.add("user@domain.com");
         emails.add("user@domain.co.in");
         emails.add("user.name@domain.com");
         emails.add("user_name@domain.com");
         emails.add("username@yahoo.corporate.in");
-
-        System.out.println("All should be valid:");
-        for (String email : emails) {
-            System.out.println(email + " : " + nl.fam_krijgsman.zovoc.generic.Helper.checkEmail(email));
+        for (String email: emails) {
+            assertTrue(Helper.checkEmail(email));
         }
 
-        System.out.println();
         emails = new ArrayList<>();
 
         //Invalid emails
@@ -28,15 +33,13 @@ public class HelperTester {
         emails.add("username@yahoo..com");
         emails.add("username@yahoo.c");
         emails.add("username@yahoo.corporate");
-
-        System.out.println("All should be invalid:");
-        for (String email : emails) {
-            System.out.println(email + " : " + nl.fam_krijgsman.zovoc.generic.Helper.checkEmail(email));
+        for (String email: emails) {
+            assertFalse(Helper.checkEmail(email));
         }
-
     }
 
-    public static void phoneCheck() {
+    @org.junit.jupiter.api.Test
+    void checkPhoneNumber() {
         List<String> phoneNumbers = new ArrayList<>();
         //Local notation:
         phoneNumbers.add("0101234567");
@@ -48,12 +51,10 @@ public class HelperTester {
         phoneNumbers.add("0111-123456");
         phoneNumbers.add("0111 123456");
 
-        System.out.println("All local should be valid:");
         for (String phoneNumber : phoneNumbers) {
-            System.out.println(phoneNumber + " : " + nl.fam_krijgsman.zovoc.generic.Helper.checkPhoneNumber(phoneNumber));
+            assertTrue(Helper.checkPhoneNumber(phoneNumber));
         }
 
-        System.out.println();
         phoneNumbers = new ArrayList<>();
 
         //International notation:
@@ -69,9 +70,9 @@ public class HelperTester {
 
         System.out.println("All international should be valid:");
         for (String phoneNumber : phoneNumbers) {
-            System.out.println(phoneNumber + " : " + nl.fam_krijgsman.zovoc.generic.Helper.checkPhoneNumber(phoneNumber));
+            assertTrue(Helper.checkPhoneNumber(phoneNumber));
         }
-        System.out.println();
+
         phoneNumbers = new ArrayList<>();
 
         //Invalid
@@ -87,7 +88,14 @@ public class HelperTester {
         phoneNumbers.add("0800-5555");
         System.out.println("All should be invalid:");
         for (String phoneNumber : phoneNumbers) {
-            System.out.println(phoneNumber + " : " + nl.fam_krijgsman.zovoc.generic.Helper.checkPhoneNumber(phoneNumber));
+            assertFalse(Helper.checkPhoneNumber(phoneNumber));
         }
     }
+
+    @Test
+    void getVerenigingNaam() {
+        assertEquals("Zovoc", Helper.getVerenigingNaam());
+    }
+
 }
+
