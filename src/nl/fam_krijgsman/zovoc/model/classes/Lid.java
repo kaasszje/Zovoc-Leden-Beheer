@@ -1,9 +1,9 @@
 package nl.fam_krijgsman.zovoc.model.classes;
 
+import nl.fam_krijgsman.zovoc.generic.Helper;
 import nl.fam_krijgsman.zovoc.model.enums.eKlasse;
 
 import java.time.Year;
-import java.util.Date;
 
 public class Lid {
     private String achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email;
@@ -15,8 +15,12 @@ public class Lid {
         this.achterNaam = achterNaam;
         this.voorNaam = voorNaam;
         this.tussenVoegsel = tussenVoegsel;
-        this.telefoonNummer = telefoonNummer;
-        this.email = email;
+
+        //Controlle op valide telefoonnummer
+        this.setTelefoonNummer(telefoonNummer);
+        //Controlle op valide email
+        this.setEmail(email);
+
         this.adres = adres;
         this.geboorteJaar = geboorteJaar;
     }
@@ -65,5 +69,41 @@ public class Lid {
         } else {
             this.team = team;
         }
+    }
+
+    public void setAchterNaam(String achterNaam) {
+        this.achterNaam = achterNaam;
+    }
+
+    public void setVoorNaam(String voorNaam) {
+        this.voorNaam = voorNaam;
+    }
+
+    public void setTussenVoegsel(String tussenVoegsel) {
+        this.tussenVoegsel = tussenVoegsel;
+    }
+
+    public void setTelefoonNummer(String telefoonNummer) {
+        if (Helper.checkPhoneNumber(telefoonNummer)) {
+            this.telefoonNummer = telefoonNummer;
+        } else {
+            this.telefoonNummer = null;
+        }
+    }
+
+    public void setEmail(String email) {
+        if (Helper.checkEmail(email)) {
+            this.email = email;
+        } else {
+            this.email = null;
+        }
+    }
+
+    public void setAdres(Adres adres) {
+        this.adres = adres;
+    }
+
+    public void setGeboorteJaar(int geboorteJaar) {
+        this.geboorteJaar = geboorteJaar;
     }
 }

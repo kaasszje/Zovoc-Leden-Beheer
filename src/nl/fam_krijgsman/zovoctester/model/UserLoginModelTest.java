@@ -35,9 +35,9 @@ public class UserLoginModelTest {
 
     private static void checkLogin(String user, String password) {
         if (userLoginModel.isValidLogin(user, password)) {
-            System.out.println("goed");
+            System.out.println(user + " : " + "goed");
         } else {
-            System.out.println("fout");
+            System.out.println(user + " : " + "fout");
         }
     }
 }

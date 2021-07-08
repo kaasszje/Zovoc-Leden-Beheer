@@ -9,7 +9,7 @@ class UserLoginModel {
     isValidLogin(user,password): boolean
 }
 
-class UserLoginView {
+class UserLoginView extends JFrame {
     -logo, icon: ImageIcon
     -loginButton: JButton
     -userField: JTextField
@@ -30,14 +30,21 @@ class UserLoginView {
 class UserLoginController {
     -userLoginView: UserLoginView
     -userLoginModel: UserLoginModel
-    UserLoginController(userLoginView, userLoginModel)
-    UserLoginFocusListener() : class
-    UserLoginActionListener(): class
+}
 
+class UserLoginFocusListener implements FocusListener {
+    focusGained(FocusEvent): void
+    focusLost(FocusEvent): void
+}
+
+class UserLoginActionListener implements ActionListener {
+    actionPerformed(ActionEvent)
 }
 
 UserLoginView --o UserLoginController
 UserLoginModel --o UserLoginController
+UserLoginActionListener --+ UserLoginController : innerclass >
+UserLoginFocusListener --+ UserLoginController : innerclass >
 
 }
 

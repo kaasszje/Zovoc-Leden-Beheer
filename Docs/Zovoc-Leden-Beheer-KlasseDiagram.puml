@@ -26,7 +26,7 @@ class Lid {
     -adres: Adres
     -telefoonNummer: String
     -email: String
-    -geboorteDatum: Date
+    -geboorteJaar: Integer
     -team: Team
     +Lid(alle attributen - team)
     +getSamenGesteldeNaam(): String
@@ -36,9 +36,16 @@ class Lid {
     +getAdres(): Adres
     +getTelefoonnummer(): String
     +getEmail(): String
-    +getGeboorteDatum(): Date
+    +getGeboorteJaar(): Integer
     +getTeam(): Team
     +setTeam(team): boolean
+    +setAchternaam(String): void
+    +setvoorNaam(String): void
+    +setTussenVoegsel(String): void
+    +setAdres(Adres): void
+    +setTelefoonNummer(String): void
+    +setEmail(String): void
+    +setGeboorteJaar(Interger): void
 }
 
 class Team {

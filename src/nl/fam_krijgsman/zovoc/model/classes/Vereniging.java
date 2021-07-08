@@ -26,8 +26,12 @@ public class Vereniging {
     }
 
     private Lid findLid(Lid lid) {
-        for (Lid currentLid : leden) {
-            if (currentLid.equals(lid)) {
+        return findLid(lid.getAchterNaam(), lid.getVoorNaam());
+    }
+
+    private Lid findLid(String achterNaam, String voorNaam) {
+        for (Lid lid : leden) {
+            if ((lid.getAchterNaam().equals(achterNaam)) && (lid.getVoorNaam().equals(voorNaam))) {
                 return lid;
             }
         }
@@ -55,8 +59,12 @@ public class Vereniging {
     }
 
     private Team findTeam(Team team) {
-        for (Team currentTeam: teams) {
-            if (currentTeam.equals(team)) {
+        return findTeam(team.getNaam());
+    }
+
+    private Team findTeam(String naam) {
+        for (Team team: teams) {
+            if (team.getNaam().equals(naam)) {
                 return team;
             }
         }
