@@ -1,7 +1,7 @@
 package nl.fam_krijgsman.zovoc.controller;
 
+import nl.fam_krijgsman.zovoc.MVC.MVCBeheer;
 import nl.fam_krijgsman.zovoc.model.UserLoginModel;
-import nl.fam_krijgsman.zovoc.view.BeheerView;
 import nl.fam_krijgsman.zovoc.view.UserLoginView;
 
 import java.awt.event.ActionEvent;
@@ -42,12 +42,13 @@ public class UserLoginController {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == userLoginView.getLoginButton()) {
                 if (userLoginModel.isValidLogin(userLoginView.getUserField(), userLoginView.getPassField())) {
-                    new BeheerView(userLoginView.getUserField());
                     userLoginView.dispose();
+                    MVCBeheer.startBeheer(userLoginView.getUserField());
                 } else {
                     userLoginView.displayErrorMessage("User and / or password are in correct.");
                     userLoginView.setUserField("");
                     userLoginView.setPassField("");
+                    userLoginView.focusUserField();
                 }
             }
         }

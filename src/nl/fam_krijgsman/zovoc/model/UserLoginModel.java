@@ -12,7 +12,7 @@ public class UserLoginModel {
         userLogins.put("martijn","test");
     }
 
-    public boolean isValidLogin(String user, String password) {
+    public final boolean isValidLogin(String user, String password) {
         try {
             return userLogins.get(user).equals(password);
         } catch (NullPointerException e) {
