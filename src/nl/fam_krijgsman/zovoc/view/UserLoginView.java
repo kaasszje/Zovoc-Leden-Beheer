@@ -88,6 +88,8 @@ public class UserLoginView extends JFrame {
         this.setResizable(false);
         this.pack();
         this.setLocationRelativeTo(null);
+        this.getRootPane().setDefaultButton(loginButton);
+        this.setVisible(true);
     }
 
     public String getUserField() {
@@ -120,5 +122,9 @@ public class UserLoginView extends JFrame {
 
     public JButton getLoginButton() {
         return loginButton;
+    }
+
+    public void focusUserField(){
+        this.userField.requestFocus();
     }
 }

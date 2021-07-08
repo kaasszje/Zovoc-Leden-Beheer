@@ -4,6 +4,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Helper {
+    private static final String verenigingNaam = "Zovoc";
+
     public static boolean checkEmail(String email) {
         //email regex:
         String regex = "^[\\w!#$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}$";
@@ -18,5 +20,9 @@ public class Helper {
         Pattern p = Pattern.compile(regex);
         Matcher m = p.matcher(phone);
         return m.matches();
+    }
+
+    public static String getVerenigingNaam() {
+        return Helper.verenigingNaam;
     }
 }
