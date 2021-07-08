@@ -1,14 +1,14 @@
-package nl.fam_krijgsman.zovoc.gui;
+package nl.fam_krijgsman.zovoc.view;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class BeheerScreenFrame extends JFrame {
+public class BeheerView extends JFrame {
     JLabel text, header;
     ImageIcon icon;
     String user;
 
-    public BeheerScreenFrame(String user) {
+    public BeheerView(String user) {
         this.user = user.substring(0,1).toUpperCase() + user.substring(1).toLowerCase();
         text = new JLabel("Succesvol ingelogt");
         text.setBackground(Color.GREEN);
@@ -21,7 +21,11 @@ public class BeheerScreenFrame extends JFrame {
         add(text, BorderLayout.CENTER);
         add(header, BorderLayout.NORTH);
 
-        icon = new ImageIcon(LoginScreenFrame.class.getResource("/Images/Icon.PNG"));
+        try {
+            icon = new ImageIcon(BeheerView.class.getResource("/Images/Icon.PNG"));
+        } catch (NullPointerException e) {
+            icon = null;
+        }
         this.setBackground(Color.GREEN);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //this.setLayout(new BorderLayout());

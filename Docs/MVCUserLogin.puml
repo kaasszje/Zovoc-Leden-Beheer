@@ -1,0 +1,51 @@
+@startuml
+'https://plantuml.com/class-diagram
+
+
+package MVCUserLogin {
+class UserLoginModel {
+    userLogins: HashMap<user,password>
+    UserLoginModel()
+    isValidLogin(user,password): boolean
+}
+
+class UserLoginView extends JFrame {
+    -logo, icon: ImageIcon
+    -loginButton: JButton
+    -userField: JTextField
+    -passField: JPasswordField
+    -userLabel, passLabel, logoLabel: JLabel
+    -topPanel, centerPanel, bottomPanel: JPanel
+    +UserLoginView()
+    +getUserField(): String
+    +getPassField(): String
+    +setUserField(userFieldText): void
+    +setPassField(passFieldText): void
+    +displayErrorMessage(errorMessage): void
+    +loginActionListener(listenForLoginButton): void
+    +userTextFocusListener(userTextFieldFocusListener): void
+    +getLoginButton(): JButton
+}
+
+class UserLoginController {
+    -userLoginView: UserLoginView
+    -userLoginModel: UserLoginModel
+}
+
+class UserLoginFocusListener implements FocusListener {
+    focusGained(FocusEvent): void
+    focusLost(FocusEvent): void
+}
+
+class UserLoginActionListener implements ActionListener {
+    actionPerformed(ActionEvent)
+}
+
+UserLoginView --o UserLoginController
+UserLoginModel --o UserLoginController
+UserLoginActionListener --+ UserLoginController : innerclass >
+UserLoginFocusListener --+ UserLoginController : innerclass >
+
+}
+
+@enduml

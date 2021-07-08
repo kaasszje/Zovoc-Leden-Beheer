@@ -1,11 +1,8 @@
 <component name="ArtifactManager">
-  <artifact type="jar" name="Zovoc Leden Beheer:jar">
+  <artifact type="jar" name="Zovoc-Leden-Beheer:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Zovoc_Leden_Beheer_jar</output-path>
-    <root id="archive" name="Zovoc Leden Beheer.jar">
-      <element id="module-output" name="Zovoc Leden Beheer" />
-      <element id="directory" name="Images">
-        <element id="dir-copy" path="$PROJECT_DIR$/Images" />
-      </element>
+    <root id="archive" name="Zovoc-Leden-Beheer.jar">
+      <element id="module-output" name="Zovoc-Leden-Beheer" />
     </root>
   </artifact>
 </component>
