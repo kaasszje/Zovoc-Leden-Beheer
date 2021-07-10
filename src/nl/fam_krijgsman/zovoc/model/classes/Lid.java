@@ -92,11 +92,7 @@ public class Lid {
             default:
                 isGoedeGeslacht = true;
         }
-        if ((isGoedeGeslacht) && (isGoedeLeeftijd)) {
-            return true;
-        } else {
-            return false;
-        }
+        return ((isGoedeGeslacht) && (isGoedeLeeftijd));
     }
 
     public void setAchterNaam(String achterNaam) {
