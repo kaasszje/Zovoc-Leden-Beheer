@@ -2,6 +2,7 @@ package nl.fam_krijgsman.zovoctester.model.classes;
 
 import nl.fam_krijgsman.zovoc.model.classes.Lid;
 import nl.fam_krijgsman.zovoc.model.classes.Team;
+import nl.fam_krijgsman.zovoc.model.classes.Vereniging;
 import nl.fam_krijgsman.zovoc.model.enums.eGeslacht;
 import nl.fam_krijgsman.zovoc.model.enums.eKlasse;
 import org.junit.jupiter.api.Test;

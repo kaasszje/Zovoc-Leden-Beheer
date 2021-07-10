@@ -10,10 +10,11 @@ class Vereniging {
     +Vereniging(naam)
     +getNaam(): String
     +getLeden(): ArrayList<Lid>
-    -findLid(Lid): boolean
+    -findLid(Lid): Lid
+    +findLid(achterNaam, voorNaam): Lid
     +addLid(Lid): boolean
     +removeLid(Lid): boolean
-    -findTeam(naam): Team
+    +findTeam(naam): Team
     +addTeam(Team): boolean
     +removeTeam(naam): boolean
     +aantalLeden(): Integer

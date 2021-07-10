@@ -1,9 +1,7 @@
 package nl.fam_krijgsman.zovoctester.model;
 
-import nl.fam_krijgsman.zovoc.controller.UserLoginController;
 import nl.fam_krijgsman.zovoc.model.UserLoginModel;
-import nl.fam_krijgsman.zovoc.testdata.UserLoginData;
-import nl.fam_krijgsman.zovoc.view.UserLoginView;
+import nl.fam_krijgsman.zovoc.data.UserLoginData;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

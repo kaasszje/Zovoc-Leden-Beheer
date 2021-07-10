@@ -2,7 +2,7 @@ package nl.fam_krijgsman.zovoc.controller;
 
 import nl.fam_krijgsman.zovoc.MVC.MVCBeheer;
 import nl.fam_krijgsman.zovoc.model.UserLoginModel;
-import nl.fam_krijgsman.zovoc.testdata.UserLoginData;
+import nl.fam_krijgsman.zovoc.data.UserLoginData;
 import nl.fam_krijgsman.zovoc.view.UserLoginView;
 
 import java.awt.event.ActionEvent;
