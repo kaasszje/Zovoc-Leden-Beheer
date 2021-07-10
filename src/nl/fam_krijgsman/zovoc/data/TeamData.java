@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoc.testdata;
+package nl.fam_krijgsman.zovoc.data;
 
 import nl.fam_krijgsman.zovoc.model.classes.Team;
 import nl.fam_krijgsman.zovoc.model.classes.Vereniging;
