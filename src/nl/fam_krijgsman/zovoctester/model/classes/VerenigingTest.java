@@ -19,6 +19,7 @@ class VerenigingTest {
         vereniging = new Vereniging("test");
         vereniging.addLid(lid);
         assertEquals(lid, vereniging.findLid(lid.getAchterNaam(), lid.getVoorNaam()));
+        assertNull(vereniging.findLid("ik besta", "niet"));
     }
 
     @Test
@@ -34,12 +35,15 @@ class VerenigingTest {
         vereniging = new Vereniging("test");
         // vereniging mag nog geen leden bevatten
         assertEquals(0,vereniging.getLeden().size());
-        vereniging.addLid(lid);
+        assertTrue(vereniging.addLid(lid));
         //na toevoeging moet er 1 lid zijn
         assertEquals(1, vereniging.getLeden().size());
-        vereniging.removeLid(lid);
+        assertTrue(vereniging.removeLid(lid));
         // nu wederom 0 leden
         assertEquals(0, vereniging.getLeden().size());
+
+        // een nietbestaand lid kan niet worden verwijderd
+        assertFalse(vereniging.removeLid(lid));
     }
 
     @Test
@@ -47,6 +51,7 @@ class VerenigingTest {
         vereniging = new Vereniging("test");
         vereniging.addTeam(team);
         assertEquals(team, vereniging.findTeam(team.getNaam()));
+        assertNull(vereniging.findTeam("niet bestaand team"));
     }
 
     @Test
@@ -61,11 +66,15 @@ class VerenigingTest {
         vereniging = new Vereniging("test");
         assertEquals(0, vereniging.getTeams().size());
 
-        vereniging.addTeam(team);
+        assertTrue(vereniging.addTeam(team));
         assertEquals(1, vereniging.getTeams().size());
 
-        vereniging.removeTeam(team);
+        assertTrue(vereniging.removeTeam(team));
         assertEquals(0, vereniging.getTeams().size());
+
+        // Een niet bestand team kan niet worden verwijderd
+        assertFalse(vereniging.removeTeam(team));
+
     }
 
     @Test
@@ -79,4 +88,29 @@ class VerenigingTest {
     }
 
 
+    @Test
+    void getNaam() {
+        vereniging = new Vereniging("test");
+        assertEquals("test", vereniging.getNaam());
+    }
+
+    @Test
+    void getLeden() {
+        vereniging = new Vereniging("test");
+        for (int i=0;i<10;i++) {
+            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", null, 1981, eGeslacht.MAN);
+            vereniging.addLid(lid);
+        }
+        assertEquals(10, vereniging.getLeden().size());
+    }
+
+    @Test
+    void getTeams() {
+        vereniging = new Vereniging("test");
+        for (int i=0; i<10;i++) {
+            team = new Team("team" + i,eKlasse.SENIOR, eGeslacht.VROUW);
+            vereniging.addTeam(team);
+        }
+        assertEquals(10, vereniging.getTeams().size());
+    }
 }

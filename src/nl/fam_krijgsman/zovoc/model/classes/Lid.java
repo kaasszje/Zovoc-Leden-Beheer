@@ -22,8 +22,6 @@ public class Lid {
         this.voorNaam = voorNaam;
         this.tussenVoegsel = tussenVoegsel;
 
-
-
         //Controlle op valide telefoonnummer
         this.setTelefoonNummer(telefoonNummer);
         //Controlle op valide email
@@ -92,7 +90,12 @@ public class Lid {
             default:
                 isGoedeGeslacht = true;
         }
-        return ((isGoedeGeslacht) && (isGoedeLeeftijd));
+        if ((isGoedeGeslacht) && (isGoedeLeeftijd)) {
+            this.team = team;
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void setAchterNaam(String achterNaam) {
