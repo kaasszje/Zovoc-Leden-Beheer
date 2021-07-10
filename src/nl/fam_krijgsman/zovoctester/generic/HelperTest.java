@@ -14,8 +14,6 @@ class HelperTest {
     void checkEmail() {
         List<String> emails = new ArrayList<>();
         //Valid emails
-
-
         emails.add("user@domain.com");
         emails.add("user@domain.co.in");
         emails.add("user.name@domain.com");
