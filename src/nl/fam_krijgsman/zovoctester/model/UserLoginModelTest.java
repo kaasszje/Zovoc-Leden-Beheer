@@ -1,6 +1,9 @@
 package nl.fam_krijgsman.zovoctester.model;
 
+import nl.fam_krijgsman.zovoc.controller.UserLoginController;
 import nl.fam_krijgsman.zovoc.model.UserLoginModel;
+import nl.fam_krijgsman.zovoc.testdata.UserLoginData;
+import nl.fam_krijgsman.zovoc.view.UserLoginView;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,6 +14,8 @@ class UserLoginModelTest {
     void isValidLogin() {
         // test 1 niet bestaande gebruiker
         UserLoginModel userLoginModel = new UserLoginModel();
+        UserLoginData.addTestUsers(userLoginModel);
+
         String user = "test";
         String password = "test";
         assertFalse(userLoginModel.isValidLogin(user, password));

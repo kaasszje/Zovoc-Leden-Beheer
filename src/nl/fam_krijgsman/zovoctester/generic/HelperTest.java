@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoctester.model.generic;
+package nl.fam_krijgsman.zovoctester.generic;
 
 import nl.fam_krijgsman.zovoc.generic.Helper;
 import org.junit.jupiter.api.Test;
@@ -33,6 +33,8 @@ class HelperTest {
         emails.add("username@yahoo..com");
         emails.add("username@yahoo.c");
         emails.add("username@yahoo.corporate");
+        emails.add("");
+        emails.add(null);
         for (String email: emails) {
             assertFalse(Helper.checkEmail(email));
         }
@@ -68,7 +70,6 @@ class HelperTest {
         phoneNumbers.add("+31111-123456");
         phoneNumbers.add("0031111-123456");
 
-        System.out.println("All international should be valid:");
         for (String phoneNumber : phoneNumbers) {
             assertTrue(Helper.checkPhoneNumber(phoneNumber));
         }
@@ -86,7 +87,8 @@ class HelperTest {
         phoneNumbers.add("0900-1234"); //(paid service numbers)
         phoneNumbers.add("0906-12345"); //(paid service numbers)");
         phoneNumbers.add("0800-5555");
-        System.out.println("All should be invalid:");
+        phoneNumbers.add("");
+        phoneNumbers.add(null);
         for (String phoneNumber : phoneNumbers) {
             assertFalse(Helper.checkPhoneNumber(phoneNumber));
         }
@@ -97,5 +99,10 @@ class HelperTest {
         assertEquals("Zovoc", Helper.getVerenigingNaam());
     }
 
+    @Test
+    void isNotNull() {
+        String test = null;
+
+    }
 }
 

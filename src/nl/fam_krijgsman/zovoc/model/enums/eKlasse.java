@@ -1,8 +1,15 @@
 package nl.fam_krijgsman.zovoc.model.enums;
 
 public enum eKlasse {
-    JUNIOR,
-    SENIOR,
-    PROMOTIE,
-    EREDIVISIE,
+    JUNIOR("Junior"), SENIOR("Senior"), PROMOTIE("Promotie"), EREDIVISIE("Eredivisie");
+    String naam;
+
+    eKlasse(String naam) {
+        this.naam = naam;
+    }
+
+    @Override
+    public String toString() {
+        return naam;
+    }
 }

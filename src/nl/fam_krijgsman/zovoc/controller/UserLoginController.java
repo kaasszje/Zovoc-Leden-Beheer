@@ -2,6 +2,7 @@ package nl.fam_krijgsman.zovoc.controller;
 
 import nl.fam_krijgsman.zovoc.MVC.MVCBeheer;
 import nl.fam_krijgsman.zovoc.model.UserLoginModel;
+import nl.fam_krijgsman.zovoc.testdata.UserLoginData;
 import nl.fam_krijgsman.zovoc.view.UserLoginView;
 
 import java.awt.event.ActionEvent;
@@ -17,6 +18,9 @@ public class UserLoginController {
     public UserLoginController(UserLoginView userLoginView, UserLoginModel userLoginModel) {
         this.userLoginView = userLoginView;
         this.userLoginModel = userLoginModel;
+
+        //fill test data
+        UserLoginData.addTestUsers(userLoginModel);
 
         this.userLoginView.setUserField(USERLOGINTEXT);
         this.userLoginView.loginActionListener(new UserLoginActionListener());

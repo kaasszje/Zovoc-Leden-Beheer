@@ -3,13 +3,11 @@ package nl.fam_krijgsman.zovoc.model;
 import java.util.HashMap;
 
 public class UserLoginModel {
-    private HashMap<String,String> userLogins = new HashMap<>();
+    private HashMap<String,String> userLogins;
 
     public UserLoginModel() {
         //add test data
-        userLogins.put("zovocuser","zovocpassword");
-        userLogins.put("admin","password");
-        userLogins.put("martijn","test");
+        userLogins = new HashMap<>();
     }
 
     public final boolean isValidLogin(String user, String password) {
@@ -18,5 +16,9 @@ public class UserLoginModel {
         } catch (NullPointerException e) {
             return false;
         }
+    }
+
+    public void setUserLogins(HashMap<String, String> userLogins) {
+        this.userLogins = userLogins;
     }
 }
