@@ -36,6 +36,7 @@ class LidTest {
 
         lid.setGeslacht(eGeslacht.MAN);
         assertTrue(lid.setTeam(team));
+        assertEquals(team, lid.getTeam());
     }
 
     @Test
