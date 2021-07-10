@@ -27,6 +27,7 @@ class Lid {
     -telefoonNummer: String
     -email: String
     -geboorteJaar: Integer
+    -geslacht: eGeslacht
     -team: Team
     +Lid(alle attributen - team)
     +getSamenGesteldeNaam(): String
@@ -37,6 +38,7 @@ class Lid {
     +getTelefoonnummer(): String
     +getEmail(): String
     +getGeboorteJaar(): Integer
+    +getGeslacht(): eGeslacht
     +getTeam(): Team
     +setTeam(team): boolean
     +setAchternaam(String): void
@@ -45,15 +47,19 @@ class Lid {
     +setAdres(Adres): void
     +setTelefoonNummer(String): void
     +setEmail(String): void
+    +setGeslacht(eGeslacht): void
     +setGeboorteJaar(Interger): void
 }
 
 class Team {
     -naam: String
     -klasse: eKlasse
-    +Team(naam, klasse)
+    -geslacht: eGeslacht
+    +Team(naam, klasse, geslacht)
     +getNaam(): String
     +getKlasse(): eKlasse
+    +getGeslacht(): eGeslacht
+
 }
 
 class Adres {
@@ -69,6 +75,15 @@ class Adres {
     +getPlaats(): String
 }
 
+package enum {
+enum eGeslacht {
+    MAN
+    VROUW
+    MIX
+    +toString(): String
+}
+
+
 enum eKlasse {
       JUNIOR
       SENIOR
@@ -76,9 +91,13 @@ enum eKlasse {
       EREDIVISIE
       +toString(): String
 }
+
+}
 }
 
 Team <|- eKlasse
+Team <|- eGeslacht
+Lid <|- eGeslacht
 Lid "6..*" *-- "1" Team : > Onderdeel van
 Vereniging "1" *-- "*" Lid : < Lid van
 Lid "*" o- "1" Adres
