@@ -98,9 +98,10 @@ class HelperTest {
     }
 
     @Test
-    void isNotNull() {
-        String test = null;
+    void isNotNullValid() {
+        assertEquals("test", Helper.isNotNull("test"));
 
+        assertThrows(IllegalArgumentException.class, () -> Helper.isNotNull(""));
     }
 }
 
