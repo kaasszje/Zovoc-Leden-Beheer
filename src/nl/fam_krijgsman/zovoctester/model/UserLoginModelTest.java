@@ -4,6 +4,8 @@ import nl.fam_krijgsman.zovoc.model.UserLoginModel;
 import nl.fam_krijgsman.zovoc.data.UserLoginData;
 import org.junit.jupiter.api.Test;
 
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserLoginModelTest {
@@ -12,25 +14,30 @@ class UserLoginModelTest {
     void isValidLogin() {
         // test 1 niet bestaande gebruiker
         UserLoginModel userLoginModel = new UserLoginModel();
-        UserLoginData.addTestUsers(userLoginModel);
+        HashMap<String,String> userLogins = new HashMap<>();
+        for (int i=0;i<10;i++){
+            userLogins.put("test"+i, "test"+i);
+        }
+        userLoginModel.setUserLogins(userLogins);
+
 
         String user = "test";
         String password = "test";
         assertFalse(userLoginModel.isValidLogin(user, password));
 
         // test 2 fout wachtwoord
-        user = "martijn";
-        password = "martijn";
+        user = "test1";
+        password = "test2";
         assertFalse(userLoginModel.isValidLogin(user, password));
 
         // test 3 valide inlog
-        user = "martijn";
-        password = "test";
+        user = "test1";
+        password = "test1";
         assertTrue(userLoginModel.isValidLogin(user, password));
 
         // test 4 valide inlog
-        user = "zovocuser";
-        password = "zovocpassword";
+        user = "test3";
+        password = "test3";
         assertTrue(userLoginModel.isValidLogin(user, password));
     }
 }
