@@ -1,21 +1,22 @@
 package nl.fam_krijgsman.zovoc.view;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class BeheerView extends JFrame {
     JLayeredPane switchPanel;
-    JPanel ledenPanel, teamPanel, welcomePanel;
-    JLabel text, header, ledenLabel, teamLabel, welcomeLabel;
+    JPanel ledenPanel, teamPanel, welcomePanel, headerPanel;
+    JLabel headerLabel, headerLabelCenter, ledenLabel, teamLabel, welcomeLabel;
     ImageIcon icon, logo;
-    String user;
+    String userName;
     JMenuBar menuBar;
     JMenu actionMenu;
     JMenuItem ledenMenuItem, teamMenuItem, exitMenuItem;
 
 
-    public BeheerView(String user) {
+    public BeheerView(String userName) {
         try {
             logo = new ImageIcon(UserLoginView.class.getResource("/Images/Zovoc_logo.png"));
         } catch (NullPointerException e) {
@@ -28,17 +29,26 @@ public class BeheerView extends JFrame {
             icon = null;
         }
 
-        this.user = user.substring(0,1).toUpperCase() + user.substring(1).toLowerCase();
-        text = new JLabel("Succesvol ingelogt");
-        text.setBackground(Color.GREEN);
+        this.userName = userName.substring(0,1).toUpperCase() + userName.substring(1).toLowerCase();
 
-        header = new JLabel("Welkom " + this.user);
-        header.setHorizontalAlignment(JLabel.CENTER);
-        header.setBackground(Color.GREEN);
+        headerLabel = new JLabel("Welkom " + this.userName);
+        headerLabel.setHorizontalAlignment(JLabel.CENTER);
+        headerLabel.setBackground(Color.GREEN);
+        headerPanel = new JPanel();
+        headerPanel.setLayout(new BorderLayout());
+        headerPanel.add(headerLabel, BorderLayout.EAST);
+        headerPanel.setBorder(BorderFactory.createRaisedBevelBorder());
 
-        this.setLayout(new BorderLayout());
-        //add(text, BorderLayout.CENTER);
-        //add(header, BorderLayout.NORTH);
+        headerLabelCenter = new JLabel("Welkom bij Zovoc Leden Administratie");
+        headerLabelCenter.setIcon(logo);
+        headerLabelCenter.setVerticalTextPosition(JLabel.BOTTOM);
+        headerLabelCenter.setHorizontalTextPosition(JLabel.CENTER);
+        headerLabelCenter.setHorizontalAlignment(JLabel.CENTER);
+        headerLabelCenter.setOpaque(true);
+        headerLabelCenter.setBackground(Color.WHITE);
+        headerPanel.setBackground(Color.WHITE);
+        headerPanel.add(headerLabelCenter, BorderLayout.CENTER);
+
 
         actionMenu = new JMenu("Acties");
         ledenMenuItem = new JMenuItem("Leden beheren");
@@ -72,18 +82,24 @@ public class BeheerView extends JFrame {
 
         welcomePanel = new JPanel();
         welcomePanel.setLayout(new FlowLayout());
-        welcomeLabel = new JLabel();
-        welcomeLabel.setIcon(logo);
+        welcomeLabel = new JLabel("Maak uw keuze in het menu.", SwingConstants.CENTER);
+
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
         welcomeLabel.setVerticalAlignment(JLabel.CENTER);
         welcomePanel.add(welcomeLabel);
+        welcomePanel.setBorder(BorderFactory.createRaisedBevelBorder());
 
         switchPanel = new JLayeredPane();
-        switchPanel.setLayout(new FlowLayout());
+        switchPanel.setLayout(new GridLayout(2,1));
         switchPanel.add(welcomePanel);
 
-        //this.add(switchPanel, BorderLayout.CENTER);
-        this.add(switchPanel);
+        //define border layout
+        this.setLayout(new BorderLayout());
+
+        //add elements to JFrame
+
+        this.add(headerPanel, BorderLayout.NORTH);
+        this.add(switchPanel, BorderLayout.CENTER);
 
         this.setBackground(Color.GREEN);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -91,8 +107,10 @@ public class BeheerView extends JFrame {
         this.setIconImage(icon.getImage());
         //Add elements to frame
 
-        this.setSize(500,500);
-        //this.pack();
+        //prefered size
+        this.setSize(1024,768);
+        //start fullscreen
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
