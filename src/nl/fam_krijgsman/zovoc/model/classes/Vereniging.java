@@ -2,7 +2,8 @@ package nl.fam_krijgsman.zovoc.model.classes;
 
 import java.util.ArrayList;
 
-public class Vereniging {
+// TODO updateLid en updateTeam schrijven
+public class Vereniging implements LidDao, TeamDao {
     private String naam;
     private ArrayList<Lid> leden;
     private ArrayList<Team> teams;
@@ -93,5 +94,15 @@ public class Vereniging {
 
     public int aantalLeden() {
         return leden.size();
+    }
+
+    @Override
+    public boolean updateLid(Lid lid) {
+        return false;
+    }
+
+    @Override
+    public boolean updateTeam(Team team) {
+        return false;
     }
 }
