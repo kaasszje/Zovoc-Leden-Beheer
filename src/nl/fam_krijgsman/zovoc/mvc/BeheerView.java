@@ -1,6 +1,10 @@
 package nl.fam_krijgsman.zovoc.mvc;
 
+import nl.fam_krijgsman.zovoc.model.eGeslacht;
+import nl.fam_krijgsman.zovoc.model.eKlasse;
+
 import javax.swing.*;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -13,7 +17,18 @@ class BeheerView extends JFrame {
     JMenuBar menuBar;
     JMenu actionMenu;
     JMenuItem ledenMenuItem, teamMenuItem, exitMenuItem;
+    JScrollPane teamScrollPane, ledenScrollPane;
+    JTable teamTable, ledenTable;
+    JComboBox geslachtBox, klasseBox, teamBox;
 
+
+    public JComboBox getGeslachtBox() {
+        return geslachtBox;
+    }
+
+    public JComboBox getKlasseBox() {
+        return klasseBox;
+    }
 
     public BeheerView(String userName) {
         try {
@@ -61,23 +76,29 @@ class BeheerView extends JFrame {
         menuBar.add(actionMenu);
         this.setJMenuBar(menuBar);
 
-
-
+        geslachtBox = new JComboBox(eGeslacht.values());
+        klasseBox = new JComboBox(eKlasse.values());
+        teamBox = new JComboBox();
 
         ledenPanel = new JPanel();
+        ledenPanel.setLayout(new BorderLayout());
         ledenLabel = new JLabel("Leden tab");
         ledenLabel.setSize(30,25);
         ledenLabel.setHorizontalAlignment(JLabel.CENTER);
-        ledenLabel.setSize(200,200);
-        ledenPanel.add(ledenLabel);
+        ledenPanel.add(ledenLabel, BorderLayout.NORTH);
+        ledenTable = new JTable();
+        ledenScrollPane = new JScrollPane(ledenTable);
+        ledenPanel.add(ledenScrollPane, BorderLayout.CENTER);
 
         teamPanel = new JPanel();
-        teamPanel.setLayout(new FlowLayout());
+        teamPanel.setLayout(new BorderLayout());
         teamLabel = new JLabel("Team tab");
         teamLabel.setSize(30,25);
         teamLabel.setHorizontalAlignment(JLabel.CENTER);
-        teamPanel.setSize(175,175);
-        teamPanel.add(teamLabel);
+        teamTable = new JTable();
+        teamScrollPane = new JScrollPane(teamTable);
+        teamPanel.add(teamLabel, BorderLayout.NORTH);
+        teamPanel.add(teamScrollPane, BorderLayout.CENTER);
 
         welcomePanel = new JPanel();
         welcomePanel.setLayout(new FlowLayout());
@@ -89,7 +110,7 @@ class BeheerView extends JFrame {
         welcomePanel.setBorder(BorderFactory.createRaisedBevelBorder());
 
         switchPanel = new JLayeredPane();
-        switchPanel.setLayout(new GridLayout(2,1));
+        switchPanel.setLayout(new GridLayout(1,1));
         switchPanel.add(welcomePanel);
 
         //define border layout
@@ -113,6 +134,8 @@ class BeheerView extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
+
+
 
     public void ledenMenuListener (ActionListener listenForMenu) {
         this.ledenMenuItem.addActionListener(listenForMenu);
@@ -151,5 +174,27 @@ class BeheerView extends JFrame {
         switchPanel.add(panel);
         switchPanel.repaint();
         switchPanel.revalidate();
+    }
+
+    public JTable getTeamTable() {
+        return teamTable;
+    }
+
+    public void makeTeamTable() {
+        teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(klasseBox));
+        teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(geslachtBox));
+    }
+
+    public void makeLedenTable() {
+        ledenTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(geslachtBox));
+        ledenTable.getColumn("Team").setCellEditor(new DefaultCellEditor(teamBox));
+    }
+
+    public JTable getLedenTable() {
+        return ledenTable;
+    }
+
+    public JComboBox getTeamBox() {
+        return teamBox;
     }
 }
