@@ -1,10 +1,10 @@
-package nl.fam_krijgsman.zovoctester.model.classes;
+package nl.fam_krijgsman.zovoctester.model;
 
-import nl.fam_krijgsman.zovoc.model.classes.Lid;
-import nl.fam_krijgsman.zovoc.model.classes.Team;
-import nl.fam_krijgsman.zovoc.model.classes.Vereniging;
-import nl.fam_krijgsman.zovoc.model.enums.eGeslacht;
-import nl.fam_krijgsman.zovoc.model.enums.eKlasse;
+import nl.fam_krijgsman.zovoc.model.Lid;
+import nl.fam_krijgsman.zovoc.model.Team;
+import nl.fam_krijgsman.zovoc.model.Vereniging;
+import nl.fam_krijgsman.zovoc.model.eGeslacht;
+import nl.fam_krijgsman.zovoc.model.eKlasse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

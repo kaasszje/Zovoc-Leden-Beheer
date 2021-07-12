@@ -1,7 +1,4 @@
-package nl.fam_krijgsman.zovoc.controller;
-
-import nl.fam_krijgsman.zovoc.model.BeheerModel;
-import nl.fam_krijgsman.zovoc.view.BeheerView;
+package nl.fam_krijgsman.zovoc.mvc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

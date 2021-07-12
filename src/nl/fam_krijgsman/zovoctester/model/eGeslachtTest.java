@@ -1,7 +1,6 @@
-package nl.fam_krijgsman.zovoctester.model.enums;
+package nl.fam_krijgsman.zovoctester.model;
 
-import nl.fam_krijgsman.zovoc.model.enums.eGeslacht;
-import nl.fam_krijgsman.zovoc.model.enums.eKlasse;
+import nl.fam_krijgsman.zovoc.model.eGeslacht;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

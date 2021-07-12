@@ -1,10 +1,6 @@
-package nl.fam_krijgsman.zovoc.MVC;
+package nl.fam_krijgsman.zovoc.mvc;
 
-import nl.fam_krijgsman.zovoc.controller.UserLoginController;
-import nl.fam_krijgsman.zovoc.view.UserLoginView;
-import nl.fam_krijgsman.zovoc.model.UserLoginModel;
-
-public class MVCUserLogin {
+public class UserLogin {
 
     public static void startUserLogin() {
         UserLoginModel userLoginModel = new UserLoginModel();

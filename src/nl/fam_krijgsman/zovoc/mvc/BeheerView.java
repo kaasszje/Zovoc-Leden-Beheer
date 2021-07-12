@@ -1,7 +1,6 @@
-package nl.fam_krijgsman.zovoc.view;
+package nl.fam_krijgsman.zovoc.mvc;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionListener;
 

@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoc.model;
+package nl.fam_krijgsman.zovoc.mvc;
 
 import java.util.HashMap;
 
