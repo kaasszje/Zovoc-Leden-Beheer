@@ -4,6 +4,8 @@ import java.util.HashMap;
 
 public class UserLoginModel {
     private HashMap<String,String> userLogins;
+    private Boolean isLoggedIn = false;
+    private String userName;
 
     public UserLoginModel() {
         //add test data
@@ -20,5 +22,21 @@ public class UserLoginModel {
 
     public void setUserLogins(HashMap<String, String> userLogins) {
         this.userLogins = userLogins;
+    }
+
+    public Boolean getLoggedIn() {
+        return isLoggedIn;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        if (userName != null) {
+            this.userName = userName;
+            this.isLoggedIn = true;
+        }
+
     }
 }
