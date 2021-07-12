@@ -43,8 +43,9 @@ public class UserLoginController {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource() == userLoginView.getLoginButton()) {
                 if (userLoginModel.isValidLogin(userLoginView.getUserField(), userLoginView.getPassField())) {
+                    userLoginModel.setUserName(userLoginView.getUserField());
                     userLoginView.dispose();
-                    Beheer.startBeheer(userLoginView.getUserField());
+                    Beheer.startBeheer(userLoginModel);
                 } else {
                     userLoginView.displayErrorMessage("User and / or password are in correct.");
                     userLoginView.setUserField("");
