@@ -105,4 +105,12 @@ public class Vereniging implements LidDao, TeamDao {
     public boolean updateTeam(Team team) {
         return false;
     }
+
+    public void setLeden(ArrayList<Lid> leden) {
+        this.leden = leden;
+    }
+
+    public void setTeams(ArrayList<Team> teams) {
+        this.teams = teams;
+    }
 }

@@ -3,7 +3,7 @@ package nl.fam_krijgsman.zovoc.mvc;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class BeheerController {
+class BeheerController {
     private BeheerView beheerView;
     private BeheerModel beheerModel;
 

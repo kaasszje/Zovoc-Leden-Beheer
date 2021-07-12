@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoctester.model;
+package nl.fam_krijgsman.zovoc.model;
 
 import nl.fam_krijgsman.zovoc.model.eKlasse;
 import org.junit.jupiter.api.Test;

@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoctester.mvc;
+package nl.fam_krijgsman.zovoc.mvc;
 
 import nl.fam_krijgsman.zovoc.mvc.UserLoginModel;
 import org.junit.jupiter.api.Test;

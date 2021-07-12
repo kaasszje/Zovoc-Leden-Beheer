@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoctester.generic;
+package nl.fam_krijgsman.zovoc.generic;
 
 import nl.fam_krijgsman.zovoc.generic.Helper;
 import org.junit.jupiter.api.Test;

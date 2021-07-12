@@ -9,7 +9,7 @@ import nl.fam_krijgsman.zovoc.model.eKlasse;
 
 import java.util.ArrayList;
 
-public class BeheerModel extends Vereniging {
+class BeheerModel extends Vereniging {
     public BeheerModel() {
         super(Helper.getVerenigingNaam());
     }
