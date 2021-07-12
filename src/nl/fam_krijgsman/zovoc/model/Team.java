@@ -25,4 +25,16 @@ public class Team {
     public eGeslacht getGeslacht() {
         return geslacht;
     }
+
+    public void setKlasse(eKlasse klasse) {
+        this.klasse = klasse;
+    }
+
+    public void setGeslacht(eGeslacht geslacht) {
+        this.geslacht = geslacht;
+    }
+
+    public void setNaam(String naam) {
+        this.naam = naam;
+    }
 }
