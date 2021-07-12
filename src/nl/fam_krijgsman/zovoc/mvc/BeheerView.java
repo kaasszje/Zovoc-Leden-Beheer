@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-public class BeheerView extends JFrame {
+class BeheerView extends JFrame {
     JLayeredPane switchPanel;
     JPanel ledenPanel, teamPanel, welcomePanel, headerPanel;
     JLabel headerLabel, headerLabelCenter, ledenLabel, teamLabel, welcomeLabel;

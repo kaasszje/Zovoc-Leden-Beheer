@@ -5,7 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
 
-public class UserLoginView extends JFrame {
+class UserLoginView extends JFrame {
     private ImageIcon logo, icon;
     private JButton loginButton;
     private JTextField userField;

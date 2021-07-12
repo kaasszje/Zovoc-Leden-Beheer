@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 
-public class UserLoginController {
+class UserLoginController {
     private final String USERLOGINTEXT = "Vul hier uw gebruikersnaam in.";
     private UserLoginView userLoginView;
     private UserLoginModel userLoginModel;
@@ -17,7 +17,7 @@ public class UserLoginController {
         this.userLoginModel = userLoginModel;
 
         //fill test data
-        UserLoginData.addTestUsers(userLoginModel);
+        userLoginModel.setUserLogins(UserLoginData.addTestUsers());
 
         this.userLoginView.setUserField(USERLOGINTEXT);
         this.userLoginView.loginActionListener(new UserLoginActionListener());

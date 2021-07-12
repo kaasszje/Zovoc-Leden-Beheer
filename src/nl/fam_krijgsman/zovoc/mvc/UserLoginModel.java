@@ -2,7 +2,7 @@ package nl.fam_krijgsman.zovoc.mvc;
 
 import java.util.HashMap;
 
-public class UserLoginModel {
+class UserLoginModel {
     private HashMap<String,String> userLogins;
     private Boolean isLoggedIn = false;
     private String userName;

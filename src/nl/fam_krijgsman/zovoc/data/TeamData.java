@@ -6,17 +6,21 @@ import nl.fam_krijgsman.zovoc.model.eGeslacht;
 import nl.fam_krijgsman.zovoc.model.eKlasse;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
 public class TeamData {
-    public static void addTeamData(@NotNull Vereniging vereniging) {
-        vereniging.addTeam(new Team("Jongens A1", eKlasse.JUNIOR, eGeslacht.MAN));
-        vereniging.addTeam(new Team("Jongens A2", eKlasse.JUNIOR, eGeslacht.MAN));
-        vereniging.addTeam(new Team("Meisjes A1", eKlasse.JUNIOR, eGeslacht.VROUW));
-        vereniging.addTeam(new Team("Meisjes A2", eKlasse.JUNIOR, eGeslacht.VROUW));
-        vereniging.addTeam(new Team("Dames 1", eKlasse.EREDIVISIE, eGeslacht.VROUW));
-        vereniging.addTeam(new Team("Dames 2", eKlasse.PROMOTIE, eGeslacht.VROUW));
-        vereniging.addTeam(new Team("Heren 1", eKlasse.EREDIVISIE, eGeslacht.MAN));
-        vereniging.addTeam(new Team("Heren 2", eKlasse.PROMOTIE, eGeslacht.MAN));
-        vereniging.addTeam(new Team("Recreanten", eKlasse.SENIOR, eGeslacht.MIX));
+    public static ArrayList<Team> addTeamData() {
+        ArrayList<Team> teams = new ArrayList<>();
+        teams.add(new Team("Jongens A1", eKlasse.JUNIOR, eGeslacht.MAN));
+        teams.add(new Team("Jongens A2", eKlasse.JUNIOR, eGeslacht.MAN));
+        teams.add(new Team("Meisjes A1", eKlasse.JUNIOR, eGeslacht.VROUW));
+        teams.add(new Team("Meisjes A2", eKlasse.JUNIOR, eGeslacht.VROUW));
+        teams.add(new Team("Dames 1", eKlasse.EREDIVISIE, eGeslacht.VROUW));
+        teams.add(new Team("Dames 2", eKlasse.PROMOTIE, eGeslacht.VROUW));
+        teams.add(new Team("Heren 1", eKlasse.EREDIVISIE, eGeslacht.MAN));
+        teams.add(new Team("Heren 2", eKlasse.PROMOTIE, eGeslacht.MAN));
+        teams.add(new Team("Recreanten", eKlasse.SENIOR, eGeslacht.MIX));
+        return teams;
     }
 
 }
