@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoc.view;
+package nl.fam_krijgsman.zovoc.mvc;
 
 import javax.swing.*;
 import java.awt.*;

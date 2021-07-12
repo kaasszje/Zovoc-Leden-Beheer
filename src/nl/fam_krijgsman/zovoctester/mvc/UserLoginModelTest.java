@@ -1,7 +1,6 @@
-package nl.fam_krijgsman.zovoctester.model;
+package nl.fam_krijgsman.zovoctester.mvc;
 
-import nl.fam_krijgsman.zovoc.model.UserLoginModel;
-import nl.fam_krijgsman.zovoc.data.UserLoginData;
+import nl.fam_krijgsman.zovoc.mvc.UserLoginModel;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

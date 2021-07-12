@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoc.model.classes;
+package nl.fam_krijgsman.zovoc.model;
 
 import java.util.ArrayList;
 

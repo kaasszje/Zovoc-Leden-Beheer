@@ -3,8 +3,8 @@ package nl.fam_krijgsman.zovoctester.data;
 import nl.fam_krijgsman.zovoc.data.LidData;
 import nl.fam_krijgsman.zovoc.data.TeamData;
 import nl.fam_krijgsman.zovoc.data.UserLoginData;
-import nl.fam_krijgsman.zovoc.model.UserLoginModel;
-import nl.fam_krijgsman.zovoc.model.classes.Vereniging;
+import nl.fam_krijgsman.zovoc.mvc.UserLoginModel;
+import nl.fam_krijgsman.zovoc.model.Vereniging;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

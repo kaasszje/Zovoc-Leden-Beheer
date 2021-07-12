@@ -1,10 +1,6 @@
-package nl.fam_krijgsman.zovoc.MVC;
+package nl.fam_krijgsman.zovoc.mvc;
 
-import nl.fam_krijgsman.zovoc.controller.BeheerController;
-import nl.fam_krijgsman.zovoc.model.BeheerModel;
-import nl.fam_krijgsman.zovoc.view.BeheerView;
-
-public class MVCBeheer {
+public class Beheer {
     public static void startBeheer(String naam) {
         BeheerModel beheerModel = new BeheerModel();
         BeheerView beheerView = new BeheerView(naam);

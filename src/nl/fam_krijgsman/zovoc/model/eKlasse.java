@@ -1,4 +1,4 @@
-package nl.fam_krijgsman.zovoc.model.enums;
+package nl.fam_krijgsman.zovoc.model;
 
 public enum eKlasse {
     JUNIOR("Junior"), SENIOR("Senior"), PROMOTIE("Promotie"), EREDIVISIE("Eredivisie");

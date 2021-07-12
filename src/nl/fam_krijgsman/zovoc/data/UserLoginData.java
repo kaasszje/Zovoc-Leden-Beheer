@@ -1,6 +1,6 @@
 package nl.fam_krijgsman.zovoc.data;
 
-import nl.fam_krijgsman.zovoc.model.UserLoginModel;
+import nl.fam_krijgsman.zovoc.mvc.UserLoginModel;
 
 import java.util.HashMap;
 

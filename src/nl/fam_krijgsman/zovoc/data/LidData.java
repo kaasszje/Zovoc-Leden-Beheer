@@ -1,10 +1,10 @@
 package nl.fam_krijgsman.zovoc.data;
 
-import nl.fam_krijgsman.zovoc.model.classes.Adres;
-import nl.fam_krijgsman.zovoc.model.classes.Lid;
-import nl.fam_krijgsman.zovoc.model.classes.Team;
-import nl.fam_krijgsman.zovoc.model.classes.Vereniging;
-import nl.fam_krijgsman.zovoc.model.enums.eGeslacht;
+import nl.fam_krijgsman.zovoc.model.Adres;
+import nl.fam_krijgsman.zovoc.model.Lid;
+import nl.fam_krijgsman.zovoc.model.Team;
+import nl.fam_krijgsman.zovoc.model.Vereniging;
+import nl.fam_krijgsman.zovoc.model.eGeslacht;
 
 public class LidData {
     public static void addLidData(Vereniging vereniging) {
