@@ -1,22 +1,24 @@
 @startuml
 'https://plantuml.com/class-diagram
 '!theme materia
-left to right direction
+'left to right direction
 package DataModel {
-class Vereniging {
+class Vereniging implements LidDao, TeamDao {
     -naam: String
     -leden: ArrayList<Lid>
     -teams: ArrayList<Team>
-    +Vereniging(naam)
+    +Vereniging(String naam)
     +getNaam(): String
     +getLeden(): ArrayList<Lid>
-    -findLid(Lid): Lid
-    +findLid(achterNaam, voorNaam): Lid
-    +addLid(Lid): boolean
-    +removeLid(Lid): boolean
-    +findTeam(naam): Team
-    +addTeam(Team): boolean
-    +removeTeam(naam): boolean
+    -findLid(Lid lid): Lid
+    +findLid(String achterNaam, String voorNaam): Lid
+    +addLid(Lid lid): boolean
+    +removeLid(Lid lid): boolean
+    +updateLid(Lid lid): boolean
+    +findTeam(String naam): Team
+    +addTeam(Team team): boolean
+    +removeTeam(Team team): boolean
+    +updateTeam(Team team): boolean
     +aantalLeden(): Integer
 }
 
@@ -52,6 +54,15 @@ class Lid {
     +setGeboorteJaar(Interger): void
 }
 
+interface LidDao {
+        getLeden(): List<Lid>
+        findLid(String achternaam, String voornaam): Lid
+        addLid(Lid lid): boolean
+        removeLid(Lid lid): boolean
+        updateLid(Lid lid): boolean
+        aantalLeden(): Integer
+}
+
 class Team {
     -naam: String
     -klasse: eKlasse
@@ -61,6 +72,14 @@ class Team {
     +getKlasse(): eKlasse
     +getGeslacht(): eGeslacht
 
+}
+
+interface TeamDao {
+    getTeams(): List<Team>
+    findTeam(String naam): Team
+    addTeam(Team team): boolean
+    removeTeam(Team team): boolean
+    updateTeam(Team team): boolean
 }
 
 class Adres {
@@ -99,8 +118,9 @@ enum eKlasse {
 Team <|- eKlasse
 Team <|- eGeslacht
 Lid <|- eGeslacht
-Lid "6..*" *-- "1" Team : > Onderdeel van
-Vereniging "1" *-- "*" Lid : < Lid van
+Lid  *-- Team
+LidDao --+ Lid
+TeamDao --+ Team
 Lid "*" o- "1" Adres
 
 @enduml
