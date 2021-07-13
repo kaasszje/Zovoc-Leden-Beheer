@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 class BeheerView extends JFrame {
     JLayeredPane switchPanel;
     JPanel ledenPanel, teamPanel, welcomePanel, headerPanel, teamButtonPanel, ledenButtonPanel;
+    AddTeamPanel addTeamPanel;
     JLabel headerLabel, headerLabelCenter, ledenLabel, teamLabel, welcomeLabel;
     ImageIcon icon, logo;
     String userName;
@@ -18,7 +19,9 @@ class BeheerView extends JFrame {
     JMenuItem ledenMenuItem, teamMenuItem, exitMenuItem;
     JScrollPane teamScrollPane, ledenScrollPane;
     JTable teamTable, ledenTable;
-    JComboBox lidGeslachtBox ,teamGeslachtBox, klasseBox, teamBox;
+    JComboBox<eGeslacht> lidGeslachtBox ,teamGeslachtBox;
+    JComboBox<eKlasse> teamKlasseBox;
+    JComboBox<String> teamBox;
     JTextArea welcomeMessage;
     JButton voegToeTeam, voegToeLid, verwijderTeam, verwijderLid;
 
@@ -74,7 +77,7 @@ class BeheerView extends JFrame {
         teamGeslachtBox = new JComboBox(eGeslacht.values());
         lidGeslachtBox = new JComboBox(eGeslacht.values());
         lidGeslachtBox.removeItem(eGeslacht.MIX);
-        klasseBox = new JComboBox(eKlasse.values());
+        teamKlasseBox = new JComboBox(eKlasse.values());
         teamBox = new JComboBox();
 
         //maak paneel om te tonen voor leden optie
@@ -137,6 +140,8 @@ class BeheerView extends JFrame {
         switchPanel.setLayout(new GridLayout(1,1));
         switchPanel.add(welcomePanel);
 
+        addTeamPanel = new AddTeamPanel();
+
         //define border layout
         this.setLayout(new BorderLayout());
 
@@ -157,6 +162,69 @@ class BeheerView extends JFrame {
         //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
+    }
+
+    class AddTeamPanel extends JPanel {
+        JLabel teamLabel, klasseLabel, geslachtLabel;
+        JPanel centerPanel, buttonPanel;
+        JTextField teamField;
+        JComboBox<eGeslacht> geslachtJComboBox = new JComboBox<>(eGeslacht.values());
+        JComboBox<eKlasse> klasseJComboBox = new JComboBox<>(eKlasse.values());
+        JButton cancelButton, toevoegButton;
+        public AddTeamPanel() {
+            setLayout(new BorderLayout());
+
+            teamLabel = new JLabel("Voer teamnaam in:");
+            teamLabel.setSize(50, 25);
+            klasseLabel = new JLabel("Kies klasse:");
+            klasseLabel.setSize(50, 25);
+            geslachtLabel = new JLabel("Wat voor geslacht:");
+            geslachtLabel.setSize(50, 25);
+            teamField = new JTextField();
+            teamField.setSize(50, 25);
+            geslachtJComboBox.setSize(50, 25);
+            klasseJComboBox.setSize(50, 25);
+            centerPanel = new JPanel();
+            centerPanel.setLayout(new GridLayout(3, 2, 10, 25));
+            centerPanel.add(teamLabel);
+            centerPanel.add(teamField);
+            centerPanel.add(klasseLabel);
+            centerPanel.add(klasseJComboBox);
+            centerPanel.add(geslachtLabel);
+            centerPanel.add(geslachtJComboBox);
+
+            cancelButton = new JButton("Annuleren");
+            cancelButton.setSize(40, 25);
+            toevoegButton = new JButton("Toevoegen");
+            toevoegButton.setSize(40, 25);
+            buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout());
+            buttonPanel.add(cancelButton);
+            buttonPanel.add(toevoegButton);
+
+            add(centerPanel, BorderLayout.CENTER);
+            add(buttonPanel, BorderLayout.SOUTH);
+        }
+
+        public void toevoegButtonListener (ActionListener listener) {
+            toevoegButton.addActionListener(listener);
+        }
+
+        public void cancelButtonListener (ActionListener listener) {
+            cancelButton.addActionListener(listener);
+        }
+
+        public String getTeamField() {
+            return teamField.getText();
+        }
+
+        public eGeslacht getGeslacht() {
+            return (eGeslacht) geslachtJComboBox.getSelectedItem();
+        }
+
+        public eKlasse getKlasse() {
+            return (eKlasse) klasseJComboBox.getSelectedItem();
+        }
     }
 
 
@@ -209,7 +277,7 @@ class BeheerView extends JFrame {
     }
 
     public void makeTeamTable() {
-        teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(klasseBox));
+        teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(teamKlasseBox));
         teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(teamGeslachtBox));
     }
 
@@ -230,4 +298,7 @@ class BeheerView extends JFrame {
         JOptionPane.showMessageDialog(this, errorMessage);
     }
 
+    public AddTeamPanel getAddTeamPanel() {
+        return addTeamPanel;
+    }
 }

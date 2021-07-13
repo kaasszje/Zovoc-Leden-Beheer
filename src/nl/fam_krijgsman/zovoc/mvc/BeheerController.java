@@ -3,6 +3,8 @@ package nl.fam_krijgsman.zovoc.mvc;
 import nl.fam_krijgsman.zovoc.data.LidData;
 import nl.fam_krijgsman.zovoc.data.TeamData;
 import nl.fam_krijgsman.zovoc.model.Team;
+import nl.fam_krijgsman.zovoc.model.eGeslacht;
+import nl.fam_krijgsman.zovoc.model.eKlasse;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +30,8 @@ class BeheerController {
         this.beheerView.verwijderLidButtonListener(new VerwijderLidListener());
         this.beheerView.voegToeTeamButtonListener(new VoegToeTeamListener());
         this.beheerView.verwijderTeamButtonListener(new VerwijderTeamListener());
+        this.beheerView.addTeamPanel.toevoegButtonListener(new AddTeamListener());
+        this.beheerView.addTeamPanel.cancelButtonListener(new CancelAddTeamListener());
 
         this.beheerView.getTeamTable().setModel(beheerModel.getTeamModel());
         this.beheerView.makeTeamTable();
@@ -74,7 +78,25 @@ class BeheerController {
     class VoegToeTeamListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            beheerView.switchPanel(beheerView.getAddTeamPanel());
+        }
+    }
 
+    class AddTeamListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String naam = beheerView.getAddTeamPanel().getTeamField();
+            eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();
+            eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();
+            beheerModel.addTeam(new Team(naam, klasse, geslacht));
+            beheerView.switchPanel(beheerView.getTeamPanel());
+        }
+    }
+
+    class CancelAddTeamListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            beheerView.switchPanel(beheerView.getTeamPanel());
         }
     }
 
