@@ -30,9 +30,8 @@ class BeheerController {
 
         this.beheerView.getLedenTable().setModel(beheerModel.getLedenModel());
 
-        for (Team team: this.beheerModel.getTeams()) {
-            this.beheerView.getTeamBox().addItem(team.getNaam());
-        }
+
+        fillTeamBox();
         this.beheerView.makeLedenTable();
 
 
@@ -57,6 +56,13 @@ class BeheerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
+        }
+    }
+
+    public void fillTeamBox() {
+        this.beheerView.getTeamBox().removeAllItems();
+        for (Team team: this.beheerModel.getTeams()) {
+            this.beheerView.getTeamBox().addItem(team.getNaam());
         }
     }
 }

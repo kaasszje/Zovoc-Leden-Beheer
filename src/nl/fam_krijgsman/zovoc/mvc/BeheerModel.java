@@ -4,8 +4,6 @@ import nl.fam_krijgsman.zovoc.generic.Helper;
 import nl.fam_krijgsman.zovoc.model.*;
 
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import java.util.regex.Pattern;
 
 class BeheerModel extends Vereniging {
     TeamModel teamModel = new TeamModel();
@@ -63,6 +61,7 @@ class BeheerModel extends Vereniging {
             Team row = getTeams().get(rowIndex);
             if (columnIndex == 0) {
                 row.setNaam((String) aValue);
+               //fireTableCellUpdated(rowIndex, columnIndex);
             } else if (columnIndex == 1) {
                 row.setKlasse((eKlasse) aValue);
             } else if (columnIndex == 2) {
