@@ -3,6 +3,8 @@ package nl.fam_krijgsman.zovoc.mvc;
 import nl.fam_krijgsman.zovoc.generic.Helper;
 import nl.fam_krijgsman.zovoc.model.*;
 
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 class BeheerModel extends Vereniging {
@@ -61,17 +63,25 @@ class BeheerModel extends Vereniging {
             Team row = getTeams().get(rowIndex);
             if (columnIndex == 0) {
                 row.setNaam((String) aValue);
-               //fireTableCellUpdated(rowIndex, columnIndex);
             } else if (columnIndex == 1) {
                 row.setKlasse((eKlasse) aValue);
             } else if (columnIndex == 2) {
                 row.setGeslacht((eGeslacht) aValue);
             }
+
         }
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
             return true;
+        }
+
+        public boolean removeTeam (int index) {
+            if (getTeams().get(index) != null) {
+                getTeams().remove(index);
+                return true;
+            }
+            return false;
         }
     }
 
@@ -142,6 +152,14 @@ class BeheerModel extends Vereniging {
             } else if (columnIndex == 7) {
                 row.setTeam(findTeam((String) aValue));
             }
+        }
+
+        public boolean removeLid (int index) {
+            if (getLeden().get(index) != null) {
+                getLeden().remove(index);
+                return true;
+            }
+            return false;
         }
 
         @Override

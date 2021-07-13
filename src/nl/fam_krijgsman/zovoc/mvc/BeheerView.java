@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 class BeheerView extends JFrame {
     JLayeredPane switchPanel;
-    JPanel ledenPanel, teamPanel, welcomePanel, headerPanel;
+    JPanel ledenPanel, teamPanel, welcomePanel, headerPanel, teamButtonPanel, ledenButtonPanel;
     JLabel headerLabel, headerLabelCenter, ledenLabel, teamLabel, welcomeLabel;
     ImageIcon icon, logo;
     String userName;
@@ -18,8 +18,9 @@ class BeheerView extends JFrame {
     JMenuItem ledenMenuItem, teamMenuItem, exitMenuItem;
     JScrollPane teamScrollPane, ledenScrollPane;
     JTable teamTable, ledenTable;
-    JComboBox geslachtBox, klasseBox, teamBox;
+    JComboBox lidGeslachtBox ,teamGeslachtBox, klasseBox, teamBox;
     JTextArea welcomeMessage;
+    JButton voegToeTeam, voegToeLid, verwijderTeam, verwijderLid;
 
     public BeheerView(String userName) {
         // get logo and icon as resource
@@ -70,7 +71,9 @@ class BeheerView extends JFrame {
         this.setJMenuBar(menuBar);
 
         //maak JComboboxen
-        geslachtBox = new JComboBox(eGeslacht.values());
+        teamGeslachtBox = new JComboBox(eGeslacht.values());
+        lidGeslachtBox = new JComboBox(eGeslacht.values());
+        lidGeslachtBox.removeItem(eGeslacht.MIX);
         klasseBox = new JComboBox(eKlasse.values());
         teamBox = new JComboBox();
 
@@ -80,10 +83,19 @@ class BeheerView extends JFrame {
         ledenLabel = new JLabel("Leden tab");
         ledenLabel.setSize(30,25);
         ledenLabel.setHorizontalAlignment(JLabel.CENTER);
-        ledenPanel.add(ledenLabel, BorderLayout.NORTH);
         ledenTable = new JTable();
         ledenScrollPane = new JScrollPane(ledenTable);
+        voegToeLid = new JButton("Voeg toe");
+        voegToeLid.setSize(30,25);
+        verwijderLid = new JButton("Verwijder");
+        verwijderLid.setSize(30,25);
+        ledenButtonPanel = new JPanel();
+        ledenButtonPanel.setLayout(new FlowLayout());
+        ledenButtonPanel.add(verwijderLid);
+        ledenButtonPanel.add(voegToeLid);
+        ledenPanel.add(ledenLabel, BorderLayout.NORTH);
         ledenPanel.add(ledenScrollPane, BorderLayout.CENTER);
+        ledenPanel.add(ledenButtonPanel, BorderLayout.SOUTH);
 
         //maak paneel om te tonen voor team optie
         teamPanel = new JPanel();
@@ -93,8 +105,17 @@ class BeheerView extends JFrame {
         teamLabel.setHorizontalAlignment(JLabel.CENTER);
         teamTable = new JTable();
         teamScrollPane = new JScrollPane(teamTable);
+        voegToeTeam = new JButton("Voeg toe");
+        voegToeTeam.setSize(30,25);
+        verwijderTeam = new JButton("Verwijder");
+        verwijderTeam.setSize(30,25);
+        teamButtonPanel = new JPanel();
+        teamButtonPanel.setLayout(new FlowLayout());
+        teamButtonPanel.add(verwijderTeam);
+        teamButtonPanel.add(voegToeTeam);
         teamPanel.add(teamLabel, BorderLayout.NORTH);
         teamPanel.add(teamScrollPane, BorderLayout.CENTER);
+        teamPanel.add(teamButtonPanel, BorderLayout.SOUTH);
 
         //maak default paneel bij opstarten applicatie
         welcomePanel = new JPanel();
@@ -152,6 +173,22 @@ class BeheerView extends JFrame {
         this.exitMenuItem.addActionListener(listenForMenu);
     }
 
+    public void voegToeLidButtonListener (ActionListener listenForButton) {
+        this.voegToeLid.addActionListener(listenForButton);
+    }
+
+    public void voegToeTeamButtonListener (ActionListener listenForButton) {
+        this.voegToeTeam.addActionListener(listenForButton);
+    }
+
+    public void verwijderLidButtonListener (ActionListener listenForButton) {
+        this.verwijderLid.addActionListener(listenForButton);
+    }
+
+    public void verwijderTeamButtonListener (ActionListener listenForButton) {
+        this.verwijderTeam.addActionListener(listenForButton);
+    }
+
     public JPanel getLedenPanel() {
         return ledenPanel;
     }
@@ -173,11 +210,11 @@ class BeheerView extends JFrame {
 
     public void makeTeamTable() {
         teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(klasseBox));
-        teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(geslachtBox));
+        teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(teamGeslachtBox));
     }
 
     public void makeLedenTable() {
-        ledenTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(geslachtBox));
+        ledenTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(lidGeslachtBox));
         ledenTable.getColumn("Team").setCellEditor(new DefaultCellEditor(teamBox));
     }
 
@@ -188,4 +225,9 @@ class BeheerView extends JFrame {
     public JComboBox getTeamBox() {
         return teamBox;
     }
+
+    public void displayErrorMessage(String errorMessage) {
+        JOptionPane.showMessageDialog(this, errorMessage);
+    }
+
 }
