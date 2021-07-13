@@ -1,9 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
 '!theme materia
-'left to right direction
+left to right direction
 package DataModel {
-class Vereniging implements LidDao, TeamDao {
+class Vereniging implements LidDao, TeamDao{
     -naam: String
     -leden: ArrayList<Lid>
     -teams: ArrayList<Team>
@@ -71,7 +71,6 @@ class Team {
     +getNaam(): String
     +getKlasse(): eKlasse
     +getGeslacht(): eGeslacht
-
 }
 
 interface TeamDao {
@@ -82,45 +81,31 @@ interface TeamDao {
     updateTeam(Team team): boolean
 }
 
-class Adres {
-    -straatNaam: String
-    -huisNummer: Integer
-    -postCode: String
-    -plaats: String
-    +Adres(alle attributen)
-    +getAdres(): Adres
-    +getStraatNaam(): String
-    +getHuisNummer(): Integer
-    +getPostCode(): String
-    +getPlaats(): String
-}
-
 package enum {
-enum eGeslacht {
-    MAN
-    VROUW
-    MIX
-    +toString(): String
-}
+    enum eGeslacht {
+        MAN
+        VROUW
+        MIX
+        +toString(): String
+    }
 
 
-enum eKlasse {
-      JUNIOR
-      SENIOR
-      PROMOTIE
-      EREDIVISIE
-      +toString(): String
-}
+    enum eKlasse {
+          JUNIOR
+        SENIOR
+        PROMOTIE
+        EREDIVISIE
+        +toString(): String
+    }
 
 }
 }
 
 Team <|- eKlasse
-Team <|- eGeslacht
+Team <|-- eGeslacht
 Lid <|- eGeslacht
 Lid  *-- Team
 LidDao --+ Lid
 TeamDao --+ Team
-Lid "*" o- "1" Adres
 
 @enduml

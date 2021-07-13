@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VerenigingTest {
-    static Lid lid = new Lid("Krijgsman", "Martijn", "", "", "", null, 1981, eGeslacht.MAN);
+    static Lid lid = new Lid("Krijgsman", "Martijn", "", "", "", 1981, eGeslacht.MAN);
     static Team team = new Team("Test team", eKlasse.PROMOTIE, eGeslacht.MAN);
     static Vereniging vereniging;
 
@@ -81,7 +81,7 @@ class VerenigingTest {
     void aantalLeden() {
         vereniging = new Vereniging("test");
         for (int i=0;i<10;i++) {
-            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", null, 1981, eGeslacht.MAN);
+            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", 1981, eGeslacht.MAN);
             vereniging.addLid(lid);
         }
         assertEquals(10, vereniging.aantalLeden());
@@ -98,7 +98,7 @@ class VerenigingTest {
     void getLeden() {
         vereniging = new Vereniging("test");
         for (int i=0;i<10;i++) {
-            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", null, 1981, eGeslacht.MAN);
+            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", 1981, eGeslacht.MAN);
             vereniging.addLid(lid);
         }
         assertEquals(10, vereniging.getLeden().size());

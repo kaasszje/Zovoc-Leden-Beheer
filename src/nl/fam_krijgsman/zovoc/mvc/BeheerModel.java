@@ -146,10 +146,7 @@ class BeheerModel extends Vereniging {
 
         @Override
         public boolean isCellEditable(int rowIndex, int columnIndex) {
-            if (columnIndex < 2) {
-                return false;
-            }
-            return true;
+            return (columnIndex > 1);
         }
     }
 

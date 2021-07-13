@@ -7,12 +7,11 @@ import java.time.Year;
 
 public class Lid {
     private String achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email;
-    private Adres adres;
     private Team team;
     private int geboorteJaar;
     private eGeslacht geslacht;
 
-    public Lid(@NotNull String achterNaam, @NotNull String voorNaam, String tussenVoegsel, String telefoonNummer, String email, Adres adres, @NotNull Integer geboorteJaar, @NotNull eGeslacht geslacht) {
+    public Lid(@NotNull String achterNaam, @NotNull String voorNaam, String tussenVoegsel, String telefoonNummer, String email, @NotNull Integer geboorteJaar, @NotNull eGeslacht geslacht) {
 
         this.achterNaam = Helper.isNotNull(achterNaam);
         this.voorNaam = Helper.isNotNull(voorNaam);
@@ -25,7 +24,6 @@ public class Lid {
         //Controlle op valide email
         this.setEmail(email);
 
-        this.adres = adres;
         this.geboorteJaar = geboorteJaar;
         this.geslacht = geslacht;
     }
@@ -48,10 +46,6 @@ public class Lid {
 
     public String getEmail() {
         return email;
-    }
-
-    public Adres getAdres() {
-        return adres;
     }
 
     public Team getTeam() {
@@ -128,10 +122,6 @@ public class Lid {
             //this.email = null;
             return false;
         }
-    }
-
-    public void setAdres(Adres adres) {
-        this.adres = adres;
     }
 
     public void setGeboorteJaar(int geboorteJaar) {
