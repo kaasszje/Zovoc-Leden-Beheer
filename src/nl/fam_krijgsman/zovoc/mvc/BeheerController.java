@@ -10,8 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class BeheerController {
-    private BeheerView beheerView;
-    private BeheerModel beheerModel;
+    private final BeheerView beheerView;
+    private final BeheerModel beheerModel;
 
     public BeheerController(BeheerView beheerView, BeheerModel beheerModel) {
         this.beheerView = beheerView;
@@ -61,7 +61,7 @@ class BeheerController {
         }
     }
 
-    class ExitMenuListener implements ActionListener {
+    static class ExitMenuListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             System.exit(0);
