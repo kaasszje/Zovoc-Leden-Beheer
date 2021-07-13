@@ -4,7 +4,6 @@ import nl.fam_krijgsman.zovoc.model.eGeslacht;
 import nl.fam_krijgsman.zovoc.model.eKlasse;
 
 import javax.swing.*;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -20,17 +19,10 @@ class BeheerView extends JFrame {
     JScrollPane teamScrollPane, ledenScrollPane;
     JTable teamTable, ledenTable;
     JComboBox geslachtBox, klasseBox, teamBox;
-
-
-    public JComboBox getGeslachtBox() {
-        return geslachtBox;
-    }
-
-    public JComboBox getKlasseBox() {
-        return klasseBox;
-    }
+    JTextArea welcomeMessage;
 
     public BeheerView(String userName) {
+        // get logo and icon as resource
         try {
             logo = new ImageIcon(UserLoginView.class.getResource("/Images/Zovoc_logo.png"));
         } catch (NullPointerException e) {
@@ -43,8 +35,10 @@ class BeheerView extends JFrame {
             icon = null;
         }
 
+        //vul user name voor tonen boven in
         this.userName = userName.substring(0,1).toUpperCase() + userName.substring(1).toLowerCase();
 
+        //Maak boven paneel
         headerLabel = new JLabel("Welkom " + this.userName);
         headerLabel.setHorizontalAlignment(JLabel.CENTER);
         headerLabel.setBackground(Color.GREEN);
@@ -63,7 +57,7 @@ class BeheerView extends JFrame {
         headerPanel.setBackground(Color.WHITE);
         headerPanel.add(headerLabelCenter, BorderLayout.CENTER);
 
-
+        //maak menu
         actionMenu = new JMenu("Acties");
         ledenMenuItem = new JMenuItem("Leden beheren");
         teamMenuItem = new JMenuItem("Teams beheren");
@@ -71,15 +65,16 @@ class BeheerView extends JFrame {
         actionMenu.add(ledenMenuItem);
         actionMenu.add(teamMenuItem);
         actionMenu.add(exitMenuItem);
-
         menuBar = new JMenuBar();
         menuBar.add(actionMenu);
         this.setJMenuBar(menuBar);
 
+        //maak JComboboxen
         geslachtBox = new JComboBox(eGeslacht.values());
         klasseBox = new JComboBox(eKlasse.values());
         teamBox = new JComboBox();
 
+        //maak paneel om te tonen voor leden optie
         ledenPanel = new JPanel();
         ledenPanel.setLayout(new BorderLayout());
         ledenLabel = new JLabel("Leden tab");
@@ -90,6 +85,7 @@ class BeheerView extends JFrame {
         ledenScrollPane = new JScrollPane(ledenTable);
         ledenPanel.add(ledenScrollPane, BorderLayout.CENTER);
 
+        //maak paneel om te tonen voor team optie
         teamPanel = new JPanel();
         teamPanel.setLayout(new BorderLayout());
         teamLabel = new JLabel("Team tab");
@@ -100,15 +96,22 @@ class BeheerView extends JFrame {
         teamPanel.add(teamLabel, BorderLayout.NORTH);
         teamPanel.add(teamScrollPane, BorderLayout.CENTER);
 
+        //maak default paneel bij opstarten applicatie
         welcomePanel = new JPanel();
-        welcomePanel.setLayout(new FlowLayout());
+        welcomePanel.setLayout(new BorderLayout(10, 10));
         welcomeLabel = new JLabel("Maak uw keuze in het menu.", SwingConstants.CENTER);
-
         welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
         welcomeLabel.setVerticalAlignment(JLabel.CENTER);
-        welcomePanel.add(welcomeLabel);
+        welcomePanel.add(welcomeLabel, BorderLayout.NORTH);
         welcomePanel.setBorder(BorderFactory.createRaisedBevelBorder());
+        welcomeMessage = new JTextArea();
+        welcomeMessage.setText("Welkom bericht:" + System.getProperty("line.separator"));
+        welcomeMessage.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+        welcomeMessage.setLineWrap(true);
+        welcomeMessage.setEditable(false);
+        welcomeMessage.setWrapStyleWord(true);
 
+        welcomePanel.add(welcomeMessage, BorderLayout.CENTER);
         switchPanel = new JLayeredPane();
         switchPanel.setLayout(new GridLayout(1,1));
         switchPanel.add(welcomePanel);
@@ -130,7 +133,7 @@ class BeheerView extends JFrame {
         //prefered size
         this.setSize(1024,768);
         //start fullscreen
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
@@ -147,18 +150,6 @@ class BeheerView extends JFrame {
 
     public void exitMenuListener (ActionListener listenForMenu) {
         this.exitMenuItem.addActionListener(listenForMenu);
-    }
-
-    public JMenuItem getLedenMenuItem() {
-        return ledenMenuItem;
-    }
-
-    public JMenuItem getTeamMenuItem() {
-        return teamMenuItem;
-    }
-
-    public JMenuItem getExitMenuItem() {
-        return exitMenuItem;
     }
 
     public JPanel getLedenPanel() {

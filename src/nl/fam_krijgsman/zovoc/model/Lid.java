@@ -120,11 +120,13 @@ public class Lid {
         }
     }
 
-    public void setEmail(String email) {
+    public boolean setEmail(String email) {
         if (Helper.checkEmail(email)) {
             this.email = email;
+            return true;
         } else {
-            this.email = null;
+            //this.email = null;
+            return false;
         }
     }
 
