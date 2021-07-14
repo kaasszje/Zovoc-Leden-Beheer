@@ -98,6 +98,7 @@ class BeheerController {
                 eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();
                 eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();
                 beheerModel.addTeam(new Team(naam, klasse, geslacht));
+                beheerView.getAddTeamPanel().clearTextFields();
                 beheerView.switchPanel(beheerView.getTeamPanel());
             }
         }
@@ -131,6 +132,7 @@ class BeheerController {
                 try {
                     Integer geboorteJaar = Integer.parseInt(geboorteJaarString);
                     beheerModel.addLid(new Lid(achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email, geboorteJaar, geslacht));
+                    beheerView.getAddLidPanel().clearTextFields();
                     beheerView.switchPanel(beheerView.getLedenPanel());
                 } catch (NumberFormatException nfe) {
                     beheerView.displayErrorMessage("Dat is geen valide geboorte jaar.");

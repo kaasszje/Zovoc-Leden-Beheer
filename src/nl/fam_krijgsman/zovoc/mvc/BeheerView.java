@@ -340,6 +340,10 @@ class BeheerView extends JFrame {
         public eKlasse getKlasse() {
             return (eKlasse) klasseJComboBox.getSelectedItem();
         }
+
+        public void clearTextFields() {
+            teamField.setText("");
+        }
     }
 
     static class AddLidPanel extends JPanel {
@@ -496,6 +500,15 @@ class BeheerView extends JFrame {
 
         public eGeslacht getGeslacht() {
             return (eGeslacht) geslachtJComboBox.getSelectedItem();
+        }
+
+        public void clearTextFields() {
+            achterNaamField.setText("");
+            voorNaamField.setText("");
+            tussenVoegselField.setText("");
+            telefoonField.setText("");
+            emailField.setText("");
+            geboorteJaarField.setText("");
         }
     }
 
