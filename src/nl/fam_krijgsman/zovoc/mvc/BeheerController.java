@@ -2,6 +2,8 @@ package nl.fam_krijgsman.zovoc.mvc;
 
 import nl.fam_krijgsman.zovoc.data.LidData;
 import nl.fam_krijgsman.zovoc.data.TeamData;
+import nl.fam_krijgsman.zovoc.generic.Helper;
+import nl.fam_krijgsman.zovoc.model.Lid;
 import nl.fam_krijgsman.zovoc.model.Team;
 import nl.fam_krijgsman.zovoc.model.eGeslacht;
 import nl.fam_krijgsman.zovoc.model.eKlasse;
@@ -33,6 +35,11 @@ class BeheerController {
         this.beheerView.getLedenPanel().getLedenTable().setModel(beheerModel.getLedenModel());
         this.beheerView.getLedenPanel().makeLedenTable();
         fillLedenTeamBox();
+
+        //Lid toevoegen acties
+        this.beheerView.getAddLidPanel().toevoegButtonListener(new AddLidListener());
+        this.beheerView.getAddLidPanel().cancelButtonListener(new CancelAddLidListener());
+
 
         //TeamPanel acties
         this.beheerView.getTeamPanel().voegToeTeamButtonListener(new VoegToeTeamListener());
@@ -70,7 +77,7 @@ class BeheerController {
     class VoegToeLidListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            beheerView.switchPanel(beheerView.getAddTeamPanel());
+            beheerView.switchPanel(beheerView.getAddLidPanel());
         }
     }
 
@@ -85,10 +92,14 @@ class BeheerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String naam = beheerView.getAddTeamPanel().getTeamField();
-            eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();
-            eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();
-            beheerModel.addTeam(new Team(naam, klasse, geslacht));
-            beheerView.switchPanel(beheerView.getTeamPanel());
+            if (naam.isEmpty()) {
+                beheerView.displayErrorMessage("Teamnaam moet gevuld zijn");
+            } else {
+                eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();
+                eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();
+                beheerModel.addTeam(new Team(naam, klasse, geslacht));
+                beheerView.switchPanel(beheerView.getTeamPanel());
+            }
         }
     }
 
@@ -99,11 +110,48 @@ class BeheerController {
         }
     }
 
+    class AddLidListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String achterNaam = beheerView.getAddLidPanel().getAchterNaamField();
+            String voorNaam = beheerView.getAddLidPanel().getVoorNaamField();
+            String tussenVoegsel = beheerView.getAddLidPanel().getTussenVoegselField();
+            String telefoonNummer = beheerView.getAddLidPanel().getTelefoonField();
+            String email = beheerView.getAddLidPanel().getEmailField();
+            String geboorteJaarString = beheerView.getAddLidPanel().getGeboorteJaarField();
+            eGeslacht geslacht = beheerView.getAddLidPanel().getGeslacht();
+
+            if (achterNaam.isEmpty() && voorNaam.isEmpty() && geboorteJaarString.isEmpty()) {
+                beheerView.displayErrorMessage("Achter-, voornaam of geboorte jaar is nog leeg.");
+            } else if (!Helper.checkPhoneNumber(telefoonNummer)) {
+                beheerView.displayErrorMessage("Dat is geen geldig telefoonnummer.");
+            } else if (!Helper.checkEmail(email)) {
+                beheerView.displayErrorMessage("Dat is geen geldig email adres.");
+            } else {
+                try {
+                    Integer geboorteJaar = Integer.parseInt(geboorteJaarString);
+                    beheerModel.addLid(new Lid(achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email, geboorteJaar, geslacht));
+                    beheerView.switchPanel(beheerView.getLedenPanel());
+                } catch (NumberFormatException nfe) {
+                    beheerView.displayErrorMessage("Dat is geen valide geboorte jaar.");
+                }
+            }
+        }
+    }
+
+    class CancelAddLidListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            beheerView.switchPanel(beheerView.getLedenPanel());
+        }
+    }
+
+
     class VerwijderLidListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             int rowIndex = beheerView.getLedenPanel().getLedenTable().getSelectedRow();
-            if (rowIndex != -1) {
+            if ((rowIndex != -1) && (rowIndex < beheerModel.getLeden().size())) {
                 beheerModel.getLedenModel().removeLid(rowIndex);
                 beheerView.switchPanel(beheerView.getLedenPanel());
             } else {
@@ -116,7 +164,7 @@ class BeheerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             int rowIndex = beheerView.getTeamPanel().getTeamTable().getSelectedRow();
-            if (rowIndex != -1) {
+            if ((rowIndex != -1) && (rowIndex < beheerModel.getTeams().size())) {
                 beheerModel.removeTeamFromLid(beheerModel.getTeams().get(rowIndex));
                 beheerModel.getTeamModel().removeTeam(rowIndex);
                 beheerView.switchPanel(beheerView.getTeamPanel());

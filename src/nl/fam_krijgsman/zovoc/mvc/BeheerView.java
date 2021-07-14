@@ -14,6 +14,7 @@ class BeheerView extends JFrame {
     private TeamPanel teamPanel;
     private LedenPanel ledenPanel;
     private AddTeamPanel addTeamPanel;
+    private AddLidPanel addLidPanel;
     private WelcomePanel welcomePanel;
     private ImageIcon icon;
     private String userName;
@@ -35,6 +36,7 @@ class BeheerView extends JFrame {
         teamPanel = new TeamPanel();
         ledenPanel = new LedenPanel();
         addTeamPanel = new AddTeamPanel();
+        addLidPanel = new AddLidPanel();
         headerPanel = new HeaderPanel(this.userName);
 
         //Maak switch panel en voeg welcomePanel toe al welkom bericht
@@ -259,7 +261,6 @@ class BeheerView extends JFrame {
         private JButton cancelButton, toevoegButton;
 
         public AddTeamPanel() {
-            setLayout(new BorderLayout());
             geslachtJComboBox = new JComboBox<>(eGeslacht.values());
             klasseJComboBox = new JComboBox<>(eKlasse.values());
             teamLabel = new JLabel("Voer teamnaam in:");
@@ -272,8 +273,8 @@ class BeheerView extends JFrame {
             teamField.setSize(100, 25);
             geslachtJComboBox.setSize(50, 25);
             klasseJComboBox.setSize(50, 25);
-            centerPanel = new JPanel();
 
+            centerPanel = new JPanel();
             centerPanel.setLayout(new GridBagLayout());
             GridBagConstraints gbc = new GridBagConstraints();
 
@@ -304,14 +305,6 @@ class BeheerView extends JFrame {
             gbc.gridy = 2;
             centerPanel.add(geslachtJComboBox, gbc);
 
-//            centerPanel.setLayout(new GridLayout(3, 2, 10, 25));
-//            centerPanel.add(teamLabel);
-//            centerPanel.add(teamField);
-//            centerPanel.add(klasseLabel);
-//            centerPanel.add(klasseJComboBox);
-//            centerPanel.add(geslachtLabel);
-//            centerPanel.add(geslachtJComboBox);
-
             cancelButton = new JButton("Annuleren");
             cancelButton.setSize(40, 25);
             toevoegButton = new JButton("Toevoegen");
@@ -321,6 +314,7 @@ class BeheerView extends JFrame {
             buttonPanel.add(cancelButton);
             buttonPanel.add(toevoegButton);
 
+            setLayout(new BorderLayout());
             add(centerPanel, BorderLayout.CENTER);
             add(buttonPanel, BorderLayout.SOUTH);
         }
@@ -346,6 +340,164 @@ class BeheerView extends JFrame {
         }
     }
 
+    static class AddLidPanel extends JPanel {
+        private JLabel achterNaamLabel, voorNaamLabel, tussenVoegselLabel, telefoonLabel, emailLabel, geboorteJaarLabel, geslachtLabel, headerLabel;
+        private JPanel centerPanel, buttonPanel, headerPanel;
+        private JTextField achterNaamField, voorNaamField, tussenVoegselField, telefoonField, emailField, geboorteJaarField;
+        private JComboBox<eGeslacht> geslachtJComboBox;
+        private JButton cancelButton, toevoegButton;
+
+        public AddLidPanel() {
+            headerLabel = new JLabel("Vul de volgende gegevens in:", SwingConstants.CENTER);
+
+            achterNaamLabel = new JLabel("Achternaam: ");
+            achterNaamLabel.setSize(50,25);
+            voorNaamLabel = new JLabel("Voornaam: ");
+            voorNaamLabel.setSize(50,25);
+            tussenVoegselLabel = new JLabel("Tussenvoegsel: ");
+            tussenVoegselLabel.setSize(50,25);
+            telefoonLabel = new JLabel("Telefoonnummer: ");
+            telefoonLabel.setSize(50,25);
+            emailLabel = new JLabel("Email-adres: ");
+            emailLabel.setSize(50,25);
+            geboorteJaarLabel = new JLabel("Geboortejaar: ");
+            geboorteJaarLabel.setSize(50,25);
+            geslachtLabel = new JLabel("Geslacht: ");
+            geslachtLabel.setSize(50,25);
+
+            achterNaamField = new JTextField();
+            achterNaamField.setSize(50,25);
+            voorNaamField = new JTextField();
+            voorNaamField.setSize(50,25);
+            tussenVoegselField = new JTextField();
+            tussenVoegselField.setSize(50,25);
+            telefoonField = new JTextField();
+            telefoonField.setSize(50,25);
+            emailField = new JTextField();
+            emailField.setSize(50,25);
+            geboorteJaarField = new JTextField();
+            geboorteJaarField.setSize(50,25);
+            geslachtJComboBox = new JComboBox<>(eGeslacht.values());
+            geslachtJComboBox.removeItem(eGeslacht.MIX);
+
+            centerPanel = new JPanel();
+            centerPanel.setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.insets = new Insets(5, 5, 5, 5);
+            gbc.ipadx = 100;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            centerPanel.add(achterNaamLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            centerPanel.add(achterNaamField, gbc);
+
+            gbc.gridx = 2;
+            gbc.gridy = 0;
+            centerPanel.add(voorNaamLabel, gbc);
+
+            gbc.gridx = 3;
+            gbc.gridy = 0;
+            centerPanel.add(voorNaamField, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            centerPanel.add(tussenVoegselLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            centerPanel.add(tussenVoegselField, gbc);
+
+            gbc.gridx = 2;
+            gbc.gridy = 1;
+            centerPanel.add(telefoonLabel, gbc);
+
+            gbc.gridx = 3;
+            gbc.gridy = 1;
+            centerPanel.add(telefoonField, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            centerPanel.add(emailLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 2;
+            gbc.gridwidth = 3;
+            centerPanel.add(emailField, gbc);
+            
+            gbc.gridx = 0;
+            gbc.gridy = 3;
+            gbc.gridwidth = 1;
+            centerPanel.add(geboorteJaarLabel, gbc);
+            
+            gbc.gridx = 1;
+            gbc.gridy = 3;
+            centerPanel.add(geboorteJaarField, gbc);
+            
+            gbc.gridx = 2;
+            gbc.gridy = 3;
+            centerPanel.add(geslachtLabel, gbc);
+            
+            gbc.gridx = 3;
+            gbc.gridy = 3;
+            centerPanel.add(geslachtJComboBox, gbc);
+
+            cancelButton = new JButton("Annuleren");
+            cancelButton.setSize(40, 25);
+            toevoegButton = new JButton("Toevoegen");
+            toevoegButton.setSize(40, 25);
+            buttonPanel = new JPanel();
+            buttonPanel.setLayout(new FlowLayout());
+            buttonPanel.add(cancelButton);
+            buttonPanel.add(toevoegButton);
+
+            setLayout(new BorderLayout());
+            add(headerLabel, BorderLayout.PAGE_START);
+            add(centerPanel, BorderLayout.CENTER);
+            add(buttonPanel, BorderLayout.PAGE_END);
+        }
+
+        public void toevoegButtonListener(ActionListener listener) {
+            toevoegButton.addActionListener(listener);
+        }
+
+        public void cancelButtonListener(ActionListener listener) {
+            cancelButton.addActionListener(listener);
+        }
+
+        public String getAchterNaamField() {
+            return achterNaamField.getText();
+        }
+
+        public String getVoorNaamField() {
+            return voorNaamField.getText();
+        }
+
+        public String getTussenVoegselField() {
+            return tussenVoegselField.getText();
+        }
+
+        public String getTelefoonField() {
+            return telefoonField.getText();
+        }
+
+        public String getEmailField() {
+            return emailField.getText();
+        }
+
+        public String getGeboorteJaarField() {
+            return geboorteJaarField.getText();
+        }
+
+        public eGeslacht getGeslacht() {
+            return (eGeslacht) geslachtJComboBox.getSelectedItem();
+        }
+    }
+
+
     public void switchPanel(JPanel panel) {
         switchPanel.removeAll();
         switchPanel.add(panel);
@@ -361,6 +513,10 @@ class BeheerView extends JFrame {
         return addTeamPanel;
     }
 
+    public AddLidPanel getAddLidPanel() {
+        return addLidPanel;
+    }
+
     public LedenPanel getLedenPanel() {
         return ledenPanel;
     }
@@ -368,6 +524,8 @@ class BeheerView extends JFrame {
     public TeamPanel getTeamPanel() {
         return teamPanel;
     }
+
+
 
     public ZovocMenuBar getZovocMenuBar() {
         return zovocMenuBar;
