@@ -9,164 +9,256 @@ import java.awt.event.ActionListener;
 import java.util.Objects;
 
 class BeheerView extends JFrame {
-    JLayeredPane switchPanel;
-    JPanel ledenPanel, teamPanel, welcomePanel, headerPanel, teamButtonPanel, ledenButtonPanel;
-    AddTeamPanel addTeamPanel;
-    JLabel headerLabel, headerLabelCenter, ledenLabel, teamLabel, welcomeLabel;
-    ImageIcon icon, logo;
-    String userName;
-    JMenuBar menuBar;
-    JMenu actionMenu;
-    JMenuItem ledenMenuItem, teamMenuItem, exitMenuItem;
-    JScrollPane teamScrollPane, ledenScrollPane;
-    JTable teamTable, ledenTable;
-    JComboBox<eGeslacht> lidGeslachtBox, teamGeslachtBox;
-    JComboBox<eKlasse> teamKlasseBox;
-    JComboBox<String> teamBox;
-    JTextArea welcomeMessage;
-    JButton voegToeTeam, voegToeLid, verwijderTeam, verwijderLid;
+    private JLayeredPane switchPanel;
+    private HeaderPanel headerPanel;
+    private TeamPanel teamPanel;
+    private LedenPanel ledenPanel;
+    private AddTeamPanel addTeamPanel;
+    private WelcomePanel welcomePanel;
+    private ImageIcon icon;
+    private String userName;
+    private ZovocMenuBar zovocMenuBar;
 
     public BeheerView(String userName) {
         // get logo and icon as resource
-        logo = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/Zovoc_logo.png")));
         icon = new ImageIcon(Objects.requireNonNull(BeheerView.class.getResource("/Images/Icon.PNG")));
 
         //vul user name voor tonen boven in
         this.userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
 
-        //Maak boven paneel
-        headerLabel = new JLabel("Welkom " + this.userName);
-        headerLabel.setHorizontalAlignment(JLabel.CENTER);
-        headerLabel.setBackground(Color.GREEN);
-        headerPanel = new JPanel();
-        headerPanel.setLayout(new BorderLayout());
-        headerPanel.add(headerLabel, BorderLayout.EAST);
-        headerPanel.setBorder(BorderFactory.createRaisedBevelBorder());
-
-        headerLabelCenter = new JLabel("Welkom bij Zovoc Leden Administratie");
-        headerLabelCenter.setIcon(logo);
-        headerLabelCenter.setVerticalTextPosition(JLabel.BOTTOM);
-        headerLabelCenter.setHorizontalTextPosition(JLabel.CENTER);
-        headerLabelCenter.setHorizontalAlignment(JLabel.CENTER);
-        headerLabelCenter.setOpaque(true);
-        headerLabelCenter.setBackground(Color.WHITE);
-        headerPanel.setBackground(Color.WHITE);
-        headerPanel.add(headerLabelCenter, BorderLayout.CENTER);
-
         //maak menu
-        actionMenu = new JMenu("Acties");
-        ledenMenuItem = new JMenuItem("Leden beheren");
-        teamMenuItem = new JMenuItem("Teams beheren");
-        exitMenuItem = new JMenuItem("Afsluiten");
-        actionMenu.add(ledenMenuItem);
-        actionMenu.add(teamMenuItem);
-        actionMenu.add(exitMenuItem);
-        menuBar = new JMenuBar();
-        menuBar.add(actionMenu);
-        this.setJMenuBar(menuBar);
+        zovocMenuBar = new ZovocMenuBar();
+        this.setJMenuBar(zovocMenuBar);
 
-        //maak JComboboxen
-        teamGeslachtBox = new JComboBox<>(eGeslacht.values());
-        lidGeslachtBox = new JComboBox<>(eGeslacht.values());
-        lidGeslachtBox.removeItem(eGeslacht.MIX);
-        teamKlasseBox = new JComboBox<>(eKlasse.values());
-        teamBox = new JComboBox<>();
+        //Initieer de diverse panels
+        welcomePanel = new WelcomePanel();
+        teamPanel = new TeamPanel();
+        ledenPanel = new LedenPanel();
+        addTeamPanel = new AddTeamPanel();
+        headerPanel = new HeaderPanel(this.userName);
 
-        //maak paneel om te tonen voor leden optie
-        ledenPanel = new JPanel();
-        ledenPanel.setLayout(new BorderLayout());
-        ledenLabel = new JLabel("Leden tab");
-        ledenLabel.setSize(30, 25);
-        ledenLabel.setHorizontalAlignment(JLabel.CENTER);
-        ledenTable = new JTable();
-        ledenScrollPane = new JScrollPane(ledenTable);
-        voegToeLid = new JButton("Voeg toe");
-        voegToeLid.setSize(30, 25);
-        verwijderLid = new JButton("Verwijder");
-        verwijderLid.setSize(30, 25);
-        ledenButtonPanel = new JPanel();
-        ledenButtonPanel.setLayout(new FlowLayout());
-        ledenButtonPanel.add(verwijderLid);
-        ledenButtonPanel.add(voegToeLid);
-        ledenPanel.add(ledenLabel, BorderLayout.NORTH);
-        ledenPanel.add(ledenScrollPane, BorderLayout.CENTER);
-        ledenPanel.add(ledenButtonPanel, BorderLayout.SOUTH);
-
-        //maak paneel om te tonen voor team optie
-        teamPanel = new JPanel();
-        teamPanel.setLayout(new BorderLayout());
-        teamLabel = new JLabel("Team tab");
-        teamLabel.setSize(30, 25);
-        teamLabel.setHorizontalAlignment(JLabel.CENTER);
-        teamTable = new JTable();
-        teamScrollPane = new JScrollPane(teamTable);
-        voegToeTeam = new JButton("Voeg toe");
-        voegToeTeam.setSize(30, 25);
-        verwijderTeam = new JButton("Verwijder");
-        verwijderTeam.setSize(30, 25);
-        teamButtonPanel = new JPanel();
-        teamButtonPanel.setLayout(new FlowLayout());
-        teamButtonPanel.add(verwijderTeam);
-        teamButtonPanel.add(voegToeTeam);
-        teamPanel.add(teamLabel, BorderLayout.NORTH);
-        teamPanel.add(teamScrollPane, BorderLayout.CENTER);
-        teamPanel.add(teamButtonPanel, BorderLayout.SOUTH);
-
-        //maak default paneel bij opstarten applicatie
-        welcomePanel = new JPanel();
-        welcomePanel.setLayout(new BorderLayout(10, 10));
-        welcomeLabel = new JLabel("Maak uw keuze in het menu.", SwingConstants.CENTER);
-        welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
-        welcomeLabel.setVerticalAlignment(JLabel.CENTER);
-        welcomePanel.add(welcomeLabel, BorderLayout.NORTH);
-        welcomePanel.setBorder(BorderFactory.createRaisedBevelBorder());
-        welcomeMessage = new JTextArea();
-        welcomeMessage.setText("Welkom bericht:" + System.getProperty("line.separator"));
-        welcomeMessage.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
-        welcomeMessage.setLineWrap(true);
-        welcomeMessage.setEditable(false);
-        welcomeMessage.setWrapStyleWord(true);
-
-        welcomePanel.add(welcomeMessage, BorderLayout.CENTER);
+        //Maak switch panel en voeg welcomePanel toe al welkom bericht
         switchPanel = new JLayeredPane();
         switchPanel.setLayout(new GridLayout(1, 1));
         switchPanel.add(welcomePanel);
 
-        addTeamPanel = new AddTeamPanel();
-
-        //define border layout
+        //Maak BorderLayour en voeg de elementen toe
         this.setLayout(new BorderLayout());
-
-        //add elements to JFrame
-
         this.add(headerPanel, BorderLayout.NORTH);
         this.add(switchPanel, BorderLayout.CENTER);
 
-        this.setBackground(Color.GREEN);
+        //Zet default settings voor JFrame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //this.setLayout(new BorderLayout());
         this.setIconImage(icon.getImage());
-        //Add elements to frame
-
-        //prefered size
         this.setSize(1024, 768);
-        //start fullscreen
-        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
     }
 
+    static class ZovocMenuBar extends JMenuBar {
+        private final JMenuItem ledenMenuItem, teamMenuItem, exitMenuItem;
+        private final JMenu actionMenu;
+
+        public ZovocMenuBar() {
+            actionMenu = new JMenu("Acties");
+            ledenMenuItem = new JMenuItem("Leden beheren");
+            teamMenuItem = new JMenuItem("Teams beheren");
+            exitMenuItem = new JMenuItem("Afsluiten");
+            actionMenu.add(ledenMenuItem);
+            actionMenu.add(teamMenuItem);
+            actionMenu.add(exitMenuItem);
+            this.add(actionMenu);
+        }
+
+        //Menu items
+        public void ledenMenuListener(ActionListener listenForMenu) {
+            this.ledenMenuItem.addActionListener(listenForMenu);
+        }
+
+        public void teamsMenuListener(ActionListener listenForMenu) {
+            this.teamMenuItem.addActionListener(listenForMenu);
+        }
+
+        public void exitMenuListener(ActionListener listenForMenu) {
+            this.exitMenuItem.addActionListener(listenForMenu);
+        }
+    }
+
+    static class HeaderPanel extends JPanel {
+        private JLabel headerLabel, headerLabelCenter;
+        private ImageIcon logo;
+
+        public HeaderPanel(String user) {
+            logo = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/Zovoc_logo.png")));
+
+            headerLabel = new JLabel("Welkom " + user);
+            headerLabel.setHorizontalAlignment(JLabel.CENTER);
+
+            headerLabelCenter = new JLabel("Welkom bij Zovoc Leden Administratie");
+            headerLabelCenter.setIcon(logo);
+            headerLabelCenter.setVerticalTextPosition(JLabel.BOTTOM);
+            headerLabelCenter.setHorizontalTextPosition(JLabel.CENTER);
+            headerLabelCenter.setHorizontalAlignment(JLabel.CENTER);
+            headerLabelCenter.setOpaque(true);
+            headerLabelCenter.setBackground(Color.WHITE);
+
+            this.setLayout(new BorderLayout());
+            this.add(headerLabel, BorderLayout.EAST);
+            this.add(headerLabelCenter, BorderLayout.CENTER);
+            this.setBorder(BorderFactory.createRaisedBevelBorder());
+            this.setBackground(Color.WHITE);
+        }
+
+    }
+
+    static class WelcomePanel extends JPanel {
+        private JLabel welcomeLabel;
+        private JTextArea welcomeMessage;
+
+        public WelcomePanel() {
+            welcomeLabel = new JLabel("Maak uw keuze in het menu.", SwingConstants.CENTER);
+            welcomeLabel.setHorizontalAlignment(JLabel.CENTER);
+            welcomeLabel.setVerticalAlignment(JLabel.CENTER);
+
+            welcomeMessage = new JTextArea();
+            welcomeMessage.setText("Welkom bericht:" + System.getProperty("line.separator"));
+            welcomeMessage.append("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+            welcomeMessage.setLineWrap(true);
+            welcomeMessage.setEditable(false);
+            welcomeMessage.setWrapStyleWord(true);
+
+            this.setLayout(new BorderLayout(10, 10));
+            this.setBorder(BorderFactory.createRaisedBevelBorder());
+            this.add(welcomeLabel, BorderLayout.NORTH);
+            this.add(welcomeMessage, BorderLayout.CENTER);
+        }
+    }
+
+    static class LedenPanel extends JPanel {
+        private JPanel ledenButtonPanel;
+        private JLabel ledenLabel;
+        private JScrollPane ledenScrollPane;
+        private JTable ledenTable;
+        private JComboBox<eGeslacht> lidGeslachtBox;
+        private JComboBox<String> teamBox;
+        private JButton voegToeLid, verwijderLid;
+        public LedenPanel() {
+            // Maak combobox voor geslacht, en verwijder mix, deze wordt niet bij leden gebruikt
+            lidGeslachtBox = new JComboBox<>(eGeslacht.values());
+            lidGeslachtBox.removeItem(eGeslacht.MIX);
+
+            teamBox = new JComboBox<>();
+
+            ledenLabel = new JLabel("Leden tab");
+            ledenLabel.setSize(30, 25);
+            ledenLabel.setHorizontalAlignment(JLabel.CENTER);
+
+            ledenTable = new JTable();
+            ledenScrollPane = new JScrollPane(ledenTable);
+
+            voegToeLid = new JButton("Voeg toe");
+            voegToeLid.setSize(30, 25);
+
+            verwijderLid = new JButton("Verwijder");
+            verwijderLid.setSize(30, 25);
+
+            ledenButtonPanel = new JPanel();
+            ledenButtonPanel.setLayout(new FlowLayout());
+            ledenButtonPanel.add(verwijderLid);
+            ledenButtonPanel.add(voegToeLid);
+
+            this.setLayout(new BorderLayout());
+            this.add(ledenLabel, BorderLayout.NORTH);
+            this.add(ledenScrollPane, BorderLayout.CENTER);
+            this.add(ledenButtonPanel, BorderLayout.SOUTH);
+        }
+        public void voegToeLidButtonListener(ActionListener listenForButton) {
+            this.voegToeLid.addActionListener(listenForButton);
+        }
+
+        public void verwijderLidButtonListener(ActionListener listenForButton) {
+            this.verwijderLid.addActionListener(listenForButton);
+        }
+
+        public void makeLedenTable() {
+            this.ledenTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(lidGeslachtBox));
+            this.ledenTable.getColumn("Team").setCellEditor(new DefaultCellEditor(teamBox));
+        }
+
+        public JTable getLedenTable() {
+            return this.ledenTable;
+        }
+
+        public JComboBox<String> getTeamBox() {
+            return this.teamBox;
+        }
+    }
+
+    static class TeamPanel extends JPanel {
+        private JPanel teamButtonPanel;
+        private JLabel teamLabel;
+        private JTable teamTable;
+        private JComboBox<eGeslacht> teamGeslachtBox;
+        private JComboBox<eKlasse> teamKlasseBox;
+        private JScrollPane teamScrollPane;
+        private JButton voegToeTeam, verwijderTeam;
+
+        public TeamPanel() {
+            teamGeslachtBox = new JComboBox<>(eGeslacht.values());
+            teamKlasseBox = new JComboBox<>(eKlasse.values());
+
+            teamLabel = new JLabel("Team tabel:");
+            teamLabel.setSize(30, 25);
+            teamLabel.setHorizontalAlignment(JLabel.CENTER);
+
+            teamTable = new JTable();
+            teamScrollPane = new JScrollPane(teamTable);
+
+            voegToeTeam = new JButton("Voeg toe");
+            voegToeTeam.setSize(30, 25);
+            verwijderTeam = new JButton("Verwijder");
+            verwijderTeam.setSize(30, 25);
+
+            teamButtonPanel = new JPanel();
+            teamButtonPanel.setLayout(new FlowLayout());
+            teamButtonPanel.add(verwijderTeam);
+            teamButtonPanel.add(voegToeTeam);
+
+            setLayout(new BorderLayout());
+            add(teamLabel, BorderLayout.NORTH);
+            add(teamScrollPane, BorderLayout.CENTER);
+            add(teamButtonPanel, BorderLayout.SOUTH);
+        }
+        public void voegToeTeamButtonListener(ActionListener listenForButton) {
+            this.voegToeTeam.addActionListener(listenForButton);
+        }
+
+        public void verwijderTeamButtonListener(ActionListener listenForButton) {
+            this.verwijderTeam.addActionListener(listenForButton);
+        }
+
+        public JTable getTeamTable() {
+            return teamTable;
+        }
+
+        public void makeTeamTable() {
+            teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(teamKlasseBox));
+            teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(teamGeslachtBox));
+        }
+    }
+
     static class AddTeamPanel extends JPanel {
-        JLabel teamLabel, klasseLabel, geslachtLabel;
-        JPanel centerPanel, buttonPanel;
-        JTextField teamField;
-        JComboBox<eGeslacht> geslachtJComboBox = new JComboBox<>(eGeslacht.values());
-        JComboBox<eKlasse> klasseJComboBox = new JComboBox<>(eKlasse.values());
-        JButton cancelButton, toevoegButton;
+        private JLabel teamLabel, klasseLabel, geslachtLabel;
+        private JPanel centerPanel, buttonPanel;
+        private JTextField teamField;
+        private JComboBox<eGeslacht> geslachtJComboBox;
+        private JComboBox<eKlasse> klasseJComboBox;
+        private JButton cancelButton, toevoegButton;
 
         public AddTeamPanel() {
             setLayout(new BorderLayout());
-
+            geslachtJComboBox = new JComboBox<>(eGeslacht.values());
+            klasseJComboBox = new JComboBox<>(eKlasse.values());
             teamLabel = new JLabel("Voer teamnaam in:");
             teamLabel.setSize(50, 25);
             klasseLabel = new JLabel("Kies klasse:");
@@ -220,70 +312,11 @@ class BeheerView extends JFrame {
         }
     }
 
-
-    public void ledenMenuListener(ActionListener listenForMenu) {
-        this.ledenMenuItem.addActionListener(listenForMenu);
-    }
-
-    public void teamsMenuListener(ActionListener listenForMenu) {
-        this.teamMenuItem.addActionListener(listenForMenu);
-    }
-
-    public void exitMenuListener(ActionListener listenForMenu) {
-        this.exitMenuItem.addActionListener(listenForMenu);
-    }
-
-    public void voegToeLidButtonListener(ActionListener listenForButton) {
-        this.voegToeLid.addActionListener(listenForButton);
-    }
-
-    public void voegToeTeamButtonListener(ActionListener listenForButton) {
-        this.voegToeTeam.addActionListener(listenForButton);
-    }
-
-    public void verwijderLidButtonListener(ActionListener listenForButton) {
-        this.verwijderLid.addActionListener(listenForButton);
-    }
-
-    public void verwijderTeamButtonListener(ActionListener listenForButton) {
-        this.verwijderTeam.addActionListener(listenForButton);
-    }
-
-    public JPanel getLedenPanel() {
-        return ledenPanel;
-    }
-
-    public JPanel getTeamPanel() {
-        return teamPanel;
-    }
-
     public void switchPanel(JPanel panel) {
         switchPanel.removeAll();
         switchPanel.add(panel);
         switchPanel.repaint();
         switchPanel.revalidate();
-    }
-
-    public JTable getTeamTable() {
-        return teamTable;
-    }
-
-    public void makeTeamTable() {
-        teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(teamKlasseBox));
-        teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(teamGeslachtBox));
-    }
-
-    public void makeLedenTable() {
-        ledenTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(lidGeslachtBox));
-        ledenTable.getColumn("Team").setCellEditor(new DefaultCellEditor(teamBox));
-    }
-
-    public JTable getLedenTable() {
-        return ledenTable;
-    }
-
-    public JComboBox<String> getTeamBox() {
-        return teamBox;
     }
 
     public void displayErrorMessage(String errorMessage) {
@@ -292,5 +325,17 @@ class BeheerView extends JFrame {
 
     public AddTeamPanel getAddTeamPanel() {
         return addTeamPanel;
+    }
+
+    public LedenPanel getLedenPanel() {
+        return ledenPanel;
+    }
+
+    public TeamPanel getTeamPanel() {
+        return teamPanel;
+    }
+
+    public ZovocMenuBar getZovocMenuBar() {
+        return zovocMenuBar;
     }
 }

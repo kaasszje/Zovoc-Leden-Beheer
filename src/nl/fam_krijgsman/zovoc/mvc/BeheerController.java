@@ -17,40 +17,39 @@ class BeheerController {
         this.beheerView = beheerView;
         this.beheerModel = beheerModel;
 
-        //fill data
+        //koppel acties aan menu items
+        this.beheerView.getZovocMenuBar().ledenMenuListener(new LedenMenuListener());
+        this.beheerView.getZovocMenuBar().teamsMenuListener(new TeamMenuListener());
+        this.beheerView.getZovocMenuBar().exitMenuListener(new ExitMenuListener());
+
+        //Data vullen teams en leden
+        //Teams zijn randvoorwaardelijk voor leden
         this.beheerModel.setTeams(TeamData.addTeamData());
         this.beheerModel.setLeden(LidData.addLidData(this.beheerModel.getTeams()));
 
+        //LedenPanel acties
+        this.beheerView.getLedenPanel().voegToeLidButtonListener(new VoegToeLidListener());
+        this.beheerView.getLedenPanel().verwijderLidButtonListener(new VerwijderLidListener());
+        this.beheerView.getLedenPanel().getLedenTable().setModel(beheerModel.getLedenModel());
+        this.beheerView.getLedenPanel().makeLedenTable();
+        fillLedenTeamBox();
 
-        //koppel acties aan menu items
-        this.beheerView.ledenMenuListener(new LedenMenuListener());
-        this.beheerView.teamsMenuListener(new TeamMenuListener());
-        this.beheerView.exitMenuListener(new ExitMenuListener());
-        this.beheerView.voegToeLidButtonListener(new VoegToeLidListener());
-        this.beheerView.verwijderLidButtonListener(new VerwijderLidListener());
-        this.beheerView.voegToeTeamButtonListener(new VoegToeTeamListener());
-        this.beheerView.verwijderTeamButtonListener(new VerwijderTeamListener());
-        this.beheerView.addTeamPanel.toevoegButtonListener(new AddTeamListener());
-        this.beheerView.addTeamPanel.cancelButtonListener(new CancelAddTeamListener());
+        //TeamPanel acties
+        this.beheerView.getTeamPanel().voegToeTeamButtonListener(new VoegToeTeamListener());
+        this.beheerView.getTeamPanel().verwijderTeamButtonListener(new VerwijderTeamListener());
+        this.beheerView.getTeamPanel().getTeamTable().setModel(beheerModel.getTeamModel());
+        this.beheerView.getTeamPanel().makeTeamTable();
 
-        this.beheerView.getTeamTable().setModel(beheerModel.getTeamModel());
-        this.beheerView.makeTeamTable();
-
-        this.beheerView.getLedenTable().setModel(beheerModel.getLedenModel());
-
-
-        fillTeamBox();
-        this.beheerView.makeLedenTable();
-
-
-
+        //Team toevoegen acties
+        this.beheerView.getAddTeamPanel().toevoegButtonListener(new AddTeamListener());
+        this.beheerView.getAddTeamPanel().cancelButtonListener(new CancelAddTeamListener());
     }
 
     class LedenMenuListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             beheerView.switchPanel(beheerView.getLedenPanel());
-            fillTeamBox();
+            fillLedenTeamBox();
         }
     }
 
@@ -71,7 +70,7 @@ class BeheerController {
     class VoegToeLidListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            beheerView.switchPanel(beheerView.getAddTeamPanel());
         }
     }
 
@@ -103,7 +102,7 @@ class BeheerController {
     class VerwijderLidListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int rowIndex = beheerView.ledenTable.getSelectedRow();
+            int rowIndex = beheerView.getLedenPanel().getLedenTable().getSelectedRow();
             if (rowIndex != -1) {
                 beheerModel.ledenModel.removeLid(rowIndex);
                 beheerView.switchPanel(beheerView.getLedenPanel());
@@ -116,7 +115,7 @@ class BeheerController {
     class VerwijderTeamListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            int rowIndex = beheerView.teamTable.getSelectedRow();
+            int rowIndex = beheerView.getTeamPanel().getTeamTable().getSelectedRow();
             if (rowIndex != -1) {
                 beheerModel.teamModel.removeTeam(rowIndex);
                 beheerView.switchPanel(beheerView.getTeamPanel());
@@ -126,10 +125,10 @@ class BeheerController {
         }
     }
 
-    public void fillTeamBox() {
-        this.beheerView.getTeamBox().removeAllItems();
-        for (Team team: this.beheerModel.getTeams()) {
-            this.beheerView.getTeamBox().addItem(team.getNaam());
+    public void fillLedenTeamBox() {
+        this.beheerView.getLedenPanel().getTeamBox().removeAllItems();
+        for (Team team : this.beheerModel.getTeams()) {
+            this.beheerView.getLedenPanel().getTeamBox().addItem(team.getNaam());
         }
     }
 }

@@ -3,8 +3,6 @@ package nl.fam_krijgsman.zovoc.mvc;
 import nl.fam_krijgsman.zovoc.generic.Helper;
 import nl.fam_krijgsman.zovoc.model.*;
 
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 class BeheerModel extends Vereniging {
