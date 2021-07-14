@@ -157,6 +157,7 @@ class BeheerView extends JFrame {
             ledenLabel.setHorizontalAlignment(JLabel.CENTER);
 
             ledenTable = new JTable();
+            ledenTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             ledenScrollPane = new JScrollPane(ledenTable);
 
             voegToeLid = new JButton("Voeg toe");
@@ -216,6 +217,7 @@ class BeheerView extends JFrame {
             teamLabel.setHorizontalAlignment(JLabel.CENTER);
 
             teamTable = new JTable();
+            teamTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             teamScrollPane = new JScrollPane(teamTable);
 
             voegToeTeam = new JButton("Voeg toe");
