@@ -96,16 +96,6 @@ public class Vereniging implements LidDao, TeamDao {
         return leden.size();
     }
 
-    @Override
-    public boolean updateLid(Lid lid) {
-        return false;
-    }
-
-    @Override
-    public boolean updateTeam(Team team) {
-        return false;
-    }
-
     public void setLeden(ArrayList<Lid> leden) {
         this.leden = leden;
     }

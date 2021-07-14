@@ -7,6 +7,5 @@ interface LidDao {
     Lid findLid(String achternaam, String voornaam);
     boolean addLid(Lid lid);
     boolean removeLid(Lid lid);
-    boolean updateLid(Lid lid);
     int aantalLeden();
 }

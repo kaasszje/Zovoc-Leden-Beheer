@@ -7,5 +7,4 @@ interface TeamDao {
     Team findTeam(String naam);
     boolean addTeam(Team team);
     boolean removeTeam(Team team);
-    boolean updateTeam(Team team);
 }
