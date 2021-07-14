@@ -104,7 +104,7 @@ class BeheerController {
         public void actionPerformed(ActionEvent e) {
             int rowIndex = beheerView.getLedenPanel().getLedenTable().getSelectedRow();
             if (rowIndex != -1) {
-                beheerModel.ledenModel.removeLid(rowIndex);
+                beheerModel.getLedenModel().removeLid(rowIndex);
                 beheerView.switchPanel(beheerView.getLedenPanel());
             } else {
                 beheerView.displayErrorMessage("Selecteer eerst een rij.");
@@ -117,7 +117,8 @@ class BeheerController {
         public void actionPerformed(ActionEvent e) {
             int rowIndex = beheerView.getTeamPanel().getTeamTable().getSelectedRow();
             if (rowIndex != -1) {
-                beheerModel.teamModel.removeTeam(rowIndex);
+                beheerModel.removeTeamFromLid(beheerModel.getTeams().get(rowIndex));
+                beheerModel.getTeamModel().removeTeam(rowIndex);
                 beheerView.switchPanel(beheerView.getTeamPanel());
             } else {
                 beheerView.displayErrorMessage("Selecteer eerst een rij.");

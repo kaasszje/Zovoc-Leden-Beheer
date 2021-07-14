@@ -57,6 +57,11 @@ public class Lid {
     }
 
     public boolean setTeam(Team team) {
+        if (team == null) {
+            this.team = null;
+            return true;
+        }
+
         boolean isGoedeLeeftijd = false;
         boolean isGoedeGeslacht = false;
         if (team.getKlasse().equals(eKlasse.JUNIOR)) {

@@ -142,6 +142,7 @@ class BeheerView extends JFrame {
         private JComboBox<eGeslacht> lidGeslachtBox;
         private JComboBox<String> teamBox;
         private JButton voegToeLid, verwijderLid;
+
         public LedenPanel() {
             // Maak combobox voor geslacht, en verwijder mix, deze wordt niet bij leden gebruikt
             lidGeslachtBox = new JComboBox<>(eGeslacht.values());
@@ -172,6 +173,7 @@ class BeheerView extends JFrame {
             this.add(ledenScrollPane, BorderLayout.CENTER);
             this.add(ledenButtonPanel, BorderLayout.SOUTH);
         }
+
         public void voegToeLidButtonListener(ActionListener listenForButton) {
             this.voegToeLid.addActionListener(listenForButton);
         }
@@ -229,6 +231,7 @@ class BeheerView extends JFrame {
             add(teamScrollPane, BorderLayout.CENTER);
             add(teamButtonPanel, BorderLayout.SOUTH);
         }
+
         public void voegToeTeamButtonListener(ActionListener listenForButton) {
             this.voegToeTeam.addActionListener(listenForButton);
         }
@@ -266,17 +269,48 @@ class BeheerView extends JFrame {
             geslachtLabel = new JLabel("Wat voor geslacht:");
             geslachtLabel.setSize(50, 25);
             teamField = new JTextField();
-            teamField.setSize(50, 25);
+            teamField.setSize(100, 25);
             geslachtJComboBox.setSize(50, 25);
             klasseJComboBox.setSize(50, 25);
             centerPanel = new JPanel();
-            centerPanel.setLayout(new GridLayout(3, 2, 10, 25));
-            centerPanel.add(teamLabel);
-            centerPanel.add(teamField);
-            centerPanel.add(klasseLabel);
-            centerPanel.add(klasseJComboBox);
-            centerPanel.add(geslachtLabel);
-            centerPanel.add(geslachtJComboBox);
+
+            centerPanel.setLayout(new GridBagLayout());
+            GridBagConstraints gbc = new GridBagConstraints();
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.insets = new Insets(5, 5, 5, 5);
+            gbc.ipadx = 100;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            centerPanel.add(teamLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            centerPanel.add(teamField, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            centerPanel.add(klasseLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            centerPanel.add(klasseJComboBox, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            centerPanel.add(geslachtLabel, gbc);
+
+            gbc.gridx = 1;
+            gbc.gridy = 2;
+            centerPanel.add(geslachtJComboBox, gbc);
+
+//            centerPanel.setLayout(new GridLayout(3, 2, 10, 25));
+//            centerPanel.add(teamLabel);
+//            centerPanel.add(teamField);
+//            centerPanel.add(klasseLabel);
+//            centerPanel.add(klasseJComboBox);
+//            centerPanel.add(geslachtLabel);
+//            centerPanel.add(geslachtJComboBox);
 
             cancelButton = new JButton("Annuleren");
             cancelButton.setSize(40, 25);

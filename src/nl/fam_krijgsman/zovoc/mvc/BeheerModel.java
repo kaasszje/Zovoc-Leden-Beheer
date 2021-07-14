@@ -6,8 +6,8 @@ import nl.fam_krijgsman.zovoc.model.*;
 import javax.swing.table.AbstractTableModel;
 
 class BeheerModel extends Vereniging {
-    TeamModel teamModel = new TeamModel();
-    LedenModel ledenModel = new LedenModel();
+    private TeamModel teamModel = new TeamModel();
+    private LedenModel ledenModel = new LedenModel();
 
     public BeheerModel() {
         super(Helper.getVerenigingNaam());
@@ -129,6 +129,10 @@ class BeheerModel extends Vereniging {
             } else if (columnIndex == 6) {
                 return row.getGeslacht();
             } else if (columnIndex == 7) {
+                Team team = row.getTeam();
+                if (team == null) {
+                    return "";
+                }
                 return row.getTeam().getNaam();
             }
             return null;
@@ -166,5 +170,12 @@ class BeheerModel extends Vereniging {
         }
     }
 
-
+    //Als een team verwijderd wordt moet het team leeg gezet worden bij de leden uit het team
+    public void removeTeamFromLid(Team team) {
+        for (Lid lid: getLeden()) {
+            if (lid.getTeam().equals(team)) {
+                lid.setTeam(null);
+            }
+        }
+    }
 }
