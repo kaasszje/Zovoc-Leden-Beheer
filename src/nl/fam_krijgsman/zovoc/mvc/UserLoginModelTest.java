@@ -39,4 +39,12 @@ class UserLoginModelTest {
         password = "test3";
         assertTrue(userLoginModel.isValidLogin(user, password));
     }
+
+    @Test
+    void setUserName() {
+        UserLoginModel userLoginModel = new UserLoginModel();
+        userLoginModel.setUserName("martijn");
+        assertTrue(userLoginModel.getLoggedIn());
+        assertEquals("martijn", userLoginModel.getUserName());
+    }
 }
