@@ -2,7 +2,7 @@
 'https://plantuml.com/class-diagram
 '!theme materia
 left to right direction
-package DataModel {
+package model {
 class Vereniging implements LidDao, TeamDao{
     -naam: String
     -leden: ArrayList<Lid>
@@ -10,16 +10,18 @@ class Vereniging implements LidDao, TeamDao{
     +Vereniging(String naam)
     +getNaam(): String
     +getLeden(): ArrayList<Lid>
+    +getTeams(): ArrayList<Team>
     -findLid(Lid lid): Lid
     +findLid(String achterNaam, String voorNaam): Lid
     +addLid(Lid lid): boolean
     +removeLid(Lid lid): boolean
-    +updateLid(Lid lid): boolean
+    -findTeam(Team team): Team
     +findTeam(String naam): Team
     +addTeam(Team team): boolean
     +removeTeam(Team team): boolean
-    +updateTeam(Team team): boolean
     +aantalLeden(): Integer
+    +setLeden(ArrayList<Lid>): void
+    +setTeams(ArrayList<Team>): void
 }
 
 class Lid {

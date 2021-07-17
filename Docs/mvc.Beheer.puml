@@ -1,0 +1,102 @@
+@startuml
+'https://plantuml.com/class-diagram
+'left to right direction
+
+Package model {
+class Vereniging
+}
+
+Package mvc {
+class BeheerModel extends Vereniging {
+    - teamModel: TeamModel
+    - ledenModel: LedenModel
+    + BeheerModel()
+    + getTeamModel(): TeamModel
+    + getLedenModel(): LedenModel
+    + removeTeamFromLid(Team): void
+}
+
+class TeamModel extends ModelHandler {
+    + TeamModel()
+    + getValueAt(rowIndex, columnIndex): Object
+    + setValueAt(rowIndex, columnIndex): void
+    + getRowCount(): Integer
+    + isCellEditable(rowIndex, columnIndex): boolean
+    + remoteTeam(rowIndex): boolean
+}
+
+class LedenModel extends ModelHandler {
+    + LedenModel()
+    + getValueAt(rowIndex, columnIndex): Object
+    + setValueAt(rowIndex, columnIndex): void
+    + getRowCount(): Integer
+    + isCellEditable(rowIndex, columnIndex): boolean
+    + removeLid(rowIndex): boolean
+}
+
+abstract class ModelHandler extends AbstractTableModel {
+    - columnNames : String[]
+    - columnClass : Class[]
+    + ModelHandler(columnName, columnClass)
+    + getColumnName(columnIndex): String
+    + getColumnClass(columnIndex): Class
+    + getColumnCount(): Integer
+}
+
+abstract class AbstractTableModel
+
+class BeheerView extends JFrame {
+    - switchPanel: JLayeredPane
+    - headerPanel: HeaderPanel
+    - teamPanel: TeamPanel
+    - ledenPanel: LedenPanel
+    - addTeamPanel: AddTeamPanel
+    - addLidPanel: AddLidPanel
+    - welcomePanel: WelcomePanel
+    - icon: ImageIcon
+    - userName: String
+    - zovocMenuBar: ZovocMenuBar
+    + BeheerView(userName: String)
+    + switchPanel(panel: JPanel): void
+    + displayErrorMessage(message: String): void
+    + getAddTeamPanel(): AddTeamPanel
+    + getAddLidPanel(): AddLidPanel
+    + getLedenPanel(): LedenPanel
+    + getTeamPanel(): TeamPanel
+    + getZovocMenuBar(): ZovocMenuBar
+}
+
+class BeheerController {
+}
+
+class ZovocMenuBar extends JMenuBar
+
+class HeaderPanel extends JPanel
+
+class WelcomePanel extends JPanel
+
+class LedenPanel extends JPanel
+
+class TeamPanel extends JPanel
+
+class AddTeamPanel extends JPanel
+
+class AddLidPanel extends JPanel
+
+'interne classes
+TeamModel --+ BeheerModel
+LedenModel --+ BeheerModel
+ZovocMenuBar --+ BeheerView
+HeaderPanel --+ BeheerView
+WelcomePanel --+ BeheerView
+LedenPanel --+ BeheerView
+TeamPanel --+ BeheerView
+AddTeamPanel --+ BeheerView
+AddLidPanel --+ BeheerView
+
+BeheerModel --o BeheerController
+BeheerView --o BeheerController
+}
+
+
+@enduml
