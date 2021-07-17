@@ -1,6 +1,6 @@
 package nl.fam_krijgsman.zovoc.model;
 
-import com.sun.istack.internal.NotNull;
+
 import nl.fam_krijgsman.zovoc.generic.Helper;
 
 public class Team {
@@ -8,7 +8,7 @@ public class Team {
     private eKlasse klasse;
     private eGeslacht geslacht;
 
-    public Team(@NotNull String naam, @NotNull eKlasse klasse, @NotNull eGeslacht geslacht) {
+    public Team(String naam, eKlasse klasse, eGeslacht geslacht) {
         this.naam = Helper.isNotNull(naam);
         this.klasse = klasse;
         this.geslacht = geslacht;

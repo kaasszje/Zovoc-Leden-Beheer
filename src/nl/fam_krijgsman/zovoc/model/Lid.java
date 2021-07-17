@@ -1,7 +1,6 @@
 package nl.fam_krijgsman.zovoc.model;
 
 import nl.fam_krijgsman.zovoc.generic.Helper;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.Year;
 
@@ -11,7 +10,7 @@ public class Lid {
     private int geboorteJaar;
     private eGeslacht geslacht;
 
-    public Lid(@NotNull String achterNaam, @NotNull String voorNaam, String tussenVoegsel, String telefoonNummer, String email, @NotNull Integer geboorteJaar, @NotNull eGeslacht geslacht) {
+    public Lid(String achterNaam, String voorNaam, String tussenVoegsel, String telefoonNummer, String email, Integer geboorteJaar, eGeslacht geslacht) {
 
         this.achterNaam = Helper.isNotNull(achterNaam);
         this.voorNaam = Helper.isNotNull(voorNaam);

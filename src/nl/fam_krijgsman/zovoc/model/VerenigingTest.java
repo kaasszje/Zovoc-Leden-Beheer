@@ -1,10 +1,6 @@
 package nl.fam_krijgsman.zovoc.model;
 
-import nl.fam_krijgsman.zovoc.model.Lid;
-import nl.fam_krijgsman.zovoc.model.Team;
-import nl.fam_krijgsman.zovoc.model.Vereniging;
-import nl.fam_krijgsman.zovoc.model.eGeslacht;
-import nl.fam_krijgsman.zovoc.model.eKlasse;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -30,20 +26,22 @@ class VerenigingTest {
         //2e keer zelf lid toevoegen
         assertFalse(vereniging.addLid(lid));
     }
+
     @Test
     void removeLid() {
         vereniging = new Vereniging("test");
-        // vereniging mag nog geen leden bevatten
-        assertEquals(0,vereniging.getLeden().size());
-        assertTrue(vereniging.addLid(lid));
-        //na toevoeging moet er 1 lid zijn
-        assertEquals(1, vereniging.getLeden().size());
-        assertTrue(vereniging.removeLid(lid));
-        // nu wederom 0 leden
-        assertEquals(0, vereniging.getLeden().size());
 
-        // een nietbestaand lid kan niet worden verwijderd
-        assertFalse(vereniging.removeLid(lid));
+        Assertions.assertAll(
+                () -> assertEquals(0, vereniging.getLeden().size()),
+                () -> assertTrue(vereniging.addLid(lid)),
+                //na toevoeging moet er 1 lid zijn
+                () -> assertEquals(1, vereniging.getLeden().size()),
+                () -> assertTrue(vereniging.removeLid(lid)),
+                // nu wederom 0 leden
+                () -> assertEquals(0, vereniging.getLeden().size()),
+                // een nietbestaand lid kan niet worden verwijderd
+                () -> assertFalse(vereniging.removeLid(lid))
+        );
     }
 
     @Test
@@ -64,23 +62,22 @@ class VerenigingTest {
     @Test
     void removeTeam() {
         vereniging = new Vereniging("test");
-        assertEquals(0, vereniging.getTeams().size());
 
-        assertTrue(vereniging.addTeam(team));
-        assertEquals(1, vereniging.getTeams().size());
-
-        assertTrue(vereniging.removeTeam(team));
-        assertEquals(0, vereniging.getTeams().size());
-
-        // Een niet bestand team kan niet worden verwijderd
-        assertFalse(vereniging.removeTeam(team));
-
+        Assertions.assertAll(
+                () -> assertEquals(0, vereniging.getTeams().size()),
+                () -> assertTrue(vereniging.addTeam(team)),
+                () -> assertEquals(1, vereniging.getTeams().size()),
+                () -> assertTrue(vereniging.removeTeam(team)),
+                () -> assertEquals(0, vereniging.getTeams().size()),
+                // Een niet bestand team kan niet worden verwijderd
+                () -> assertFalse(vereniging.removeTeam(team))
+        );
     }
 
     @Test
     void aantalLeden() {
         vereniging = new Vereniging("test");
-        for (int i=0;i<10;i++) {
+        for (int i = 0; i < 10; i++) {
             lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", 1981, eGeslacht.MAN);
             vereniging.addLid(lid);
         }
@@ -97,7 +94,7 @@ class VerenigingTest {
     @Test
     void getLeden() {
         vereniging = new Vereniging("test");
-        for (int i=0;i<10;i++) {
+        for (int i = 0; i < 10; i++) {
             lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", 1981, eGeslacht.MAN);
             vereniging.addLid(lid);
         }
@@ -107,8 +104,8 @@ class VerenigingTest {
     @Test
     void getTeams() {
         vereniging = new Vereniging("test");
-        for (int i=0; i<10;i++) {
-            team = new Team("team" + i,eKlasse.SENIOR, eGeslacht.VROUW);
+        for (int i = 0; i < 10; i++) {
+            team = new Team("team" + i, eKlasse.SENIOR, eGeslacht.VROUW);
             vereniging.addTeam(team);
         }
         assertEquals(10, vereniging.getTeams().size());

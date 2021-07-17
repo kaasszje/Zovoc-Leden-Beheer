@@ -2,7 +2,6 @@ package nl.fam_krijgsman.zovoc.model;
 
 import java.util.ArrayList;
 
-// TODO updateLid en updateTeam schrijven
 public class Vereniging implements LidDao, TeamDao {
     private String naam;
     private ArrayList<Lid> leden;

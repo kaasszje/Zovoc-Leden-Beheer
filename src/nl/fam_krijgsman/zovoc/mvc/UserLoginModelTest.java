@@ -1,11 +1,12 @@
 package nl.fam_krijgsman.zovoc.mvc;
 
-import nl.fam_krijgsman.zovoc.mvc.UserLoginModel;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 
 class UserLoginModelTest {
 
@@ -19,32 +20,21 @@ class UserLoginModelTest {
         }
         userLoginModel.setUserLogins(userLogins);
 
-
-        String user = "test";
-        String password = "test";
-        assertFalse(userLoginModel.isValidLogin(user, password));
-
-        // test 2 fout wachtwoord
-        user = "test1";
-        password = "test2";
-        assertFalse(userLoginModel.isValidLogin(user, password));
-
-        // test 3 valide inlog
-        user = "test1";
-        password = "test1";
-        assertTrue(userLoginModel.isValidLogin(user, password));
-
-        // test 4 valide inlog
-        user = "test3";
-        password = "test3";
-        assertTrue(userLoginModel.isValidLogin(user, password));
+        Assertions.assertAll(
+                () -> assertFalse(userLoginModel.isValidLogin("test", "test")),
+                () -> assertFalse(userLoginModel.isValidLogin("test1", "test2")),
+                () -> assertTrue(userLoginModel.isValidLogin("test1", "test1")),
+                () -> assertTrue(userLoginModel.isValidLogin("test3", "test3"))
+        );
     }
 
     @Test
     void setUserName() {
         UserLoginModel userLoginModel = new UserLoginModel();
         userLoginModel.setUserName("martijn");
-        assertTrue(userLoginModel.getLoggedIn());
-        assertEquals("martijn", userLoginModel.getUserName());
+        Assertions.assertAll(
+                () -> assertTrue(userLoginModel.getLoggedIn()),
+                () -> assertEquals("martijn", userLoginModel.getUserName())
+        );
     }
 }

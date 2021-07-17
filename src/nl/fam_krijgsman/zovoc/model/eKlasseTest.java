@@ -1,10 +1,8 @@
 package nl.fam_krijgsman.zovoc.model;
 
-import nl.fam_krijgsman.zovoc.model.eKlasse;
 import org.junit.jupiter.api.Test;
 
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class eKlasseTest {
 
