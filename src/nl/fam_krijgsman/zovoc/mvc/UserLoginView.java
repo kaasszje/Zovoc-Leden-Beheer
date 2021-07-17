@@ -25,7 +25,7 @@ class UserLoginView extends JFrame {
         }
 
         try {
-            icon = new ImageIcon(UserLoginView.class.getResource("/Images/Icon.PNG"));
+            icon = new ImageIcon(UserLoginView.class.getResource("/Images/favicon.png"));
         } catch (NullPointerException e) {
             icon = null;
         }

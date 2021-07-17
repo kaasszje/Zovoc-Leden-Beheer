@@ -22,7 +22,7 @@ class BeheerView extends JFrame {
 
     public BeheerView(String userName) {
         // get logo and icon as resource
-        icon = new ImageIcon(Objects.requireNonNull(BeheerView.class.getResource("/Images/Icon.PNG")));
+        icon = new ImageIcon(Objects.requireNonNull(BeheerView.class.getResource("/Images/favicon.png")));
 
         //vul user name voor tonen boven in
         this.userName = userName.substring(0, 1).toUpperCase() + userName.substring(1).toLowerCase();
