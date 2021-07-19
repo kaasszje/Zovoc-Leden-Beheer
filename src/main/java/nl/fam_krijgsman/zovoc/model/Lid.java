@@ -128,12 +128,8 @@ public class Lid {
         }
     }
 
-    public boolean setGeboorteJaar(int geboorteJaar) {
-        if (Helper.isNumeric(geboorteJaar)) {
+    public void setGeboorteJaar(int geboorteJaar) {
             this.geboorteJaar = geboorteJaar;
-            return true;
-        }
-        return false;
     }
 
     public eGeslacht getGeslacht() {

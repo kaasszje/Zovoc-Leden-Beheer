@@ -154,9 +154,7 @@ class BeheerModel extends Vereniging {
                     JOptionPane.showMessageDialog(null, "Dit is geen valide email adres.");
                 }
             } else if (columnIndex == 5) {
-                if (!row.setGeboorteJaar((Integer) aValue)) {
-                    JOptionPane.showMessageDialog(null, "Dat is geen valide jaartal");
-                }
+                    row.setGeboorteJaar((Integer) aValue);
             } else if (columnIndex == 6) {
                 row.setGeslacht((eGeslacht) aValue);
             } else if (columnIndex == 7) {
