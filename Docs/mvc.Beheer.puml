@@ -83,9 +83,12 @@ class AddTeamPanel extends JPanel
 
 class AddLidPanel extends JPanel
 
+
+
 'interne classes
 TeamModel --+ BeheerModel
 LedenModel --+ BeheerModel
+ModelHandler --+ BeheerModel
 ZovocMenuBar --+ BeheerView
 HeaderPanel --+ BeheerView
 WelcomePanel --+ BeheerView
@@ -94,9 +97,11 @@ TeamPanel --+ BeheerView
 AddTeamPanel --+ BeheerView
 AddLidPanel --+ BeheerView
 
-BeheerModel --o BeheerController
 BeheerView --o BeheerController
+BeheerModel --o BeheerController
+
 }
+
 
 
 @enduml
