@@ -3,6 +3,7 @@ package nl.fam_krijgsman.zovoc.mvc;
 import nl.fam_krijgsman.zovoc.generic.Helper;
 import nl.fam_krijgsman.zovoc.model.*;
 
+import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 
@@ -17,9 +18,9 @@ class BeheerModel extends Vereniging {
 
     abstract class ModelHandler extends AbstractTableModel {
         private final String[] columnNames;
-        private final Class[] columnClass;
+        private final Class<?>[] columnClass;
 
-        public ModelHandler(String[] columnNames, Class[] columnClass) {
+        public ModelHandler(String[] columnNames, Class<?>[] columnClass) {
             this.columnNames = columnNames;
             this.columnClass = columnClass;
         }
@@ -146,15 +147,21 @@ class BeheerModel extends Vereniging {
             if (columnIndex == 2) {
                 row.setTussenVoegsel((String) aValue);
             } else if (columnIndex == 3) {
-                row.setTelefoonNummer((String) aValue);
+                if (!row.setTelefoonNummer((String) aValue)) {
+                    JOptionPane.showMessageDialog(null, "Dit is geen valide telefoonnummer.");
+                }
             } else if (columnIndex == 4) {
-                row.setEmail((String) aValue);
+                if (!row.setEmail((String) aValue)) {
+                    JOptionPane.showMessageDialog(null, "Dit is geen valide email adres.");
+                }
             } else if (columnIndex == 5) {
                 row.setGeboorteJaar((Integer) aValue);
             } else if (columnIndex == 6) {
                 row.setGeslacht((eGeslacht) aValue);
             } else if (columnIndex == 7) {
-                row.setTeam(findTeam((String) aValue));
+                if (!row.setTeam(findTeam((String) aValue))) {
+                    JOptionPane.showMessageDialog(null, "Dit is geen team voor een " + row.getGeslacht() + " uit " + row.getGeboorteJaar() + ".");
+                }
             }
         }
 

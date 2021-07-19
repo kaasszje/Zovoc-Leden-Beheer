@@ -110,11 +110,12 @@ public class Lid {
         this.tussenVoegsel = tussenVoegsel;
     }
 
-    public void setTelefoonNummer(String telefoonNummer) {
+    public boolean setTelefoonNummer(String telefoonNummer) {
         if (Helper.checkPhoneNumber(telefoonNummer)) {
             this.telefoonNummer = telefoonNummer;
+            return true;
         } else {
-            this.telefoonNummer = null;
+            return false;
         }
     }
 
