@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
+left to right direction
 
-
-package mvc {
+package nl.fam_krijgsman.zovoc.mvc {
 class UserLoginModel {
     userLogins: HashMap<user,password>
     UserLoginModel()
@@ -41,8 +41,8 @@ class UserLoginActionListener implements ActionListener {
     actionPerformed(ActionEvent)
 }
 
-UserLoginView --o UserLoginController
-UserLoginModel --o UserLoginController
+UserLoginController -o UserLoginView
+UserLoginModel o- UserLoginController
 UserLoginActionListener --+ UserLoginController : innerclass >
 UserLoginFocusListener --+ UserLoginController : innerclass >
 

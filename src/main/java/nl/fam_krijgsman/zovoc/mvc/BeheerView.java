@@ -5,7 +5,6 @@ import nl.fam_krijgsman.zovoc.model.eKlasse;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.util.Objects;
 
 class BeheerView extends JFrame {
@@ -72,17 +71,16 @@ class BeheerView extends JFrame {
             this.add(actionMenu);
         }
 
-        //Menu items
-        public void ledenMenuListener(ActionListener listenForMenu) {
-            this.ledenMenuItem.addActionListener(listenForMenu);
+        public JMenuItem getLedenMenuItem() {
+            return ledenMenuItem;
         }
 
-        public void teamsMenuListener(ActionListener listenForMenu) {
-            this.teamMenuItem.addActionListener(listenForMenu);
+        public JMenuItem getTeamMenuItem() {
+            return teamMenuItem;
         }
 
-        public void exitMenuListener(ActionListener listenForMenu) {
-            this.exitMenuItem.addActionListener(listenForMenu);
+        public JMenuItem getExitMenuItem() {
+            return exitMenuItem;
         }
     }
 
@@ -177,14 +175,6 @@ class BeheerView extends JFrame {
             this.add(ledenButtonPanel, BorderLayout.SOUTH);
         }
 
-        public void voegToeLidButtonListener(ActionListener listenForButton) {
-            this.voegToeLid.addActionListener(listenForButton);
-        }
-
-        public void verwijderLidButtonListener(ActionListener listenForButton) {
-            this.verwijderLid.addActionListener(listenForButton);
-        }
-
         public void makeLedenTable() {
             this.ledenTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(lidGeslachtBox));
             this.ledenTable.getColumn("Team").setCellEditor(new DefaultCellEditor(teamBox));
@@ -196,6 +186,14 @@ class BeheerView extends JFrame {
 
         public JComboBox<String> getTeamBox() {
             return this.teamBox;
+        }
+
+        public JButton getVoegToeLid() {
+            return voegToeLid;
+        }
+
+        public JButton getVerwijderLid() {
+            return verwijderLid;
         }
     }
 
@@ -236,14 +234,6 @@ class BeheerView extends JFrame {
             add(teamButtonPanel, BorderLayout.SOUTH);
         }
 
-        public void voegToeTeamButtonListener(ActionListener listenForButton) {
-            this.voegToeTeam.addActionListener(listenForButton);
-        }
-
-        public void verwijderTeamButtonListener(ActionListener listenForButton) {
-            this.verwijderTeam.addActionListener(listenForButton);
-        }
-
         public JTable getTeamTable() {
             return teamTable;
         }
@@ -251,6 +241,14 @@ class BeheerView extends JFrame {
         public void makeTeamTable() {
             teamTable.getColumn("Klasse").setCellEditor(new DefaultCellEditor(teamKlasseBox));
             teamTable.getColumn("Geslacht").setCellEditor(new DefaultCellEditor(teamGeslachtBox));
+        }
+
+        public JButton getVoegToeTeam() {
+            return voegToeTeam;
+        }
+
+        public JButton getVerwijderTeam() {
+            return verwijderTeam;
         }
     }
 
@@ -321,14 +319,6 @@ class BeheerView extends JFrame {
             add(buttonPanel, BorderLayout.SOUTH);
         }
 
-        public void toevoegButtonListener(ActionListener listener) {
-            toevoegButton.addActionListener(listener);
-        }
-
-        public void cancelButtonListener(ActionListener listener) {
-            cancelButton.addActionListener(listener);
-        }
-
         public String getTeamField() {
             return teamField.getText();
         }
@@ -343,6 +333,14 @@ class BeheerView extends JFrame {
 
         public void clearTextFields() {
             teamField.setText("");
+        }
+
+        public JButton getCancelButton() {
+            return cancelButton;
+        }
+
+        public JButton getToevoegButton() {
+            return toevoegButton;
         }
     }
 
@@ -466,14 +464,6 @@ class BeheerView extends JFrame {
             add(buttonPanel, BorderLayout.PAGE_END);
         }
 
-        public void toevoegButtonListener(ActionListener listener) {
-            toevoegButton.addActionListener(listener);
-        }
-
-        public void cancelButtonListener(ActionListener listener) {
-            cancelButton.addActionListener(listener);
-        }
-
         public String getAchterNaamField() {
             return achterNaamField.getText();
         }
@@ -509,6 +499,14 @@ class BeheerView extends JFrame {
             telefoonField.setText("");
             emailField.setText("");
             geboorteJaarField.setText("");
+        }
+
+        public JButton getCancelButton() {
+            return cancelButton;
+        }
+
+        public JButton getToevoegButton() {
+            return toevoegButton;
         }
     }
 

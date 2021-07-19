@@ -1,12 +1,18 @@
 @startuml
 'https://plantuml.com/class-diagram
-'left to right direction
+left to right direction
 
-Package model {
+Package nl.fam_krijgsman.zovoc.model {
 class Vereniging
 }
 
-Package mvc {
+Package nl.fam_krijgsman.zovoc.mvc {
+Package javax.swing {
+    class JFrame
+    class JMenuBar
+    class JPanel
+}
+
 class BeheerModel extends Vereniging {
     - teamModel: TeamModel
     - ledenModel: LedenModel
@@ -67,38 +73,55 @@ class BeheerView extends JFrame {
 }
 
 class BeheerController {
+    - beheerView: BeheerView
+    - beheerModel: BeheerModel
+    + BeheerController(BeheerView, BeheerModel)
+    + fillLedenTeamBox(): void
 }
 
+'Beheerview
 class ZovocMenuBar extends JMenuBar
-
 class HeaderPanel extends JPanel
-
 class WelcomePanel extends JPanel
-
 class LedenPanel extends JPanel
-
 class TeamPanel extends JPanel
-
 class AddTeamPanel extends JPanel
-
 class AddLidPanel extends JPanel
 
+'BeheerController
+interface ActionListener {
+    actionPerformed(ActionEvent): void
+}
+class MenuListener implements ActionListener
+class LedenViewListener implements ActionListener
+class AddLedenViewListener implements ActionListener
+class TeamViewListener implements ActionListener
+class AddTeamViewListener implements ActionListener
 
 
-'interne classes
+'interne Beheermodel classes
 TeamModel --+ BeheerModel
 LedenModel --+ BeheerModel
 ModelHandler --+ BeheerModel
+
+'interne Beheerview classes
 ZovocMenuBar --+ BeheerView
 HeaderPanel --+ BeheerView
 WelcomePanel --+ BeheerView
-LedenPanel --+ BeheerView
-TeamPanel --+ BeheerView
-AddTeamPanel --+ BeheerView
-AddLidPanel --+ BeheerView
+LedenPanel ---+ BeheerView
+TeamPanel ---+ BeheerView
+AddTeamPanel ---+ BeheerView
+AddLidPanel ---+ BeheerView
 
-BeheerView --o BeheerController
-BeheerModel --o BeheerController
+'interne Beheercontroller classes
+MenuListener --+ BeheerController
+LedenViewListener --+ BeheerController
+AddLedenViewListener --+ BeheerController
+TeamViewListener --+ BeheerController
+AddTeamViewListener --+ BeheerController
+
+BeheerController -o BeheerView
+BeheerModel o- BeheerController
 
 }
 
