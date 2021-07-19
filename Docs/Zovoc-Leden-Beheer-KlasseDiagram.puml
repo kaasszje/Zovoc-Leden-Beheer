@@ -1,8 +1,8 @@
 @startuml
 'https://plantuml.com/class-diagram
-'!theme materia
+!theme black-knight
 left to right direction
-package model {
+package model #000000{
 class Vereniging implements LidDao, TeamDao{
     -naam: String
     -leden: ArrayList<Lid>

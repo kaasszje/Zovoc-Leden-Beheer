@@ -1,8 +1,9 @@
 @startuml
 'https://plantuml.com/class-diagram
 left to right direction
+!theme black-knight
 
-package nl.fam_krijgsman.zovoc.mvc {
+package nl.fam_krijgsman.zovoc.mvc #000000{
 class UserLoginModel {
     userLogins: HashMap<user,password>
     UserLoginModel()

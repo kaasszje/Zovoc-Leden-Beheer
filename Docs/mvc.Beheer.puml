@@ -1,13 +1,14 @@
 @startuml
 'https://plantuml.com/class-diagram
 left to right direction
+!theme black-knight
 
-Package nl.fam_krijgsman.zovoc.model {
+Package nl.fam_krijgsman.zovoc.model #000000{
 class Vereniging
 }
 
-Package nl.fam_krijgsman.zovoc.mvc {
-Package javax.swing {
+Package nl.fam_krijgsman.zovoc.mvc #000000{
+Package javax.swing{
     class JFrame
     class JMenuBar
     class JPanel
