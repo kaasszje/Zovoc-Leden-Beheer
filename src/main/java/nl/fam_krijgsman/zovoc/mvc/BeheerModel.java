@@ -5,7 +5,6 @@ import nl.fam_krijgsman.zovoc.model.*;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
-import java.util.ArrayList;
 
 class BeheerModel extends Vereniging {
     private final TeamModel teamModel = new TeamModel();
@@ -155,7 +154,9 @@ class BeheerModel extends Vereniging {
                     JOptionPane.showMessageDialog(null, "Dit is geen valide email adres.");
                 }
             } else if (columnIndex == 5) {
-                row.setGeboorteJaar((Integer) aValue);
+                if (!row.setGeboorteJaar((Integer) aValue)) {
+                    JOptionPane.showMessageDialog(null, "Dat is geen valide jaartal");
+                }
             } else if (columnIndex == 6) {
                 row.setGeslacht((eGeslacht) aValue);
             } else if (columnIndex == 7) {

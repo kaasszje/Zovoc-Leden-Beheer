@@ -124,14 +124,18 @@ public class Lid {
             this.email = email;
             return true;
         } else {
-            //this.email = null;
             return false;
         }
     }
 
-    public void setGeboorteJaar(int geboorteJaar) {
-        this.geboorteJaar = geboorteJaar;
+    public boolean setGeboorteJaar(int geboorteJaar) {
+        if (Helper.isNumeric(geboorteJaar)) {
+            this.geboorteJaar = geboorteJaar;
+            return true;
+        }
+        return false;
     }
+
     public eGeslacht getGeslacht() {
         return geslacht;
     }

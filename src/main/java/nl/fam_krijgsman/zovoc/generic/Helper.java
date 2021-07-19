@@ -34,4 +34,16 @@ public class Helper {
         }
         return waarde;
     }
+
+    public static boolean isNumeric(Object object) {
+        if (object == null) {
+            return false;
+        }
+        try {
+            Integer.parseInt(String.valueOf(object));
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+        return true;
+    }
 }
