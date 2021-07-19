@@ -175,9 +175,14 @@ class BeheerModel extends Vereniging {
     //Als een team verwijderd wordt moet het team leeg gezet worden bij de leden uit het team
     public void removeTeamFromLid(Team team) {
         for (Lid lid : getLeden()) {
-            if (lid.getTeam().equals(team)) {
-                lid.setTeam(null);
+            try {
+                if (lid.getTeam().equals(team)) {
+                    lid.setTeam(null);
+                }
+            } catch (NullPointerException e) {
+                // als een lid geen team meer heeft
             }
+
         }
     }
 }

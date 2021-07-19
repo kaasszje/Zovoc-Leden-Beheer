@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
+import java.util.Objects;
 
 class UserLoginView extends JFrame {
     private ImageIcon logo, icon;
@@ -18,17 +19,8 @@ class UserLoginView extends JFrame {
         topPanel = new JPanel();
 
         //Create logo fot label en setup label
-        try {
-            logo = new ImageIcon(UserLoginView.class.getResource("/Images/Zovoc_logo.png"));
-        } catch (NullPointerException e) {
-            logo = null;
-        }
-
-        try {
-            icon = new ImageIcon(UserLoginView.class.getResource("/Images/favicon.png"));
-        } catch (NullPointerException e) {
-            icon = null;
-        }
+        logo = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/Zovoc_logo.png")));
+        icon = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/favicon.png")));
 
         logoLabel = new JLabel();
         logoLabel.setIcon(logo);
