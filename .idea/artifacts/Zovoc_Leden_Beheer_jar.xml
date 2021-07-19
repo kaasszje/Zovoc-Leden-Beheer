@@ -2,7 +2,7 @@
   <artifact type="jar" name="Zovoc-Leden-Beheer:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/Zovoc_Leden_Beheer_jar</output-path>
     <root id="archive" name="Zovoc-Leden-Beheer.jar">
-      <element id="module-output" name="Zovoc-Leden-Beheer" />
+      <element id="module-output" name="main" />
     </root>
   </artifact>
 </component>
