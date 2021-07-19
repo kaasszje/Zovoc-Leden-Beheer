@@ -1,6 +1,5 @@
 package nl.fam_krijgsman.zovoc.generic;
 
-import nl.fam_krijgsman.zovoc.generic.Helper;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
