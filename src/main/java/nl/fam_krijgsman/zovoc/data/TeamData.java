@@ -1,10 +1,8 @@
 package nl.fam_krijgsman.zovoc.data;
 
 import nl.fam_krijgsman.zovoc.model.Team;
-import nl.fam_krijgsman.zovoc.model.Vereniging;
 import nl.fam_krijgsman.zovoc.model.eGeslacht;
 import nl.fam_krijgsman.zovoc.model.eKlasse;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
