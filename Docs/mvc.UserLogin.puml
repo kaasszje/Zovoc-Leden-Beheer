@@ -2,8 +2,16 @@
 'https://plantuml.com/class-diagram
 left to right direction
 !theme black-knight
+skinparam class {
+    ArrowColor Yellow
+    ArrowThickness 1
+}
 
-package nl.fam_krijgsman.zovoc.mvc #000000{
+skinparam package {
+    BackgroundColor #000000
+}
+
+package nl.fam_krijgsman.zovoc.mvc {
 class UserLoginModel {
     userLogins: HashMap<user,password>
     UserLoginModel()

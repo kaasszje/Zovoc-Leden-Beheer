@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class HelperTest {
 
-    @org.junit.jupiter.api.Test
+    @Test
     void checkEmail() {
         List<String> emails = new ArrayList<>();
         //Valid emails
@@ -37,7 +37,7 @@ class HelperTest {
         }
     }
 
-    @org.junit.jupiter.api.Test
+    @Test
     void checkPhoneNumber() {
         List<String> phoneNumbers = new ArrayList<>();
         //Local notation:

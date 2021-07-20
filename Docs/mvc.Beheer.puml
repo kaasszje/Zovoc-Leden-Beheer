@@ -3,11 +3,20 @@
 left to right direction
 !theme black-knight
 
-Package nl.fam_krijgsman.zovoc.model #000000{
+skinparam class {
+    ArrowColor Yellow
+    ArrowThickness 1
+}
+
+skinparam package {
+    BackgroundColor #000000
+}
+
+Package nl.fam_krijgsman.zovoc.model {
 class Vereniging
 }
 
-Package nl.fam_krijgsman.zovoc.mvc #000000{
+Package nl.fam_krijgsman.zovoc.mvc {
 Package javax.swing{
     class JFrame
     class JMenuBar

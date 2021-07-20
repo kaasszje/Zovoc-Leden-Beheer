@@ -2,7 +2,16 @@
 'https://plantuml.com/class-diagram
 !theme black-knight
 left to right direction
-package model #000000{
+skinparam class {
+    ArrowColor Yellow
+    ArrowThickness 1
+}
+
+skinparam package {
+    BackgroundColor #000000
+}
+
+package nl.fam_krijgsman.zovoc.model {
 class Vereniging implements LidDao, TeamDao{
     -naam: String
     -leden: ArrayList<Lid>
