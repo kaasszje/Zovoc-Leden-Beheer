@@ -37,9 +37,8 @@ class Lid {
     -achterNaam: String
     -voorNaam: String
     -tussenVoegsel: String
-    -adres: Adres
-    -telefoonNummer: String
-    -email: String
+    -telefoonNummer: TelefoonNummer
+    -email: Email
     -geboorteJaar: Integer
     -geslacht: eGeslacht
     -team: Team
@@ -48,17 +47,15 @@ class Lid {
     +getAchterNaam(): String
     +getVoorNaam(): String
     +gettussenVoegsel(): String
-    +getAdres(): Adres
-    +getTelefoonnummer(): String
-    +getEmail(): String
+    +getTelefoonnummer(): TelefoonNummer
+    +getEmail(): Email
     +getGeboorteJaar(): Integer
     +getGeslacht(): eGeslacht
     +getTeam(): Team
-    +setTeam(team): boolean
+    +setTeam(team): void
     +setAchternaam(String): void
     +setvoorNaam(String): void
     +setTussenVoegsel(String): void
-    +setAdres(Adres): void
     +setTelefoonNummer(String): void
     +setEmail(String): void
     +setGeslacht(eGeslacht): void
@@ -92,6 +89,22 @@ interface TeamDao {
     updateTeam(Team team): boolean
 }
 
+class TelefoonNummer {
+    - telefoonNummer: String
+    + TelefoonNummer(String)
+    + getTelefoonnummer(): TelefoonNummer
+    + setTelefoonNummer(String): void
+    + isValideTelefoonNummer(String): boolean
+}
+
+class Email {
+    - email: String
+    + Email(String)
+    + getEmail(): Email
+    + setEmail(String): void
+    + isValideEmail(String): boolean
+}
+
 package enum {
     enum eGeslacht {
         MAN
@@ -115,6 +128,8 @@ package enum {
 Team <|- eKlasse
 Team <|-- eGeslacht
 Lid <|- eGeslacht
+Lid o-- TelefoonNummer
+Lid o-- Email
 Lid  *-- Team
 LidDao --+ Lid
 TeamDao --+ Team
