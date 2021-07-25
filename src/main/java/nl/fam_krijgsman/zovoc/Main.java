@@ -2,9 +2,11 @@ package nl.fam_krijgsman.zovoc;
 
 import nl.fam_krijgsman.zovoc.mvc.UserLogin;
 
+import static javax.swing.SwingUtilities.invokeLater;
+
 public class Main {
     public static void main(String[] args) {
-        javax.swing.SwingUtilities.invokeLater(() -> createAndShowGUI());
+        invokeLater(Main::createAndShowGUI);
     }
 
     private static void createAndShowGUI() {

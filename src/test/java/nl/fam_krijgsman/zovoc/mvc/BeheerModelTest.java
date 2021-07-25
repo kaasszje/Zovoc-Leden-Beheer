@@ -9,29 +9,22 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class BeheerModelTest {
     BeheerModel beheerModel;
-    ArrayList<Team> teams;
-    ArrayList<Lid> leden;
     BeheerModel.TeamModel teamModel;
     BeheerModel.LedenModel ledenModel;
 
     @BeforeEach
     void init() {
         beheerModel = new BeheerModel();
-        teams = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            teams.add(new Team("team " + i, eKlasse.SENIOR, eGeslacht.MAN));
+            beheerModel.addTeam(new Team("team " + i, eKlasse.SENIOR, eGeslacht.MAN));
         }
-        beheerModel.setTeams(teams);
         teamModel = beheerModel.getTeamModel();
-        leden = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            leden.add(new Lid("achternaam" + i,
+            beheerModel.addLid(new Lid("achternaam" + i,
                     "voornaam" + i,
                     "",
                     "0626454220",
@@ -40,7 +33,6 @@ class BeheerModelTest {
                     eGeslacht.MAN
             ));
         }
-        beheerModel.setLeden(leden);
         ledenModel = beheerModel.getLedenModel();
     }
 
@@ -230,8 +222,8 @@ class BeheerModelTest {
     @Test
     @DisplayName("Leden: Verwijder team van lid")
     void removeTeamFromLid() {
-        Team team = teams.get(0);
-        Lid lid = leden.get(0);
+        Team team = beheerModel.getTeams().get(0);
+        Lid lid = beheerModel.getLeden().get(0);
         team.setNaam("testteam");
         lid.setTeam(team);
         assertEquals("testteam", beheerModel.getLedenModel().getValueAt(0, 7));

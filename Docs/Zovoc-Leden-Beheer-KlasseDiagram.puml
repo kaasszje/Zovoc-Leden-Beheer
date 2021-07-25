@@ -14,8 +14,8 @@ skinparam package {
 package nl.fam_krijgsman.zovoc.model {
 class Vereniging implements LidDao, TeamDao{
     -naam: String
-    -leden: ArrayList<Lid>
-    -teams: ArrayList<Team>
+    -leden: List<Lid>
+    -teams: List<Team>
     +Vereniging(String naam)
     +getNaam(): String
     +getLeden(): ArrayList<Lid>
@@ -29,8 +29,6 @@ class Vereniging implements LidDao, TeamDao{
     +addTeam(Team team): boolean
     +removeTeam(Team team): boolean
     +aantalLeden(): Integer
-    +setLeden(ArrayList<Lid>): void
-    +setTeams(ArrayList<Team>): void
 }
 
 class Lid {
@@ -79,6 +77,7 @@ class Team {
     +getNaam(): String
     +getKlasse(): eKlasse
     +getGeslacht(): eGeslacht
+    +magInTeam(geslacht,geboorteJaar): boolean
 }
 
 interface TeamDao {

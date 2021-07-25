@@ -54,7 +54,7 @@ public class LidData {
     private static void addLeden(ArrayList<Lid> leden, Team team, Integer startJaar) {
         Lid lid;
         for (int i=0;i<8;i++){
-            lid = new Lid(team.getGeslacht().toString() + i, team.getKlasse().toString() + i,  "",
+            lid = new Lid(team.getNaam()+" "+team.getGeslacht().toString() + i, team.getKlasse().toString() + i,  "",
                     "06123123" + i + i, "voornaam" + i + ".achternaam" + i + "@example.com",
                     (startJaar + i), team.getGeslacht());
             lid.setTeam(team);
