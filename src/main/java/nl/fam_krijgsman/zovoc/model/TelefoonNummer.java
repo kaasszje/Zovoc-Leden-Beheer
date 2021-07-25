@@ -28,6 +28,5 @@ public class TelefoonNummer {
         Pattern telefoonNummerPatroon = Pattern.compile(telefoonNummerExpressie);
         Matcher isTelefoonNummer = telefoonNummerPatroon.matcher(telefoonNummer);
         return isTelefoonNummer.matches();
-
     }
 }
