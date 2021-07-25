@@ -1,9 +1,10 @@
 package nl.fam_krijgsman.zovoc.mvc;
 
 import java.util.HashMap;
+import java.util.Map;
 
 class UserLoginModel {
-    private HashMap<String,String> userLogins;
+    private Map<String, String> userLogins;
     private Boolean isLoggedIn = false;
     private String userName;
 
@@ -20,7 +21,7 @@ class UserLoginModel {
         }
     }
 
-    public void setUserLogins(HashMap<String, String> userLogins) {
+    public void setUserLogins(Map<String, String> userLogins) {
         this.userLogins = userLogins;
     }
 

@@ -1,18 +1,17 @@
 package nl.fam_krijgsman.zovoc.mvc;
 
-import nl.fam_krijgsman.zovoc.generic.Helper;
 import nl.fam_krijgsman.zovoc.model.*;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
 
 class BeheerModel extends Vereniging {
+    private final static String VERENIGING_NAAM = "Zovoc";
     private final TeamModel teamModel = new TeamModel();
     private final LedenModel ledenModel = new LedenModel();
 
     public BeheerModel() {
-        super(Helper.getVerenigingNaam());
-
+        super(VERENIGING_NAAM); //Default naam
     }
 
     abstract class ModelHandler extends AbstractTableModel {
@@ -146,11 +145,15 @@ class BeheerModel extends Vereniging {
             if (columnIndex == 2) {
                 row.setTussenVoegsel((String) aValue);
             } else if (columnIndex == 3) {
-                if (!row.setTelefoonNummer((String) aValue)) {
+                try {
+                    row.setTelefoonNummer((String) aValue);
+                } catch (IllegalArgumentException e) {
                     JOptionPane.showMessageDialog(null, "Dit is geen valide telefoonnummer.");
                 }
             } else if (columnIndex == 4) {
-                if (!row.setEmail((String) aValue)) {
+                try {
+                    row.setEmail((String) aValue);
+                } catch (IllegalArgumentException e) {
                     JOptionPane.showMessageDialog(null, "Dit is geen valide email adres.");
                 }
             } else if (columnIndex == 5) {
@@ -158,7 +161,9 @@ class BeheerModel extends Vereniging {
             } else if (columnIndex == 6) {
                 row.setGeslacht((eGeslacht) aValue);
             } else if (columnIndex == 7) {
-                if (!row.setTeam(findTeam((String) aValue))) {
+                try {
+                    row.setTeam(findTeam((String) aValue));
+                } catch (IllegalArgumentException e) {
                     JOptionPane.showMessageDialog(null, "Dit is geen team voor een " + row.getGeslacht() + " uit " + row.getGeboorteJaar() + ".");
                 }
             }

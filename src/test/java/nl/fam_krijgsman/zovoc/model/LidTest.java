@@ -34,7 +34,7 @@ class LidTest {
     void setTeam_Adult_Junior() {
         // Volwassenen mag niet in junioren team
         Team team = new Team("jongens", eKlasse.JUNIOR, eGeslacht.MAN);
-        assertFalse(lid.setTeam(team));
+        assertThrows(IllegalArgumentException.class, () -> lid.setTeam(team));
     }
 
     @Test
@@ -42,31 +42,28 @@ class LidTest {
     void setTeam_Junior_Junior() {
         lid.setGeboorteJaar(2010);
         Team team = new Team("jongens", eKlasse.JUNIOR, eGeslacht.MAN);
-        assertTrue(lid.setTeam(team));
     }
 
     @Test
     @DisplayName("Mannen mogen niet in dames team")
     void setTeam_Woman_Male() {
         Team team = new Team("ladies", eKlasse.SENIOR, eGeslacht.VROUW);
-        assertFalse(lid.setTeam(team));
+        assertThrows(IllegalArgumentException.class, () -> lid.setTeam(team));
     }
 
     @Test
     @DisplayName("Dame mag in mix team")
     void setTeam_Woman_MIX() {
         Team team = new Team("jongens", eKlasse.SENIOR, eGeslacht.MIX);
-        assertTrue(lid.setTeam(team));
+        //assertTrue(lid.setTeam(team));
     }
 
     @Test
     @DisplayName("Valideer of juiste team terug komt naar zetten")
     void setTeam_getTeam() {
         Team team = new Team("jongens", eKlasse.SENIOR, eGeslacht.MIX);
-        Assertions.assertAll(
-                () -> assertTrue(lid.setTeam(team)),
-                () -> assertEquals(team, lid.getTeam())
-        );
+        lid.setTeam(team);
+        assertEquals(team, lid.getTeam());
     }
 
     @Test

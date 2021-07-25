@@ -2,14 +2,14 @@ package nl.fam_krijgsman.zovoc.model;
 
 public enum eKlasse {
     JUNIOR("Junior"), SENIOR("Senior"), PROMOTIE("Promotie"), EREDIVISIE("Eredivisie");
-    String naam;
+    private final String schrijfNaam;
 
-    eKlasse(String naam) {
-        this.naam = naam;
+    eKlasse(String schrijfNaam) {
+        this.schrijfNaam = schrijfNaam;
     }
 
     @Override
     public String toString() {
-        return naam;
+        return schrijfNaam;
     }
 }

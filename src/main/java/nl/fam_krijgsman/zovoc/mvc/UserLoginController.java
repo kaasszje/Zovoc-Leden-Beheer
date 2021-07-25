@@ -9,8 +9,8 @@ import java.awt.event.FocusListener;
 
 class UserLoginController {
     private final String USERLOGINTEXT = "Vul hier uw gebruikersnaam in.";
-    private UserLoginView userLoginView;
-    private UserLoginModel userLoginModel;
+    private final UserLoginView userLoginView;
+    private final UserLoginModel userLoginModel;
 
     public UserLoginController(UserLoginView userLoginView, UserLoginModel userLoginModel) {
         this.userLoginView = userLoginView;

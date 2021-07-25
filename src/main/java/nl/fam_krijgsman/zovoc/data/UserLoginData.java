@@ -1,11 +1,12 @@
 package nl.fam_krijgsman.zovoc.data;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class UserLoginData {
 
-    public static HashMap<String, String> addTestUsers() {
-        HashMap<String,String> userLogins = new HashMap<>();
+    public static Map<String, String> addTestUsers() {
+        Map<String,String> userLogins = new HashMap<>();
 
         // Add test logins
         userLogins.put("zovocuser","zovocpassword");

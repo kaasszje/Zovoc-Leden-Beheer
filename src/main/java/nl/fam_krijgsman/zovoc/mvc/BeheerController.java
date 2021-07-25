@@ -2,11 +2,7 @@ package nl.fam_krijgsman.zovoc.mvc;
 
 import nl.fam_krijgsman.zovoc.data.LidData;
 import nl.fam_krijgsman.zovoc.data.TeamData;
-import nl.fam_krijgsman.zovoc.generic.Helper;
-import nl.fam_krijgsman.zovoc.model.Lid;
-import nl.fam_krijgsman.zovoc.model.Team;
-import nl.fam_krijgsman.zovoc.model.eGeslacht;
-import nl.fam_krijgsman.zovoc.model.eKlasse;
+import nl.fam_krijgsman.zovoc.model.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,9 +93,9 @@ class BeheerController {
 
                 if (achterNaam.isEmpty() && voorNaam.isEmpty() && geboorteJaarString.isEmpty()) {
                     beheerView.displayErrorMessage("Achter-, voornaam of geboorte jaar is nog leeg.");
-                } else if (!Helper.checkPhoneNumber(telefoonNummer)) {
+                } else if (!TelefoonNummer.isValideTelefoonNummer(telefoonNummer)) {
                     beheerView.displayErrorMessage("Dat is geen geldig telefoonnummer.");
-                } else if (!Helper.checkEmail(email)) {
+                } else if (!Email.isValideEmail(email)) {
                     beheerView.displayErrorMessage("Dat is geen geldig email adres.");
                 } else {
                     try {

@@ -3,7 +3,7 @@ package nl.fam_krijgsman.zovoc.model;
 import java.util.ArrayList;
 
 public class Vereniging implements LidDao, TeamDao {
-    private String naam;
+    private final String naam;
     private ArrayList<Lid> leden;
     private ArrayList<Team> teams;
 

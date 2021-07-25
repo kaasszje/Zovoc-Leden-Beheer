@@ -1,7 +1,7 @@
 package nl.fam_krijgsman.zovoc.model;
 
 
-import nl.fam_krijgsman.zovoc.generic.Helper;
+import java.time.Year;
 
 public class Team {
     private String naam;
@@ -9,7 +9,10 @@ public class Team {
     private eGeslacht geslacht;
 
     public Team(String naam, eKlasse klasse, eGeslacht geslacht) {
-        this.naam = Helper.isNotNull(naam);
+        if (naam.isEmpty()) {
+            throw new IllegalArgumentException("Naam mag niet leeg zijn");
+        }
+        this.naam = naam;
         this.klasse = klasse;
         this.geslacht = geslacht;
     }
@@ -36,5 +39,23 @@ public class Team {
 
     public void setNaam(String naam) {
         this.naam = naam;
+    }
+
+    public boolean magInTeam(eGeslacht geslacht, int geboorteJaar) {
+        boolean isGoedeLeeftijd = false;
+        boolean isGoedeGeslacht = false;
+        if (this.klasse.equals(eKlasse.JUNIOR)) {
+            // Lid moet jonger zijn dan 18 voor junior klasse
+            int currentYear = Year.now().getValue();
+            if ((currentYear - geboorteJaar) < 18) {
+                isGoedeLeeftijd = true;
+            }
+        } else {
+            isGoedeLeeftijd = true;
+        }
+        if ((this.geslacht.equals(geslacht)) || this.geslacht.equals(eGeslacht.MIX)) {
+            isGoedeGeslacht = true;
+        }
+        return ((isGoedeGeslacht) && (isGoedeLeeftijd));
     }
 }

@@ -1,6 +1,6 @@
 package nl.fam_krijgsman.zovoc.mvc;
 
-public class Beheer {
+class Beheer {
     public static void startBeheer(UserLoginModel userLoginModel) {
         if (userLoginModel.getLoggedIn()) {
             BeheerModel beheerModel = new BeheerModel();

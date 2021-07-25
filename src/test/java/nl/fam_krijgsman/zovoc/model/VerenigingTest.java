@@ -4,7 +4,6 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class VerenigingTest {
     Lid lid;
     Team team;
@@ -12,7 +11,7 @@ class VerenigingTest {
 
     @BeforeEach
     void init() {
-        lid = new Lid("Krijgsman", "Martijn", "", "", "", 1981, eGeslacht.MAN);
+        lid = new Lid("Krijgsman", "Martijn", "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
         team = new Team("Test team", eKlasse.PROMOTIE, eGeslacht.MAN);
         vereniging = new Vereniging("test");
     }
@@ -119,7 +118,7 @@ class VerenigingTest {
     void aantalLeden() {
         // voeg 10 teams toe
         for (int i = 0; i < 10; i++) {
-            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", 1981, eGeslacht.MAN);
+            lid = new Lid("nummer-" + i, "naam-" + i, "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
             vereniging.addLid(lid);
         }
         assertEquals(10, vereniging.aantalLeden());
@@ -136,7 +135,7 @@ class VerenigingTest {
     @DisplayName("Valideer leden")
     void getLeden() {
         for (int i = 0; i < 10; i++) {
-            lid = new Lid("nummer-" + i, "naam-" + i, "", "", "", 1981, eGeslacht.MAN);
+            lid = new Lid("nummer-" + i, "naam-" + i, "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
             vereniging.addLid(lid);
         }
         assertEquals(10, vereniging.getLeden().size());

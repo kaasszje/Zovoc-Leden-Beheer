@@ -1,96 +1,63 @@
 package nl.fam_krijgsman.zovoc.model;
 
-import nl.fam_krijgsman.zovoc.generic.Helper;
-
-import java.time.Year;
-
 public class Lid {
-    private String achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email;
+    private String achterNaam, voorNaam, tussenVoegsel;
+    private Email email;
+    private TelefoonNummer telefoonNummer;
     private Team team;
     private int geboorteJaar;
     private eGeslacht geslacht;
 
     public Lid(String achterNaam, String voorNaam, String tussenVoegsel, String telefoonNummer, String email, Integer geboorteJaar, eGeslacht geslacht) {
-
-        this.achterNaam = Helper.isNotNull(achterNaam);
-        this.voorNaam = Helper.isNotNull(voorNaam);
-
+        if ((achterNaam.isEmpty()) || voorNaam.isEmpty()) {
+            throw new IllegalArgumentException("Waarde mag niet leeg zijn");
+        }
+        this.achterNaam = achterNaam;
         this.voorNaam = voorNaam;
         this.tussenVoegsel = tussenVoegsel;
-
-        //Controlle op valide telefoonnummer
-        this.setTelefoonNummer(telefoonNummer);
-        //Controlle op valide email
-        this.setEmail(email);
-
+        this.telefoonNummer = new TelefoonNummer(telefoonNummer);
+        this.email = new Email(email);
         this.geboorteJaar = geboorteJaar;
         this.geslacht = geslacht;
     }
 
     public String getAchterNaam() {
-        return achterNaam;
+        return this.achterNaam;
     }
 
     public String getVoorNaam() {
-        return voorNaam;
+        return this.voorNaam;
     }
 
     public String getTussenVoegsel() {
-        return tussenVoegsel;
+        return this.tussenVoegsel;
     }
 
     public String getTelefoonNummer() {
-        return telefoonNummer;
+        return this.telefoonNummer.getTelefoonNummer();
     }
 
     public String getEmail() {
-        return email;
+        return this.email.getEmail();
     }
 
     public Team getTeam() {
-        return team;
+        return this.team;
     }
 
     public int getGeboorteJaar() {
-        return geboorteJaar;
+        return this.geboorteJaar;
     }
 
-    public boolean setTeam(Team team) {
+    public void setTeam(Team team) {
         if (team == null) {
             this.team = null;
-            return true;
+            return;
         }
-
-        boolean isGoedeLeeftijd = false;
-        boolean isGoedeGeslacht = false;
-        if (team.getKlasse().equals(eKlasse.JUNIOR)) {
-            // Lid moet jonger zijn dan 18 voor junior klasse
-            int currentYear = Year.now().getValue();
-            if ((currentYear - this.geboorteJaar) < 18) {
-                isGoedeLeeftijd = true;
-            }
-        } else {
-            isGoedeLeeftijd = true;
-        }
-        switch (team.getGeslacht()) {
-            case MAN:
-                if (this.geslacht == eGeslacht.MAN) {
-                    isGoedeGeslacht = true;
-                }
-                break;
-            case VROUW:
-                if (this.geslacht == eGeslacht.VROUW) {
-                    isGoedeGeslacht = true;
-                }
-                break;
-            default:
-                isGoedeGeslacht = true;
-        }
-        if ((isGoedeGeslacht) && (isGoedeLeeftijd)) {
+        if (team.magInTeam(this.geslacht, this.geboorteJaar)) {
             this.team = team;
-            return true;
         } else {
-            return false;
+            throw new IllegalArgumentException("Geen valide team voor dit lid");
         }
     }
 
@@ -110,30 +77,28 @@ public class Lid {
         this.tussenVoegsel = tussenVoegsel;
     }
 
-    public boolean setTelefoonNummer(String telefoonNummer) {
-        if (Helper.checkPhoneNumber(telefoonNummer)) {
-            this.telefoonNummer = telefoonNummer;
-            return true;
+    public void setTelefoonNummer(String telefoonNummer) {
+        if (this.telefoonNummer != null) {
+            this.telefoonNummer.setTelefoonNummer(telefoonNummer);
         } else {
-            return false;
+            this.telefoonNummer = new TelefoonNummer(telefoonNummer);
         }
     }
 
-    public boolean setEmail(String email) {
-        if (Helper.checkEmail(email)) {
-            this.email = email;
-            return true;
+    public void setEmail(String email) {
+        if (this.email != null) {
+            this.email.setEmail(email);
         } else {
-            return false;
+            this.email = new Email(email);
         }
     }
 
     public void setGeboorteJaar(int geboorteJaar) {
-            this.geboorteJaar = geboorteJaar;
+        this.geboorteJaar = geboorteJaar;
     }
 
     public eGeslacht getGeslacht() {
-        return geslacht;
+        return this.geslacht;
     }
 
     public void setGeslacht(eGeslacht geslacht) {
