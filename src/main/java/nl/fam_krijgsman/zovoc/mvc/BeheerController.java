@@ -23,11 +23,11 @@ class BeheerController {
 
         //Data vullen teams en leden
         //Teams zijn randvoorwaardelijk voor leden
-        List<Team> teams = TeamData.makeTeamList();
+        List<Team> teams = TeamData.maakTeamLijst();
         for (Team team: teams) {
             this.beheerModel.addTeam(team);
         }
-        List<Lid> leden = LidData.makeLidListWithTeam(this.beheerModel.getTeams());
+        List<Lid> leden = LidData.maakLidLijstMetTeam(this.beheerModel.getTeams());
         for (Lid lid: leden) {
             this.beheerModel.addLid(lid);
         }

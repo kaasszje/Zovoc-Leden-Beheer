@@ -17,7 +17,7 @@ class UserLoginController {
         this.userLoginModel = userLoginModel;
 
         //fill test data
-        userLoginModel.setUserLogins(UserLoginData.addTestUsers());
+        userLoginModel.setUserLogins(UserLoginData.maakTestUsers());
 
         this.userLoginView.setUserField(USERLOGINTEXT);
         this.userLoginView.loginActionListener(new UserLoginActionListener());

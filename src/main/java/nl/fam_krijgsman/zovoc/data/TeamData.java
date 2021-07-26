@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeamData {
-    public static List<Team> makeTeamList() {
+    public static List<Team> maakTeamLijst() {
         ArrayList<Team> teams = new ArrayList<>();
         teams.add(new Team("Jongens A1", eKlasse.JUNIOR, eGeslacht.MAN));
         teams.add(new Team("Jongens A2", eKlasse.JUNIOR, eGeslacht.MAN));

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class UserLoginData {
 
-    public static Map<String, String> addTestUsers() {
+    public static Map<String, String> maakTestUsers() {
         Map<String,String> userLogins = new HashMap<>();
 
         // Add test logins

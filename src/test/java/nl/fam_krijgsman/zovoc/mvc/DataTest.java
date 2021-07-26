@@ -17,7 +17,7 @@ class DataTest {
     @Test
     void UserLoginModelTest() {
         UserLoginModel userLoginModel = new UserLoginModel();
-        userLoginModel.setUserLogins(UserLoginData.addTestUsers());
+        userLoginModel.setUserLogins(UserLoginData.maakTestUsers());
         Assertions.assertAll(
                 () -> assertFalse(userLoginModel.isValidLogin("martijn", "martijn")),
                 () -> assertTrue(userLoginModel.isValidLogin("martijn", "test"))
@@ -27,11 +27,11 @@ class DataTest {
     @Test
     void TeamandLidDataTest() {
         BeheerModel vereniging = new BeheerModel();
-        List<Team> teams = TeamData.makeTeamList();
+        List<Team> teams = TeamData.maakTeamLijst();
         for (Team team: teams) {
             vereniging.addTeam(team);
         }
-        List<Lid> leden = LidData.makeLidListWithTeam(vereniging.getTeams());
+        List<Lid> leden = LidData.maakLidLijstMetTeam(vereniging.getTeams());
         for (Lid lid: leden){
             vereniging.addLid(lid);
         }

@@ -7,7 +7,7 @@ import nl.fam_krijgsman.zovoc.model.eGeslacht;
 import java.util.ArrayList;
 
 public class LidData {
-    public static ArrayList<Lid> makeLidListWithTeam(ArrayList<Team> teams) {
+    public static ArrayList<Lid> maakLidLijstMetTeam(ArrayList<Team> teams) {
         ArrayList<Lid> leden = new ArrayList<>();
         //teams moeten eerst bestaan
         Lid lid1 = new Lid("Krijgsman","Martijn", "",
