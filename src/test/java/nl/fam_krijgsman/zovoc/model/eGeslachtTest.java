@@ -18,6 +18,6 @@ class eGeslachtTest {
 
     @Test
     void valueOf() {
-
+        assertEquals(eGeslacht.MAN, eGeslacht.valueOf("MAN"));
     }
 }

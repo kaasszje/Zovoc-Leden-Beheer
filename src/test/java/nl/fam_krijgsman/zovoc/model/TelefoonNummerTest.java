@@ -25,7 +25,7 @@ class TelefoonNummerTest {
     @Test
     void setTelefoonNummerValid() {
         String validTelefoonNummer = "0612345678";
-        telefoonNummer.setTelefoonNummer(validTelefoonNummer);
+        assertDoesNotThrow(() -> telefoonNummer.setTelefoonNummer(validTelefoonNummer));
     }
 
     @Test
@@ -39,7 +39,7 @@ class TelefoonNummerTest {
     @DisplayName("Valide nationale telefoonnummers")
     @ValueSource(strings = {"0101234567", "010-1234567", "010 - 123 45 67", "010 1234 567", "06-12345678", "06 123 456 78", "0111-123456", "0111 123456"})
     void isValideTelefoonNummerNational(String nummer) {
-        TelefoonNummer.isValideTelefoonNummer(nummer);
+        assertTrue(TelefoonNummer.isValideTelefoonNummer(nummer));
     }
 
     @ParameterizedTest

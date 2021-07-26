@@ -26,7 +26,7 @@ class EmailTest {
     @DisplayName("Valideer correcte setEmail")
     void setEmailValide() {
         String validEmail = "user.name@domain.com";
-        email.setEmail(validEmail);
+        assertDoesNotThrow(() -> email.setEmail(validEmail));
     }
 
     @Test

@@ -42,6 +42,7 @@ class LidTest {
     void setTeam_Junior_Junior() {
         lid.setGeboorteJaar(2010);
         Team team = new Team("jongens", eKlasse.JUNIOR, eGeslacht.MAN);
+        assertDoesNotThrow(() -> lid.setTeam(team));
     }
 
     @Test
@@ -55,7 +56,7 @@ class LidTest {
     @DisplayName("Dame mag in mix team")
     void setTeam_Woman_MIX() {
         Team team = new Team("jongens", eKlasse.SENIOR, eGeslacht.MIX);
-        //assertTrue(lid.setTeam(team));
+        assertDoesNotThrow(() -> lid.setTeam(team));
     }
 
     @Test
@@ -131,7 +132,7 @@ class LidTest {
     @DisplayName("Valideer set met valide telefoonnummer")
     void setTelefoonNummerValid() {
         String validTelefoonNummer = "06-12345678";
-        lid.setTelefoonNummer(validTelefoonNummer);
+        assertDoesNotThrow(() -> lid.setTelefoonNummer(validTelefoonNummer));
     }
 
     @Test
@@ -144,7 +145,7 @@ class LidTest {
     @Test
     @DisplayName("Valideer set met null waarde voor telefoonnummer")
     void setTelefoonNummerNull() {
-        lid.setTelefoonNummer(null);
+        assertDoesNotThrow(() -> lid.setTelefoonNummer(null));
     }
 
     @Test
@@ -159,7 +160,7 @@ class LidTest {
     @DisplayName("Valideer set met valide email")
     void setEmailValid() {
         String validEmail = "test@example.com";
-        lid.setEmail(validEmail);
+        assertDoesNotThrow(() -> lid.setEmail(validEmail));
     }
 
     @Test
@@ -172,7 +173,7 @@ class LidTest {
     @Test
     @DisplayName("Valideer set met null waarde voor email")
     void setEmailNull() {
-        lid.setEmail(null);
+        assertDoesNotThrow(() -> lid.setEmail(null));
     }
 
     @Test
