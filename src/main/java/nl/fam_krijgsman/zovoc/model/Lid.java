@@ -12,11 +12,11 @@ public class Lid {
         if ((achterNaam.isEmpty()) || voorNaam.isEmpty()) {
             throw new IllegalArgumentException("Waarde mag niet leeg zijn");
         }
-        this.achterNaam = achterNaam;
-        this.voorNaam = voorNaam;
+        this.setAchterNaam(achterNaam);
+        this.setVoorNaam(voorNaam);
         this.tussenVoegsel = tussenVoegsel;
-        this.telefoonNummer = new TelefoonNummer(telefoonNummer);
-        this.email = new Email(email);
+        this.setTelefoonNummer(telefoonNummer);
+        this.setEmail(email);
         this.geboorteJaar = geboorteJaar;
         this.geslacht = geslacht;
     }
@@ -62,15 +62,17 @@ public class Lid {
     }
 
     public void setAchterNaam(String achterNaam) {
-        if (achterNaam.length() >= 1) {
-            this.achterNaam = achterNaam;
+        if (achterNaam.isEmpty()) {
+            throw new IllegalArgumentException("Achternaam mag niet leeg zijn");
         }
+        this.achterNaam = achterNaam;
     }
 
     public void setVoorNaam(String voorNaam) {
-        if (voorNaam.length() >= 1) {
-            this.voorNaam = voorNaam;
+        if (voorNaam.isEmpty()) {
+            throw new IllegalArgumentException("Voornaam mag niet leeg zijn");
         }
+        this.voorNaam = voorNaam;
     }
 
     public void setTussenVoegsel(String tussenVoegsel) {
@@ -78,18 +80,22 @@ public class Lid {
     }
 
     public void setTelefoonNummer(String telefoonNummer) {
-        if (this.telefoonNummer != null) {
+        if ((this.telefoonNummer != null) && (telefoonNummer != null)) {
             this.telefoonNummer.setTelefoonNummer(telefoonNummer);
-        } else {
+        } else if ((this.telefoonNummer == null) && (telefoonNummer != null)) {
             this.telefoonNummer = new TelefoonNummer(telefoonNummer);
+        } else {
+            this.telefoonNummer = null;
         }
     }
 
     public void setEmail(String email) {
-        if (this.email != null) {
+        if ((this.email != null) && (email != null)) {
             this.email.setEmail(email);
-        } else {
+        } else if ((this.email == null) && (email != null)) {
             this.email = new Email(email);
+        } else {
+            this.email = null;
         }
     }
 

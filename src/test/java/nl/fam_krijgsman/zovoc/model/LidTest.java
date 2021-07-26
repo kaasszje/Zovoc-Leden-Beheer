@@ -82,10 +82,22 @@ class LidTest {
     }
 
     @Test
+    @DisplayName("Zet lege achternaam")
+    void setAchterNaamEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> lid.setAchterNaam(""));
+    }
+
+    @Test
     @DisplayName("Valideer voornaam")
     void getVoorNaam() {
         lid.setVoorNaam("test");
         assertEquals("test", lid.getVoorNaam());
+    }
+
+    @Test
+    @DisplayName("Zet lege voornaam")
+    void setVoorNaamEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> lid.setVoorNaam(""));
     }
 
     @Test
@@ -96,17 +108,59 @@ class LidTest {
     }
 
     @Test
-    @DisplayName("Valideer telefoonnummer")
+    @DisplayName("Valideer get telefoonnummer")
     void getTelefoonNummer() {
-        lid.setTelefoonNummer("0626454220");
-        assertEquals("0626454220", lid.getTelefoonNummer());
+        String validTelefoonNummer = "0612345678";
+        lid.setTelefoonNummer(validTelefoonNummer);
+        assertEquals("0612345678", lid.getTelefoonNummer());
     }
 
     @Test
-    @DisplayName("Valideer email-adres")
+    @DisplayName("Valideer set met valide telefoonnummer")
+    void setTelefoonNummerValid() {
+        String validTelefoonNummer = "06-12345678";
+        lid.setTelefoonNummer(validTelefoonNummer);
+    }
+
+    @Test
+    @DisplayName("Valideer set met onvalide telefoonnummer")
+    void setTelefoonNummerInValid() {
+        String invalidTelefoonNummer = "06-123-4567";
+        assertThrows(IllegalArgumentException.class, () -> lid.setTelefoonNummer(invalidTelefoonNummer));
+    }
+
+    @Test
+    @DisplayName("Valideer set met null waarde voor telefoonnummer")
+    void setTelefoonNummerNull() {
+        lid.setTelefoonNummer(null);
+    }
+
+    @Test
+    @DisplayName("Valideer get email-adres")
     void getEmail() {
-        lid.setEmail("test@example.com");
+        String validEmail = "test@example.com"; 
+        lid.setEmail(validEmail);
         assertEquals("test@example.com", lid.getEmail());
+    }
+
+    @Test
+    @DisplayName("Valideer set met valide email")
+    void setEmailValid() {
+        String validEmail = "test@example.com";
+        lid.setEmail(validEmail);
+    }
+
+    @Test
+    @DisplayName("Valideer set met onvalide email")
+    void setEmailInValid() {
+        String invalidEmail = "a.b@c";
+        assertThrows(IllegalArgumentException.class, () -> lid.setEmail(invalidEmail));
+    }
+
+    @Test
+    @DisplayName("Valideer set met null waarde voor email")
+    void setEmailNull() {
+        lid.setEmail(null);
     }
 
     @Test
