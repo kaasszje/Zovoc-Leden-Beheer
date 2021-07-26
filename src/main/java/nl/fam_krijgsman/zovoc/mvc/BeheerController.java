@@ -4,10 +4,8 @@ import nl.fam_krijgsman.zovoc.data.LidData;
 import nl.fam_krijgsman.zovoc.data.TeamData;
 import nl.fam_krijgsman.zovoc.model.*;
 
-import javax.swing.event.MenuListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 import java.util.List;
 
 class BeheerController {
@@ -25,11 +23,11 @@ class BeheerController {
 
         //Data vullen teams en leden
         //Teams zijn randvoorwaardelijk voor leden
-        List<Team> teams = TeamData.addTeamData();
+        List<Team> teams = TeamData.makeTeamList();
         for (Team team: teams) {
             this.beheerModel.addTeam(team);
         }
-        List<Lid> leden = LidData.addLidData(this.beheerModel.getTeams());
+        List<Lid> leden = LidData.makeLidListWithTeam(this.beheerModel.getTeams());
         for (Lid lid: leden) {
             this.beheerModel.addLid(lid);
         }

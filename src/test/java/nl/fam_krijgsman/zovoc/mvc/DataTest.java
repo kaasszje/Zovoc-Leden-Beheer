@@ -27,11 +27,11 @@ class DataTest {
     @Test
     void TeamandLidDataTest() {
         BeheerModel vereniging = new BeheerModel();
-        List<Team> teams = TeamData.addTeamData();
+        List<Team> teams = TeamData.makeTeamList();
         for (Team team: teams) {
             vereniging.addTeam(team);
         }
-        List<Lid> leden = LidData.addLidData(vereniging.getTeams());
+        List<Lid> leden = LidData.makeLidListWithTeam(vereniging.getTeams());
         for (Lid lid: leden){
             vereniging.addLid(lid);
         }
