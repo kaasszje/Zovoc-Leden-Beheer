@@ -9,9 +9,6 @@ public class Lid {
     private eGeslacht geslacht;
 
     public Lid(String achterNaam, String voorNaam, String tussenVoegsel, String telefoonNummer, String email, Integer geboorteJaar, eGeslacht geslacht) {
-        if ((achterNaam.isEmpty()) || voorNaam.isEmpty()) {
-            throw new IllegalArgumentException("Waarde mag niet leeg zijn");
-        }
         this.setAchterNaam(achterNaam);
         this.setVoorNaam(voorNaam);
         this.tussenVoegsel = tussenVoegsel;
@@ -62,14 +59,14 @@ public class Lid {
     }
 
     public void setAchterNaam(String achterNaam) {
-        if (achterNaam.isEmpty()) {
+        if ((achterNaam == null) || (achterNaam.isEmpty())) {
             throw new IllegalArgumentException("Achternaam mag niet leeg zijn");
         }
         this.achterNaam = achterNaam;
     }
 
     public void setVoorNaam(String voorNaam) {
-        if (voorNaam.isEmpty()) {
+        if ((voorNaam == null) || (voorNaam.isEmpty())) {
             throw new IllegalArgumentException("Voornaam mag niet leeg zijn");
         }
         this.voorNaam = voorNaam;

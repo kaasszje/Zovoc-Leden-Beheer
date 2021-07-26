@@ -33,6 +33,18 @@ class TeamTest {
     }
 
     @Test
+    @DisplayName("Valideer fout bij lege teamnaam")
+    void setNaamEmpty() {
+        assertThrows(IllegalArgumentException.class, () -> team.setNaam(""));
+    }
+
+    @Test
+    @DisplayName("Valideer fout bij null waarde teamnaam")
+    void setNaamNull() {
+        assertThrows(IllegalArgumentException.class,() -> team.setNaam(null));
+    }
+
+    @Test
     @DisplayName("Valideer klasse")
     void getKlasse() {
         team.setKlasse(eKlasse.JUNIOR);

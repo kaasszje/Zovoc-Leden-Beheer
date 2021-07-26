@@ -9,10 +9,7 @@ public class Team {
     private eGeslacht geslacht;
 
     public Team(String naam, eKlasse klasse, eGeslacht geslacht) {
-        if (naam.isEmpty()) {
-            throw new IllegalArgumentException("Naam mag niet leeg zijn");
-        }
-        this.naam = naam;
+        this.setNaam(naam);
         this.klasse = klasse;
         this.geslacht = geslacht;
     }
@@ -38,7 +35,11 @@ public class Team {
     }
 
     public void setNaam(String naam) {
-        this.naam = naam;
+        if ((naam == null) || (naam.isEmpty())) {
+            throw new IllegalArgumentException("Naam mag niet leeg zijn");
+        } else {
+            this.naam = naam;
+        }
     }
 
     public boolean magInTeam(eGeslacht geslacht, int geboorteJaar) {

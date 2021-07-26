@@ -88,6 +88,12 @@ class LidTest {
     }
 
     @Test
+    @DisplayName("Zet null waarde achternaam")
+    void setAchterNaamNull() {
+        assertThrows(IllegalArgumentException.class, () -> lid.setAchterNaam(null));
+    }
+
+    @Test
     @DisplayName("Valideer voornaam")
     void getVoorNaam() {
         lid.setVoorNaam("test");
@@ -98,6 +104,12 @@ class LidTest {
     @DisplayName("Zet lege voornaam")
     void setVoorNaamEmpty() {
         assertThrows(IllegalArgumentException.class, () -> lid.setVoorNaam(""));
+    }
+
+    @Test
+    @DisplayName("Zet null waarde voornaam")
+    void setVoorNaamNull() {
+        assertThrows(IllegalArgumentException.class, () -> lid.setVoorNaam(null));
     }
 
     @Test

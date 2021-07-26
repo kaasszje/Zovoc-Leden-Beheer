@@ -63,11 +63,12 @@ public class LidData {
     }
     
     private static Team findTeam(ArrayList<Team> teams, String teamNaam) {
+        Team foundTeam = null;
         for (Team team: teams) {
             if (team.getNaam().equals(teamNaam)) {
-                return team;
+                foundTeam = team;
             }
         }
-        return null;
+        return foundTeam;
     }
 }
