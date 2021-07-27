@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserLoginData</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">nl.fam_krijgsman.zovoc.data</a>
+</div>
+
+<h1>Coverage Summary for Class: UserLoginData (nl.fam_krijgsman.zovoc.data)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserLoginData</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (1/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    85,7%
+  </span>
+  <span class="absValue">
+    (6/7)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package nl.fam_krijgsman.zovoc.data;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import java.util.HashMap;
+<i class="no-highlight">4</i>&nbsp;import java.util.Map;
+<i class="no-highlight">5</i>&nbsp;
+<b class="nc"><i class="no-highlight">6</i>&nbsp;public class UserLoginData {</b>
+<i class="no-highlight">7</i>&nbsp;
+<i class="no-highlight">8</i>&nbsp;    public static Map&lt;String, String&gt; maakTestUsers() {
+<b class="fc"><i class="no-highlight">9</i>&nbsp;        Map&lt;String,String&gt; userLogins = new HashMap&lt;&gt;();</b>
+<i class="no-highlight">10</i>&nbsp;
+<i class="no-highlight">11</i>&nbsp;        // Add test logins
+<b class="fc"><i class="no-highlight">12</i>&nbsp;        userLogins.put(&quot;zovocuser&quot;,&quot;zovocpassword&quot;);</b>
+<b class="fc"><i class="no-highlight">13</i>&nbsp;        userLogins.put(&quot;admin&quot;,&quot;password&quot;);</b>
+<b class="fc"><i class="no-highlight">14</i>&nbsp;        userLogins.put(&quot;martijn&quot;,&quot;test&quot;);</b>
+<b class="fc"><i class="no-highlight">15</i>&nbsp;        userLogins.put(&quot;edward&quot;, &quot;edward&quot;);</b>
+<b class="fc"><i class="no-highlight">16</i>&nbsp;        return userLogins;</b>
+<i class="no-highlight">17</i>&nbsp;    }
+<i class="no-highlight">18</i>&nbsp;
+<i class="no-highlight">19</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-27 23:01</div>
+</div>
+</body>
+</html>

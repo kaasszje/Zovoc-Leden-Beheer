@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > UserLoginView</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+    @import "../../.css/highlight-idea.css";
+  </style>
+  <script type="text/javascript" src="../../.js/highlight.pack.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">nl.fam_krijgsman.zovoc.mvc</a>
+</div>
+
+<h1>Coverage Summary for Class: UserLoginView (nl.fam_krijgsman.zovoc.mvc)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">UserLoginView</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/52)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<div class="sourceCode" id="sourceCode"><i class="no-highlight">1</i>&nbsp;package nl.fam_krijgsman.zovoc.mvc;
+<i class="no-highlight">2</i>&nbsp;
+<i class="no-highlight">3</i>&nbsp;import javax.swing.*;
+<i class="no-highlight">4</i>&nbsp;import java.awt.*;
+<i class="no-highlight">5</i>&nbsp;import java.awt.event.ActionListener;
+<i class="no-highlight">6</i>&nbsp;import java.awt.event.FocusListener;
+<i class="no-highlight">7</i>&nbsp;import java.util.Objects;
+<i class="no-highlight">8</i>&nbsp;
+<i class="no-highlight">9</i>&nbsp;class UserLoginView extends JFrame {
+<i class="no-highlight">10</i>&nbsp;    private ImageIcon logo, icon;
+<i class="no-highlight">11</i>&nbsp;    private JButton loginButton;
+<i class="no-highlight">12</i>&nbsp;    private JTextField userField;
+<i class="no-highlight">13</i>&nbsp;    private JPasswordField passField;
+<i class="no-highlight">14</i>&nbsp;    private JLabel userLabel, passLabel, logoLabel;
+<i class="no-highlight">15</i>&nbsp;    private JPanel topPanel, centerPanel, bottomPanel;
+<i class="no-highlight">16</i>&nbsp;
+<b class="nc"><i class="no-highlight">17</i>&nbsp;    public UserLoginView() {</b>
+<i class="no-highlight">18</i>&nbsp;
+<b class="nc"><i class="no-highlight">19</i>&nbsp;        topPanel = new JPanel();</b>
+<i class="no-highlight">20</i>&nbsp;
+<i class="no-highlight">21</i>&nbsp;        //Create logo fot label en setup label
+<b class="nc"><i class="no-highlight">22</i>&nbsp;        logo = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource(&quot;/Images/Zovoc_logo.png&quot;)));</b>
+<b class="nc"><i class="no-highlight">23</i>&nbsp;        icon = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource(&quot;/Images/favicon.png&quot;)));</b>
+<i class="no-highlight">24</i>&nbsp;
+<b class="nc"><i class="no-highlight">25</i>&nbsp;        logoLabel = new JLabel();</b>
+<b class="nc"><i class="no-highlight">26</i>&nbsp;        logoLabel.setIcon(logo);</b>
+<b class="nc"><i class="no-highlight">27</i>&nbsp;        logoLabel.setHorizontalAlignment(JLabel.CENTER);</b>
+<i class="no-highlight">28</i>&nbsp;
+<i class="no-highlight">29</i>&nbsp;        //Add logo to topPanel
+<b class="nc"><i class="no-highlight">30</i>&nbsp;        topPanel.add(logoLabel);</b>
+<i class="no-highlight">31</i>&nbsp;
+<i class="no-highlight">32</i>&nbsp;        //Create center panel
+<b class="nc"><i class="no-highlight">33</i>&nbsp;        centerPanel = new JPanel();</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;        centerPanel.setLayout(new GridLayout(2, 2));</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;        centerPanel.setSize(100, 50);</b>
+<i class="no-highlight">36</i>&nbsp;
+<b class="nc"><i class="no-highlight">37</i>&nbsp;        userLabel = new JLabel(&quot;Gebruikersnaam:&quot;);</b>
+<b class="nc"><i class="no-highlight">38</i>&nbsp;        userLabel.setSize(30, 25);</b>
+<b class="nc"><i class="no-highlight">39</i>&nbsp;        userLabel.setHorizontalAlignment(JLabel.CENTER);</b>
+<i class="no-highlight">40</i>&nbsp;
+<b class="nc"><i class="no-highlight">41</i>&nbsp;        passLabel = new JLabel(&quot;Wachtwoord:&quot;);</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        passLabel.setSize(30, 25);</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;        passLabel.setHorizontalAlignment(JLabel.CENTER);</b>
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;
+<b class="nc"><i class="no-highlight">46</i>&nbsp;        userField = new JTextField(&quot;&quot;, 30);</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        userField.setHorizontalAlignment(JTextField.CENTER);</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;
+<b class="nc"><i class="no-highlight">50</i>&nbsp;        passField = new JPasswordField(&quot;&quot;, 30);</b>
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        passField.setHorizontalAlignment(JPasswordField.CENTER);</b>
+<i class="no-highlight">52</i>&nbsp;
+<b class="nc"><i class="no-highlight">53</i>&nbsp;        centerPanel.add(userLabel);</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        centerPanel.add(userField);</b>
+<i class="no-highlight">55</i>&nbsp;
+<b class="nc"><i class="no-highlight">56</i>&nbsp;        centerPanel.add(passLabel);</b>
+<b class="nc"><i class="no-highlight">57</i>&nbsp;        centerPanel.add(passField);</b>
+<i class="no-highlight">58</i>&nbsp;
+<b class="nc"><i class="no-highlight">59</i>&nbsp;        centerPanel.setSize(100, 50);</b>
+<i class="no-highlight">60</i>&nbsp;
+<b class="nc"><i class="no-highlight">61</i>&nbsp;        loginButton = new JButton(&quot;Login&quot;);</b>
+<b class="nc"><i class="no-highlight">62</i>&nbsp;        loginButton.setHorizontalAlignment(JButton.CENTER);</b>
+<b class="nc"><i class="no-highlight">63</i>&nbsp;        loginButton.setSize(30, 20);</b>
+<i class="no-highlight">64</i>&nbsp;
+<i class="no-highlight">65</i>&nbsp;
+<b class="nc"><i class="no-highlight">66</i>&nbsp;        bottomPanel = new JPanel();</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;        bottomPanel.setLayout(new FlowLayout());</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;        bottomPanel.add(loginButton);</b>
+<i class="no-highlight">69</i>&nbsp;
+<i class="no-highlight">70</i>&nbsp;
+<i class="no-highlight">71</i>&nbsp;        //Setup frame
+<b class="nc"><i class="no-highlight">72</i>&nbsp;        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</b>
+<b class="nc"><i class="no-highlight">73</i>&nbsp;        this.setLayout(new BorderLayout());</b>
+<b class="nc"><i class="no-highlight">74</i>&nbsp;        this.setIconImage(icon.getImage());</b>
+<i class="no-highlight">75</i>&nbsp;
+<i class="no-highlight">76</i>&nbsp;        //Add elements to frame
+<b class="nc"><i class="no-highlight">77</i>&nbsp;        this.add(topPanel, BorderLayout.NORTH);</b>
+<b class="nc"><i class="no-highlight">78</i>&nbsp;        this.add(centerPanel, BorderLayout.CENTER);</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;        this.add(bottomPanel, BorderLayout.SOUTH);</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;        this.setResizable(false);</b>
+<b class="nc"><i class="no-highlight">81</i>&nbsp;        this.pack();</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;        this.setLocationRelativeTo(null);</b>
+<b class="nc"><i class="no-highlight">83</i>&nbsp;        this.getRootPane().setDefaultButton(loginButton);</b>
+<b class="nc"><i class="no-highlight">84</i>&nbsp;        this.setVisible(true);</b>
+<i class="no-highlight">85</i>&nbsp;    }
+<i class="no-highlight">86</i>&nbsp;
+<i class="no-highlight">87</i>&nbsp;    public String getUserField() {
+<b class="nc"><i class="no-highlight">88</i>&nbsp;        return this.userField.getText();</b>
+<i class="no-highlight">89</i>&nbsp;    }
+<i class="no-highlight">90</i>&nbsp;
+<i class="no-highlight">91</i>&nbsp;    public String getPassField() {
+<b class="nc"><i class="no-highlight">92</i>&nbsp;        return String.valueOf(this.passField.getPassword());</b>
+<i class="no-highlight">93</i>&nbsp;    }
+<i class="no-highlight">94</i>&nbsp;
+<i class="no-highlight">95</i>&nbsp;    public void setUserField(String userFieldText) {
+<b class="nc"><i class="no-highlight">96</i>&nbsp;        this.userField.setText(userFieldText);</b>
+<i class="no-highlight">97</i>&nbsp;    }
+<i class="no-highlight">98</i>&nbsp;
+<i class="no-highlight">99</i>&nbsp;    public void setPassField(String passFieldText) {
+<b class="nc"><i class="no-highlight">100</i>&nbsp;        this.passField.setText(passFieldText);</b>
+<i class="no-highlight">101</i>&nbsp;    }
+<i class="no-highlight">102</i>&nbsp;
+<i class="no-highlight">103</i>&nbsp;    public void displayErrorMessage(String errorMessage) {
+<b class="nc"><i class="no-highlight">104</i>&nbsp;        JOptionPane.showMessageDialog(this, errorMessage);</b>
+<i class="no-highlight">105</i>&nbsp;    }
+<i class="no-highlight">106</i>&nbsp;
+<i class="no-highlight">107</i>&nbsp;    public void loginActionListener (ActionListener listenForLoginButton) {
+<b class="nc"><i class="no-highlight">108</i>&nbsp;        this.loginButton.addActionListener(listenForLoginButton);</b>
+<i class="no-highlight">109</i>&nbsp;    }
+<i class="no-highlight">110</i>&nbsp;
+<i class="no-highlight">111</i>&nbsp;    public void userTextFocusListener (FocusListener userTextFieldFocusListener) {
+<b class="nc"><i class="no-highlight">112</i>&nbsp;        this.userField.addFocusListener(userTextFieldFocusListener);</b>
+<i class="no-highlight">113</i>&nbsp;    }
+<i class="no-highlight">114</i>&nbsp;
+<i class="no-highlight">115</i>&nbsp;    public JButton getLoginButton() {
+<b class="nc"><i class="no-highlight">116</i>&nbsp;        return loginButton;</b>
+<i class="no-highlight">117</i>&nbsp;    }
+<i class="no-highlight">118</i>&nbsp;
+<i class="no-highlight">119</i>&nbsp;    public void focusUserField(){
+<b class="nc"><i class="no-highlight">120</i>&nbsp;        this.userField.requestFocus();</b>
+<i class="no-highlight">121</i>&nbsp;    }
+<i class="no-highlight">122</i>&nbsp;}
+</div>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+        var codeBlock = document.getElementById('sourceCode');
+
+        if (codeBlock) {
+            hljs.highlightBlock(codeBlock);
+        }
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-07-27 23:01</div>
+</div>
+</body>
+</html>
