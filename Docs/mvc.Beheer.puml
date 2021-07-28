@@ -110,25 +110,25 @@ class AddTeamViewListener implements ActionListener
 
 
 'interne Beheermodel classes
-TeamModel --+ BeheerModel
-LedenModel --+ BeheerModel
-ModelHandler --+ BeheerModel
+TeamModel --+ BeheerModel : innerclass >
+LedenModel --+ BeheerModel : innerclass >
+ModelHandler --+ BeheerModel : innerclass >
 
 'interne Beheerview classes
-ZovocMenuBar --+ BeheerView
-HeaderPanel --+ BeheerView
-WelcomePanel --+ BeheerView
-LedenPanel ---+ BeheerView
-TeamPanel ---+ BeheerView
-AddTeamPanel ---+ BeheerView
-AddLidPanel ---+ BeheerView
+ZovocMenuBar --+ BeheerView : innerclass >
+HeaderPanel --+ BeheerView : innerclass >
+WelcomePanel --+ BeheerView : innerclass >
+LedenPanel ---+ BeheerView : innerclass >
+TeamPanel ---+ BeheerView : innerclass >
+AddTeamPanel ---+ BeheerView : innerclass >
+AddLidPanel ---+ BeheerView : innerclass >
 
 'interne Beheercontroller classes
-MenuListener --+ BeheerController
-LedenViewListener --+ BeheerController
-AddLedenViewListener --+ BeheerController
-TeamViewListener --+ BeheerController
-AddTeamViewListener --+ BeheerController
+MenuListener --+ BeheerController : innerclass >
+LedenViewListener --+ BeheerController : innerclass >
+AddLedenViewListener --+ BeheerController : innerclass >
+TeamViewListener --+ BeheerController : innerclass >
+AddTeamViewListener --+ BeheerController : innerclass >
 
 BeheerController -o BeheerView
 BeheerModel o- BeheerController
