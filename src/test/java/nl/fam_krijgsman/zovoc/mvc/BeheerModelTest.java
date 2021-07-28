@@ -99,7 +99,8 @@ class BeheerModelTest {
     @Test
     @DisplayName("Team: Verwijder niet bestaand team")
     void getTeamModelOutOfBounds() {
-        assertThrows(IndexOutOfBoundsException.class, () -> teamModel.removeTeam(10));
+        //assertThrows(IndexOutOfBoundsException.class, () -> teamModel.removeTeam(10));
+        assertFalse(teamModel.removeTeam(25));
     }
 
     @Test

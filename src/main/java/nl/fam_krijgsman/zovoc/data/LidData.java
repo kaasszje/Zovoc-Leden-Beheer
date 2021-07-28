@@ -5,9 +5,10 @@ import nl.fam_krijgsman.zovoc.model.Team;
 import nl.fam_krijgsman.zovoc.model.eGeslacht;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class LidData {
-    public static ArrayList<Lid> maakLidLijstMetTeam(ArrayList<Team> teams) {
+    public static ArrayList<Lid> maakLidLijstMetTeam(List<Team> teams) {
         ArrayList<Lid> leden = new ArrayList<>();
         //teams moeten eerst bestaan
         Lid lid1 = new Lid("Krijgsman","Martijn", "",
@@ -62,7 +63,7 @@ public class LidData {
         }
     }
     
-    private static Team findTeam(ArrayList<Team> teams, String teamNaam) {
+    private static Team findTeam(List<Team> teams, String teamNaam) {
         Team foundTeam = null;
         for (Team team: teams) {
             if (team.getNaam().equals(teamNaam)) {

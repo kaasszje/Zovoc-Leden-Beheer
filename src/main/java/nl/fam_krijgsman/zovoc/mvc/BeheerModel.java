@@ -4,6 +4,8 @@ import nl.fam_krijgsman.zovoc.model.*;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
+import java.util.List;
 
 class BeheerModel extends Vereniging {
     private final static String VERENIGING_NAAM = "Zovoc";
@@ -43,17 +45,19 @@ class BeheerModel extends Vereniging {
         return teamModel;
     }
 
-    class TeamModel extends ModelHandler {
+    class TeamModel extends ModelHandler implements TeamDao {
+        private ArrayList<Team> teams;
 
         public TeamModel() {
             super(new String[]{"Teamnaam", "Klasse", "Geslacht"}
                     , new Class[]{String.class, eKlasse.class, eGeslacht.class}
             );
+            teams = new ArrayList<>();
         }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Team row = getTeams().get(rowIndex);
+            Team row = this.teams.get(rowIndex);
             if (columnIndex == 0) {
                 return row.getNaam();
             } else if (columnIndex == 1) {
@@ -66,7 +70,7 @@ class BeheerModel extends Vereniging {
 
         @Override
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-            Team row = getTeams().get(rowIndex);
+            Team row = this.teams.get(rowIndex);
             if (columnIndex == 0) {
                 row.setNaam((String) aValue);
             } else if (columnIndex == 1) {
@@ -78,7 +82,7 @@ class BeheerModel extends Vereniging {
 
         @Override
         public int getRowCount() {
-            return getTeams().size();
+            return this.teams.size();
         }
 
         @Override
@@ -87,10 +91,52 @@ class BeheerModel extends Vereniging {
         }
 
         public boolean removeTeam(int index) {
-            if (getTeams().get(index) != null) {
-                getTeams().remove(index);
+            try {
+                this.removeTeam(teams.get(index));
+                return true;
+            } catch (IndexOutOfBoundsException e) {
+                return false;
+            }
+        }
+
+        @Override
+        public List<Team> getTeams() {
+            return this.teams;
+        }
+
+        @Override
+        public Team findTeam(String naam) {
+            for (Team team: teams) {
+                if (team.getNaam().equals(naam)) {
+                    return team;
+                }
+            }
+            return null;
+        }
+
+        private Team findTeam(Team team) {
+            return this.findTeam(team.getNaam());
+        }
+
+        @Override
+        public boolean addTeam(Team team) {
+            //controlleer of team al bestaat
+            if (findTeam(team) == null) {
+                teams.add(team);
                 return true;
             }
+            // team bestond all
+            return false;
+        }
+
+        @Override
+        public boolean removeTeam(Team team) {
+            //controlleer of te verwijderen team voorkomt
+            if (findTeam(team) != null) {
+                teams.remove(team);
+                return true;
+            }
+            // team kwam niet voor
             return false;
         }
     }

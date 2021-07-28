@@ -25,9 +25,9 @@ class BeheerController {
         //Teams zijn randvoorwaardelijk voor leden
         List<Team> teams = TeamData.maakTeamLijst();
         for (Team team: teams) {
-            this.beheerModel.addTeam(team);
+            this.beheerModel.getTeamModel().addTeam(team);
         }
-        List<Lid> leden = LidData.maakLidLijstMetTeam(this.beheerModel.getTeams());
+        List<Lid> leden = LidData.maakLidLijstMetTeam(this.beheerModel.getTeamModel().getTeams());
         for (Lid lid: leden) {
             this.beheerModel.addLid(lid);
         }
@@ -127,8 +127,8 @@ class BeheerController {
                 beheerView.switchPanel(beheerView.getAddTeamPanel());
             } else if (e.getSource().equals(beheerView.getTeamPanel().getVerwijderTeam())) {
                 int rowIndex = beheerView.getTeamPanel().getTeamTable().getSelectedRow();
-                if ((rowIndex != -1) && (rowIndex < beheerModel.getTeams().size())) {
-                    beheerModel.removeTeamFromLid(beheerModel.getTeams().get(rowIndex));
+                if ((rowIndex != -1) && (rowIndex < beheerModel.getTeamModel().getTeams().size())) {
+                    beheerModel.removeTeamFromLid(beheerModel.getTeamModel().getTeams().get(rowIndex));
                     beheerModel.getTeamModel().removeTeam(rowIndex);
                     beheerView.switchPanel(beheerView.getTeamPanel());
                 } else {
