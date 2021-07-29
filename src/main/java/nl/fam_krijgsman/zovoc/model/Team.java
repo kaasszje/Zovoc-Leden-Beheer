@@ -36,7 +36,7 @@ public class Team {
 
     public void setNaam(String naam) {
         if ((naam == null) || (naam.isEmpty())) {
-            throw new IllegalArgumentException("Naam mag niet leeg zijn");
+            throw new IllegalArgumentException("Team naam mag niet leeg zijn");
         } else {
             this.naam = naam;
         }

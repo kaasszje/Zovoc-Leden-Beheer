@@ -2,7 +2,10 @@ package nl.fam_krijgsman.zovoc.mvc;
 
 import nl.fam_krijgsman.zovoc.data.LidData;
 import nl.fam_krijgsman.zovoc.data.TeamData;
-import nl.fam_krijgsman.zovoc.model.*;
+import nl.fam_krijgsman.zovoc.model.Lid;
+import nl.fam_krijgsman.zovoc.model.Team;
+import nl.fam_krijgsman.zovoc.model.eGeslacht;
+import nl.fam_krijgsman.zovoc.model.eKlasse;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,11 +27,11 @@ class BeheerController {
         //Data vullen teams en leden
         //Teams zijn randvoorwaardelijk voor leden
         List<Team> teams = TeamData.maakTeamLijst();
-        for (Team team: teams) {
+        for (Team team : teams) {
             this.beheerModel.addTeam(team);
         }
         List<Lid> leden = LidData.maakLidLijstMetTeam(this.beheerModel.getTeams());
-        for (Lid lid: leden) {
+        for (Lid lid : leden) {
             this.beheerModel.addLid(lid);
         }
 
@@ -98,22 +101,17 @@ class BeheerController {
                 String geboorteJaarString = beheerView.getAddLidPanel().getGeboorteJaarField();
                 eGeslacht geslacht = beheerView.getAddLidPanel().getGeslacht();
 
-                if (achterNaam.isEmpty() && voorNaam.isEmpty() && geboorteJaarString.isEmpty()) {
-                    beheerView.displayErrorMessage("Achter-, voornaam of geboorte jaar is nog leeg.");
-                } else if (!TelefoonNummer.isValideTelefoonNummer(telefoonNummer)) {
-                    beheerView.displayErrorMessage("Dat is geen geldig telefoonnummer.");
-                } else if (!Email.isValideEmail(email)) {
-                    beheerView.displayErrorMessage("Dat is geen geldig email adres.");
-                } else {
-                    try {
-                        Integer geboorteJaar = Integer.parseInt(geboorteJaarString);
-                        beheerModel.addLid(new Lid(achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email, geboorteJaar, geslacht));
-                        beheerView.getAddLidPanel().clearTextFields();
-                        beheerView.switchPanel(beheerView.getLedenPanel());
-                    } catch (NumberFormatException nfe) {
-                        beheerView.displayErrorMessage("Dat is geen valide geboorte jaar.");
-                    }
+                try {
+                    Integer geboorteJaar = Integer.parseInt(geboorteJaarString);
+                    beheerModel.addLid(new Lid(achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email, geboorteJaar, geslacht));
+                    beheerView.getAddLidPanel().clearTextFields();
+                    beheerView.switchPanel(beheerView.getLedenPanel());
+                } catch (NumberFormatException nfe) {
+                    beheerView.displayErrorMessage("Dat is geen valide geboorte jaar.");
+                } catch (IllegalArgumentException iae) {
+                    beheerView.displayErrorMessage(iae.getMessage());
                 }
+
             } else if (e.getSource().equals(beheerView.getAddLidPanel().getCancelButton())) {
                 beheerView.switchPanel(beheerView.getLedenPanel());
             }
@@ -143,14 +141,15 @@ class BeheerController {
         public void actionPerformed(ActionEvent e) {
             if (e.getSource().equals(beheerView.getAddTeamPanel().getToevoegButton())) {
                 String naam = beheerView.getAddTeamPanel().getTeamField();
-                if (naam.isEmpty()) {
-                    beheerView.displayErrorMessage("Teamnaam moet gevuld zijn");
-                } else {
+
+                try {
                     eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();
                     eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();
                     beheerModel.addTeam(new Team(naam, klasse, geslacht));
                     beheerView.getAddTeamPanel().clearTextFields();
                     beheerView.switchPanel(beheerView.getTeamPanel());
+                } catch (IllegalArgumentException iae) {
+                    beheerView.displayErrorMessage(iae.getMessage());
                 }
             } else if (e.getSource().equals(beheerView.getAddTeamPanel().getCancelButton())) {
                 beheerView.switchPanel(beheerView.getTeamPanel());
