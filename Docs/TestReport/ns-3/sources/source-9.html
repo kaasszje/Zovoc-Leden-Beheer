@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
-  <title>Coverage Report > TeamDao</title>
+  <title>Coverage Report > LidDao</title>
   <style type="text/css">
     @import "../../.css/coverage.css";
     @import "../../.css/highlight-idea.css";
@@ -20,14 +20,14 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">nl.fam_krijgsman.zovoc.model</a>
 </div>
 
-<h1>Coverage Summary for Class: TeamDao (nl.fam_krijgsman.zovoc.model)</h1>
+<h1>Coverage Summary for Class: LidDao (nl.fam_krijgsman.zovoc.model)</h1>
 
 <table class="coverageStats">
 <tr>
   <th class="name">Class</th>
 </tr>
 <tr>
-  <td class="name">TeamDao</td>
+  <td class="name">LidDao</td>
 </tr>
 
 </table>
@@ -41,12 +41,13 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import java.util.List;
 <i class="no-highlight">4</i>&nbsp;
-<i class="no-highlight">5</i>&nbsp;interface TeamDao {
-<i class="no-highlight">6</i>&nbsp;    List&lt;Team&gt; getTeams();
-<i class="no-highlight">7</i>&nbsp;    Team findTeam(String naam);
-<i class="no-highlight">8</i>&nbsp;    boolean addTeam(Team team);
-<i class="no-highlight">9</i>&nbsp;    boolean removeTeam(Team team);
-<i class="no-highlight">10</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;interface LidDao {
+<i class="no-highlight">6</i>&nbsp;    List&lt;Lid&gt; getLeden();
+<i class="no-highlight">7</i>&nbsp;    Lid findLid(String achternaam, String voornaam);
+<i class="no-highlight">8</i>&nbsp;    boolean addLid(Lid lid);
+<i class="no-highlight">9</i>&nbsp;    boolean removeLid(Lid lid);
+<i class="no-highlight">10</i>&nbsp;    int aantalLeden();
+<i class="no-highlight">11</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -73,7 +74,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2021-07-27 23:01</div>
+    <div style="float:right;">generated on 2021-07-29 23:04</div>
 </div>
 </body>
 </html>

@@ -176,167 +176,166 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">37</i>&nbsp;        public int getColumnCount() {
 <b class="fc"><i class="no-highlight">38</i>&nbsp;            return columnNames.length;</b>
 <i class="no-highlight">39</i>&nbsp;        }
-<i class="no-highlight">40</i>&nbsp;
-<i class="no-highlight">41</i>&nbsp;    }
-<i class="no-highlight">42</i>&nbsp;
-<i class="no-highlight">43</i>&nbsp;    public TeamModel getTeamModel() {
-<b class="fc"><i class="no-highlight">44</i>&nbsp;        return teamModel;</b>
-<i class="no-highlight">45</i>&nbsp;    }
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;    class TeamModel extends ModelHandler {
-<i class="no-highlight">48</i>&nbsp;
-<b class="fc"><i class="no-highlight">49</i>&nbsp;        public TeamModel() {</b>
-<b class="fc"><i class="no-highlight">50</i>&nbsp;            super(new String[]{&quot;Teamnaam&quot;, &quot;Klasse&quot;, &quot;Geslacht&quot;}</b>
-<i class="no-highlight">51</i>&nbsp;                    , new Class[]{String.class, eKlasse.class, eGeslacht.class}
-<i class="no-highlight">52</i>&nbsp;            );
-<b class="fc"><i class="no-highlight">53</i>&nbsp;        }</b>
-<i class="no-highlight">54</i>&nbsp;
-<i class="no-highlight">55</i>&nbsp;        @Override
-<i class="no-highlight">56</i>&nbsp;        public Object getValueAt(int rowIndex, int columnIndex) {
-<b class="fc"><i class="no-highlight">57</i>&nbsp;            Team row = getTeams().get(rowIndex);</b>
-<b class="fc"><i class="no-highlight">58</i>&nbsp;            if (columnIndex == 0) {</b>
-<b class="fc"><i class="no-highlight">59</i>&nbsp;                return row.getNaam();</b>
-<b class="fc"><i class="no-highlight">60</i>&nbsp;            } else if (columnIndex == 1) {</b>
-<b class="fc"><i class="no-highlight">61</i>&nbsp;                return row.getKlasse();</b>
-<b class="fc"><i class="no-highlight">62</i>&nbsp;            } else if (columnIndex == 2) {</b>
-<b class="fc"><i class="no-highlight">63</i>&nbsp;                return row.getGeslacht();</b>
-<i class="no-highlight">64</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">65</i>&nbsp;            return null;</b>
-<i class="no-highlight">66</i>&nbsp;        }
-<i class="no-highlight">67</i>&nbsp;
-<i class="no-highlight">68</i>&nbsp;        @Override
-<i class="no-highlight">69</i>&nbsp;        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-<b class="fc"><i class="no-highlight">70</i>&nbsp;            Team row = getTeams().get(rowIndex);</b>
-<b class="fc"><i class="no-highlight">71</i>&nbsp;            if (columnIndex == 0) {</b>
-<b class="fc"><i class="no-highlight">72</i>&nbsp;                row.setNaam((String) aValue);</b>
-<b class="fc"><i class="no-highlight">73</i>&nbsp;            } else if (columnIndex == 1) {</b>
-<b class="fc"><i class="no-highlight">74</i>&nbsp;                row.setKlasse((eKlasse) aValue);</b>
-<b class="fc"><i class="no-highlight">75</i>&nbsp;            } else if (columnIndex == 2) {</b>
-<b class="fc"><i class="no-highlight">76</i>&nbsp;                row.setGeslacht((eGeslacht) aValue);</b>
-<i class="no-highlight">77</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">78</i>&nbsp;        }</b>
-<i class="no-highlight">79</i>&nbsp;
-<i class="no-highlight">80</i>&nbsp;        @Override
-<i class="no-highlight">81</i>&nbsp;        public int getRowCount() {
-<b class="fc"><i class="no-highlight">82</i>&nbsp;            return getTeams().size();</b>
-<i class="no-highlight">83</i>&nbsp;        }
-<i class="no-highlight">84</i>&nbsp;
-<i class="no-highlight">85</i>&nbsp;        @Override
-<i class="no-highlight">86</i>&nbsp;        public boolean isCellEditable(int rowIndex, int columnIndex) {
-<b class="fc"><i class="no-highlight">87</i>&nbsp;            return true;</b>
-<i class="no-highlight">88</i>&nbsp;        }
-<i class="no-highlight">89</i>&nbsp;
-<i class="no-highlight">90</i>&nbsp;        public boolean removeTeam(int index) {
-<b class="fc"><i class="no-highlight">91</i>&nbsp;            if (getTeams().get(index) != null) {</b>
-<b class="fc"><i class="no-highlight">92</i>&nbsp;                getTeams().remove(index);</b>
-<b class="fc"><i class="no-highlight">93</i>&nbsp;                return true;</b>
-<i class="no-highlight">94</i>&nbsp;            }
-<b class="nc"><i class="no-highlight">95</i>&nbsp;            return false;</b>
-<i class="no-highlight">96</i>&nbsp;        }
-<i class="no-highlight">97</i>&nbsp;    }
-<i class="no-highlight">98</i>&nbsp;
-<i class="no-highlight">99</i>&nbsp;    public LedenModel getLedenModel() {
-<b class="fc"><i class="no-highlight">100</i>&nbsp;        return ledenModel;</b>
-<i class="no-highlight">101</i>&nbsp;    }
-<i class="no-highlight">102</i>&nbsp;
-<i class="no-highlight">103</i>&nbsp;    class LedenModel extends ModelHandler {
-<i class="no-highlight">104</i>&nbsp;
-<b class="fc"><i class="no-highlight">105</i>&nbsp;        public LedenModel() {</b>
-<b class="fc"><i class="no-highlight">106</i>&nbsp;            super(new String[]{&quot;Achternaam&quot;, &quot;Voornaam&quot;, &quot;TussenVoegsel&quot;, &quot;TelefoonNummer&quot;, &quot;e-mail&quot;, &quot;GeboorteJaar&quot;, &quot;Geslacht&quot;, &quot;Team&quot;}</b>
-<i class="no-highlight">107</i>&nbsp;                    , new Class[]{String.class, String.class, String.class, String.class, String.class, Integer.class, eGeslacht.class, Team.class}
-<i class="no-highlight">108</i>&nbsp;            );
-<b class="fc"><i class="no-highlight">109</i>&nbsp;        }</b>
-<i class="no-highlight">110</i>&nbsp;
-<i class="no-highlight">111</i>&nbsp;        @Override
-<i class="no-highlight">112</i>&nbsp;        public Object getValueAt(int rowIndex, int columnIndex) {
-<b class="fc"><i class="no-highlight">113</i>&nbsp;            Lid row = getLeden().get(rowIndex);</b>
-<b class="fc"><i class="no-highlight">114</i>&nbsp;            if (columnIndex == 0) {</b>
-<b class="fc"><i class="no-highlight">115</i>&nbsp;                return row.getAchterNaam();</b>
-<b class="fc"><i class="no-highlight">116</i>&nbsp;            } else if (columnIndex == 1) {</b>
-<b class="fc"><i class="no-highlight">117</i>&nbsp;                return row.getVoorNaam();</b>
-<b class="fc"><i class="no-highlight">118</i>&nbsp;            } else if (columnIndex == 2) {</b>
-<b class="fc"><i class="no-highlight">119</i>&nbsp;                return row.getTussenVoegsel();</b>
-<b class="fc"><i class="no-highlight">120</i>&nbsp;            } else if (columnIndex == 3) {</b>
-<b class="fc"><i class="no-highlight">121</i>&nbsp;                return row.getTelefoonNummer();</b>
-<b class="fc"><i class="no-highlight">122</i>&nbsp;            } else if (columnIndex == 4) {</b>
-<b class="fc"><i class="no-highlight">123</i>&nbsp;                return row.getEmail();</b>
-<b class="fc"><i class="no-highlight">124</i>&nbsp;            } else if (columnIndex == 5) {</b>
-<b class="fc"><i class="no-highlight">125</i>&nbsp;                return row.getGeboorteJaar();</b>
-<b class="fc"><i class="no-highlight">126</i>&nbsp;            } else if (columnIndex == 6) {</b>
-<b class="fc"><i class="no-highlight">127</i>&nbsp;                return row.getGeslacht();</b>
-<b class="fc"><i class="no-highlight">128</i>&nbsp;            } else if (columnIndex == 7) {</b>
-<b class="fc"><i class="no-highlight">129</i>&nbsp;                Team team = row.getTeam();</b>
-<b class="fc"><i class="no-highlight">130</i>&nbsp;                if (team == null) {</b>
-<b class="fc"><i class="no-highlight">131</i>&nbsp;                    return &quot;&quot;;</b>
-<i class="no-highlight">132</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">133</i>&nbsp;                return row.getTeam().getNaam();</b>
-<i class="no-highlight">134</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">135</i>&nbsp;            return null;</b>
-<i class="no-highlight">136</i>&nbsp;        }
-<i class="no-highlight">137</i>&nbsp;
-<i class="no-highlight">138</i>&nbsp;        @Override
-<i class="no-highlight">139</i>&nbsp;        public int getRowCount() {
-<b class="fc"><i class="no-highlight">140</i>&nbsp;            return getLeden().size();</b>
-<i class="no-highlight">141</i>&nbsp;        }
-<i class="no-highlight">142</i>&nbsp;
-<i class="no-highlight">143</i>&nbsp;        @Override
-<i class="no-highlight">144</i>&nbsp;        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-<b class="fc"><i class="no-highlight">145</i>&nbsp;            Lid row = getLeden().get(rowIndex);</b>
-<b class="fc"><i class="no-highlight">146</i>&nbsp;            if (columnIndex == 2) {</b>
-<b class="fc"><i class="no-highlight">147</i>&nbsp;                row.setTussenVoegsel((String) aValue);</b>
-<b class="fc"><i class="no-highlight">148</i>&nbsp;            } else if (columnIndex == 3) {</b>
-<i class="no-highlight">149</i>&nbsp;                try {
-<b class="fc"><i class="no-highlight">150</i>&nbsp;                    row.setTelefoonNummer((String) aValue);</b>
-<b class="nc"><i class="no-highlight">151</i>&nbsp;                } catch (IllegalArgumentException e) {</b>
-<b class="nc"><i class="no-highlight">152</i>&nbsp;                    JOptionPane.showMessageDialog(null, &quot;Dit is geen valide telefoonnummer.&quot;);</b>
-<b class="fc"><i class="no-highlight">153</i>&nbsp;                }</b>
-<b class="fc"><i class="no-highlight">154</i>&nbsp;            } else if (columnIndex == 4) {</b>
-<i class="no-highlight">155</i>&nbsp;                try {
-<b class="nc"><i class="no-highlight">156</i>&nbsp;                    row.setEmail((String) aValue);</b>
-<b class="nc"><i class="no-highlight">157</i>&nbsp;                } catch (IllegalArgumentException e) {</b>
-<b class="nc"><i class="no-highlight">158</i>&nbsp;                    JOptionPane.showMessageDialog(null, &quot;Dit is geen valide email adres.&quot;);</b>
-<b class="nc"><i class="no-highlight">159</i>&nbsp;                }</b>
-<b class="fc"><i class="no-highlight">160</i>&nbsp;            } else if (columnIndex == 5) {</b>
-<b class="fc"><i class="no-highlight">161</i>&nbsp;                    row.setGeboorteJaar((Integer) aValue);</b>
-<b class="fc"><i class="no-highlight">162</i>&nbsp;            } else if (columnIndex == 6) {</b>
-<b class="fc"><i class="no-highlight">163</i>&nbsp;                row.setGeslacht((eGeslacht) aValue);</b>
-<b class="nc"><i class="no-highlight">164</i>&nbsp;            } else if (columnIndex == 7) {</b>
-<i class="no-highlight">165</i>&nbsp;                try {
-<b class="nc"><i class="no-highlight">166</i>&nbsp;                    row.setTeam(findTeam((String) aValue));</b>
-<b class="nc"><i class="no-highlight">167</i>&nbsp;                } catch (IllegalArgumentException e) {</b>
-<b class="nc"><i class="no-highlight">168</i>&nbsp;                    JOptionPane.showMessageDialog(null, &quot;Dit is geen team voor een &quot; + row.getGeslacht() + &quot; uit &quot; + row.getGeboorteJaar() + &quot;.&quot;);</b>
-<b class="nc"><i class="no-highlight">169</i>&nbsp;                }</b>
-<i class="no-highlight">170</i>&nbsp;            }
-<b class="fc"><i class="no-highlight">171</i>&nbsp;        }</b>
-<i class="no-highlight">172</i>&nbsp;
-<i class="no-highlight">173</i>&nbsp;        @Override
-<i class="no-highlight">174</i>&nbsp;        public boolean isCellEditable(int rowIndex, int columnIndex) {
-<b class="fc"><i class="no-highlight">175</i>&nbsp;            return (columnIndex &gt; 1);</b>
-<i class="no-highlight">176</i>&nbsp;        }
-<i class="no-highlight">177</i>&nbsp;
-<i class="no-highlight">178</i>&nbsp;        public boolean removeLid(int index) {
-<b class="fc"><i class="no-highlight">179</i>&nbsp;            if (getLeden().get(index) != null) {</b>
-<b class="fc"><i class="no-highlight">180</i>&nbsp;                getLeden().remove(index);</b>
-<b class="fc"><i class="no-highlight">181</i>&nbsp;                return true;</b>
-<i class="no-highlight">182</i>&nbsp;            }
-<b class="nc"><i class="no-highlight">183</i>&nbsp;            return false;</b>
-<i class="no-highlight">184</i>&nbsp;        }
-<i class="no-highlight">185</i>&nbsp;    }
-<i class="no-highlight">186</i>&nbsp;
-<i class="no-highlight">187</i>&nbsp;    //Als een team verwijderd wordt moet het team leeg gezet worden bij de leden uit het team
-<i class="no-highlight">188</i>&nbsp;    public void removeTeamFromLid(Team team) {
-<b class="fc"><i class="no-highlight">189</i>&nbsp;        for (Lid lid : getLeden()) {</b>
-<i class="no-highlight">190</i>&nbsp;            try {
-<b class="fc"><i class="no-highlight">191</i>&nbsp;                if (lid.getTeam().equals(team)) {</b>
-<b class="fc"><i class="no-highlight">192</i>&nbsp;                    lid.setTeam(null);</b>
-<i class="no-highlight">193</i>&nbsp;                }
-<b class="fc"><i class="no-highlight">194</i>&nbsp;            } catch (NullPointerException e) {</b>
-<i class="no-highlight">195</i>&nbsp;                // als een lid geen team meer heeft
-<b class="fc"><i class="no-highlight">196</i>&nbsp;            }</b>
-<i class="no-highlight">197</i>&nbsp;
-<b class="fc"><i class="no-highlight">198</i>&nbsp;        }</b>
-<b class="fc"><i class="no-highlight">199</i>&nbsp;    }</b>
-<i class="no-highlight">200</i>&nbsp;}
+<i class="no-highlight">40</i>&nbsp;    }
+<i class="no-highlight">41</i>&nbsp;
+<i class="no-highlight">42</i>&nbsp;    public TeamModel getTeamModel() {
+<b class="fc"><i class="no-highlight">43</i>&nbsp;        return teamModel;</b>
+<i class="no-highlight">44</i>&nbsp;    }
+<i class="no-highlight">45</i>&nbsp;
+<i class="no-highlight">46</i>&nbsp;    class TeamModel extends ModelHandler {
+<i class="no-highlight">47</i>&nbsp;
+<b class="fc"><i class="no-highlight">48</i>&nbsp;        public TeamModel() {</b>
+<b class="fc"><i class="no-highlight">49</i>&nbsp;            super(new String[]{&quot;Teamnaam&quot;, &quot;Klasse&quot;, &quot;Geslacht&quot;}</b>
+<i class="no-highlight">50</i>&nbsp;                    , new Class[]{String.class, eKlasse.class, eGeslacht.class}
+<i class="no-highlight">51</i>&nbsp;            );
+<b class="fc"><i class="no-highlight">52</i>&nbsp;        }</b>
+<i class="no-highlight">53</i>&nbsp;
+<i class="no-highlight">54</i>&nbsp;        @Override
+<i class="no-highlight">55</i>&nbsp;        public Object getValueAt(int rowIndex, int columnIndex) {
+<b class="fc"><i class="no-highlight">56</i>&nbsp;            Team row = getTeams().get(rowIndex);</b>
+<b class="fc"><i class="no-highlight">57</i>&nbsp;            if (columnIndex == 0) {</b>
+<b class="fc"><i class="no-highlight">58</i>&nbsp;                return row.getNaam();</b>
+<b class="fc"><i class="no-highlight">59</i>&nbsp;            } else if (columnIndex == 1) {</b>
+<b class="fc"><i class="no-highlight">60</i>&nbsp;                return row.getKlasse();</b>
+<b class="fc"><i class="no-highlight">61</i>&nbsp;            } else if (columnIndex == 2) {</b>
+<b class="fc"><i class="no-highlight">62</i>&nbsp;                return row.getGeslacht();</b>
+<i class="no-highlight">63</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">64</i>&nbsp;            return null;</b>
+<i class="no-highlight">65</i>&nbsp;        }
+<i class="no-highlight">66</i>&nbsp;
+<i class="no-highlight">67</i>&nbsp;        @Override
+<i class="no-highlight">68</i>&nbsp;        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+<b class="fc"><i class="no-highlight">69</i>&nbsp;            Team row = getTeams().get(rowIndex);</b>
+<b class="fc"><i class="no-highlight">70</i>&nbsp;            if (columnIndex == 0) {</b>
+<b class="fc"><i class="no-highlight">71</i>&nbsp;                row.setNaam((String) aValue);</b>
+<b class="fc"><i class="no-highlight">72</i>&nbsp;            } else if (columnIndex == 1) {</b>
+<b class="fc"><i class="no-highlight">73</i>&nbsp;                row.setKlasse((eKlasse) aValue);</b>
+<b class="fc"><i class="no-highlight">74</i>&nbsp;            } else if (columnIndex == 2) {</b>
+<b class="fc"><i class="no-highlight">75</i>&nbsp;                row.setGeslacht((eGeslacht) aValue);</b>
+<i class="no-highlight">76</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">77</i>&nbsp;        }</b>
+<i class="no-highlight">78</i>&nbsp;
+<i class="no-highlight">79</i>&nbsp;        @Override
+<i class="no-highlight">80</i>&nbsp;        public int getRowCount() {
+<b class="fc"><i class="no-highlight">81</i>&nbsp;            return getTeams().size();</b>
+<i class="no-highlight">82</i>&nbsp;        }
+<i class="no-highlight">83</i>&nbsp;
+<i class="no-highlight">84</i>&nbsp;        @Override
+<i class="no-highlight">85</i>&nbsp;        public boolean isCellEditable(int rowIndex, int columnIndex) {
+<b class="fc"><i class="no-highlight">86</i>&nbsp;            return true;</b>
+<i class="no-highlight">87</i>&nbsp;        }
+<i class="no-highlight">88</i>&nbsp;
+<i class="no-highlight">89</i>&nbsp;        public boolean removeTeam(int index) {
+<b class="fc"><i class="no-highlight">90</i>&nbsp;            if (getTeams().get(index) != null) {</b>
+<b class="fc"><i class="no-highlight">91</i>&nbsp;                getTeams().remove(index);</b>
+<b class="fc"><i class="no-highlight">92</i>&nbsp;                return true;</b>
+<i class="no-highlight">93</i>&nbsp;            }
+<b class="nc"><i class="no-highlight">94</i>&nbsp;            return false;</b>
+<i class="no-highlight">95</i>&nbsp;        }
+<i class="no-highlight">96</i>&nbsp;    }
+<i class="no-highlight">97</i>&nbsp;
+<i class="no-highlight">98</i>&nbsp;    public LedenModel getLedenModel() {
+<b class="fc"><i class="no-highlight">99</i>&nbsp;        return ledenModel;</b>
+<i class="no-highlight">100</i>&nbsp;    }
+<i class="no-highlight">101</i>&nbsp;
+<i class="no-highlight">102</i>&nbsp;    class LedenModel extends ModelHandler {
+<i class="no-highlight">103</i>&nbsp;
+<b class="fc"><i class="no-highlight">104</i>&nbsp;        public LedenModel() {</b>
+<b class="fc"><i class="no-highlight">105</i>&nbsp;            super(new String[]{&quot;Achternaam&quot;, &quot;Voornaam&quot;, &quot;TussenVoegsel&quot;, &quot;TelefoonNummer&quot;, &quot;e-mail&quot;, &quot;GeboorteJaar&quot;, &quot;Geslacht&quot;, &quot;Team&quot;}</b>
+<i class="no-highlight">106</i>&nbsp;                    , new Class[]{String.class, String.class, String.class, String.class, String.class, Integer.class, eGeslacht.class, Team.class}
+<i class="no-highlight">107</i>&nbsp;            );
+<b class="fc"><i class="no-highlight">108</i>&nbsp;        }</b>
+<i class="no-highlight">109</i>&nbsp;
+<i class="no-highlight">110</i>&nbsp;        @Override
+<i class="no-highlight">111</i>&nbsp;        public Object getValueAt(int rowIndex, int columnIndex) {
+<b class="fc"><i class="no-highlight">112</i>&nbsp;            Lid row = getLeden().get(rowIndex);</b>
+<b class="fc"><i class="no-highlight">113</i>&nbsp;            if (columnIndex == 0) {</b>
+<b class="fc"><i class="no-highlight">114</i>&nbsp;                return row.getAchterNaam();</b>
+<b class="fc"><i class="no-highlight">115</i>&nbsp;            } else if (columnIndex == 1) {</b>
+<b class="fc"><i class="no-highlight">116</i>&nbsp;                return row.getVoorNaam();</b>
+<b class="fc"><i class="no-highlight">117</i>&nbsp;            } else if (columnIndex == 2) {</b>
+<b class="fc"><i class="no-highlight">118</i>&nbsp;                return row.getTussenVoegsel();</b>
+<b class="fc"><i class="no-highlight">119</i>&nbsp;            } else if (columnIndex == 3) {</b>
+<b class="fc"><i class="no-highlight">120</i>&nbsp;                return row.getTelefoonNummer();</b>
+<b class="fc"><i class="no-highlight">121</i>&nbsp;            } else if (columnIndex == 4) {</b>
+<b class="fc"><i class="no-highlight">122</i>&nbsp;                return row.getEmail();</b>
+<b class="fc"><i class="no-highlight">123</i>&nbsp;            } else if (columnIndex == 5) {</b>
+<b class="fc"><i class="no-highlight">124</i>&nbsp;                return row.getGeboorteJaar();</b>
+<b class="fc"><i class="no-highlight">125</i>&nbsp;            } else if (columnIndex == 6) {</b>
+<b class="fc"><i class="no-highlight">126</i>&nbsp;                return row.getGeslacht();</b>
+<b class="fc"><i class="no-highlight">127</i>&nbsp;            } else if (columnIndex == 7) {</b>
+<b class="fc"><i class="no-highlight">128</i>&nbsp;                Team team = row.getTeam();</b>
+<b class="fc"><i class="no-highlight">129</i>&nbsp;                if (team == null) {</b>
+<b class="fc"><i class="no-highlight">130</i>&nbsp;                    return &quot;&quot;;</b>
+<i class="no-highlight">131</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">132</i>&nbsp;                return row.getTeam().getNaam();</b>
+<i class="no-highlight">133</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">134</i>&nbsp;            return null;</b>
+<i class="no-highlight">135</i>&nbsp;        }
+<i class="no-highlight">136</i>&nbsp;
+<i class="no-highlight">137</i>&nbsp;        @Override
+<i class="no-highlight">138</i>&nbsp;        public int getRowCount() {
+<b class="fc"><i class="no-highlight">139</i>&nbsp;            return getLeden().size();</b>
+<i class="no-highlight">140</i>&nbsp;        }
+<i class="no-highlight">141</i>&nbsp;
+<i class="no-highlight">142</i>&nbsp;        @Override
+<i class="no-highlight">143</i>&nbsp;        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+<b class="fc"><i class="no-highlight">144</i>&nbsp;            Lid row = getLeden().get(rowIndex);</b>
+<b class="fc"><i class="no-highlight">145</i>&nbsp;            if (columnIndex == 2) {</b>
+<b class="fc"><i class="no-highlight">146</i>&nbsp;                row.setTussenVoegsel((String) aValue);</b>
+<b class="fc"><i class="no-highlight">147</i>&nbsp;            } else if (columnIndex == 3) {</b>
+<i class="no-highlight">148</i>&nbsp;                try {
+<b class="fc"><i class="no-highlight">149</i>&nbsp;                    row.setTelefoonNummer((String) aValue);</b>
+<b class="nc"><i class="no-highlight">150</i>&nbsp;                } catch (IllegalArgumentException e) {</b>
+<b class="nc"><i class="no-highlight">151</i>&nbsp;                    JOptionPane.showMessageDialog(null, &quot;Dit is geen valide telefoonnummer.&quot;);</b>
+<b class="fc"><i class="no-highlight">152</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">153</i>&nbsp;            } else if (columnIndex == 4) {</b>
+<i class="no-highlight">154</i>&nbsp;                try {
+<b class="nc"><i class="no-highlight">155</i>&nbsp;                    row.setEmail((String) aValue);</b>
+<b class="nc"><i class="no-highlight">156</i>&nbsp;                } catch (IllegalArgumentException e) {</b>
+<b class="nc"><i class="no-highlight">157</i>&nbsp;                    JOptionPane.showMessageDialog(null, &quot;Dit is geen valide email adres.&quot;);</b>
+<b class="nc"><i class="no-highlight">158</i>&nbsp;                }</b>
+<b class="fc"><i class="no-highlight">159</i>&nbsp;            } else if (columnIndex == 5) {</b>
+<b class="fc"><i class="no-highlight">160</i>&nbsp;                    row.setGeboorteJaar((Integer) aValue);</b>
+<b class="fc"><i class="no-highlight">161</i>&nbsp;            } else if (columnIndex == 6) {</b>
+<b class="fc"><i class="no-highlight">162</i>&nbsp;                row.setGeslacht((eGeslacht) aValue);</b>
+<b class="nc"><i class="no-highlight">163</i>&nbsp;            } else if (columnIndex == 7) {</b>
+<i class="no-highlight">164</i>&nbsp;                try {
+<b class="nc"><i class="no-highlight">165</i>&nbsp;                    row.setTeam(findTeam((String) aValue));</b>
+<b class="nc"><i class="no-highlight">166</i>&nbsp;                } catch (IllegalArgumentException e) {</b>
+<b class="nc"><i class="no-highlight">167</i>&nbsp;                    JOptionPane.showMessageDialog(null, &quot;Dit is geen team voor een &quot; + row.getGeslacht() + &quot; uit &quot; + row.getGeboorteJaar() + &quot;.&quot;);</b>
+<b class="nc"><i class="no-highlight">168</i>&nbsp;                }</b>
+<i class="no-highlight">169</i>&nbsp;            }
+<b class="fc"><i class="no-highlight">170</i>&nbsp;        }</b>
+<i class="no-highlight">171</i>&nbsp;
+<i class="no-highlight">172</i>&nbsp;        @Override
+<i class="no-highlight">173</i>&nbsp;        public boolean isCellEditable(int rowIndex, int columnIndex) {
+<b class="fc"><i class="no-highlight">174</i>&nbsp;            return (columnIndex &gt; 1);</b>
+<i class="no-highlight">175</i>&nbsp;        }
+<i class="no-highlight">176</i>&nbsp;
+<i class="no-highlight">177</i>&nbsp;        public boolean removeLid(int index) {
+<b class="fc"><i class="no-highlight">178</i>&nbsp;            if (getLeden().get(index) != null) {</b>
+<b class="fc"><i class="no-highlight">179</i>&nbsp;                getLeden().remove(index);</b>
+<b class="fc"><i class="no-highlight">180</i>&nbsp;                return true;</b>
+<i class="no-highlight">181</i>&nbsp;            }
+<b class="nc"><i class="no-highlight">182</i>&nbsp;            return false;</b>
+<i class="no-highlight">183</i>&nbsp;        }
+<i class="no-highlight">184</i>&nbsp;    }
+<i class="no-highlight">185</i>&nbsp;
+<i class="no-highlight">186</i>&nbsp;    //Als een team verwijderd wordt moet het team leeg gezet worden bij de leden uit het team
+<i class="no-highlight">187</i>&nbsp;    public void removeTeamFromLid(Team team) {
+<b class="fc"><i class="no-highlight">188</i>&nbsp;        for (Lid lid : getLeden()) {</b>
+<i class="no-highlight">189</i>&nbsp;            try {
+<b class="fc"><i class="no-highlight">190</i>&nbsp;                if (lid.getTeam().equals(team)) {</b>
+<b class="fc"><i class="no-highlight">191</i>&nbsp;                    lid.setTeam(null);</b>
+<i class="no-highlight">192</i>&nbsp;                }
+<b class="fc"><i class="no-highlight">193</i>&nbsp;            } catch (NullPointerException e) {</b>
+<i class="no-highlight">194</i>&nbsp;                // als een lid geen team meer heeft
+<b class="fc"><i class="no-highlight">195</i>&nbsp;            }</b>
+<i class="no-highlight">196</i>&nbsp;
+<b class="fc"><i class="no-highlight">197</i>&nbsp;        }</b>
+<b class="fc"><i class="no-highlight">198</i>&nbsp;    }</b>
+<i class="no-highlight">199</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -363,7 +362,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2021-07-27 23:01</div>
+    <div style="float:right;">generated on 2021-07-29 23:04</div>
 </div>
 </body>
 </html>

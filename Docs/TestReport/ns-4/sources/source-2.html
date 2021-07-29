@@ -69,7 +69,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/24)
+    (0/20)
   </span>
 </td>
   </tr>
@@ -88,7 +88,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/12)
+    (0/13)
   </span>
 </td>
   </tr>
@@ -164,7 +164,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     0%
   </span>
   <span class="absValue">
-    (0/95)
+    (0/92)
   </span>
 </td>
 </tr>
@@ -179,169 +179,168 @@ Current scope:     <a href="../../index.html">all classes</a>
 <i class="no-highlight">2</i>&nbsp;
 <i class="no-highlight">3</i>&nbsp;import nl.fam_krijgsman.zovoc.data.LidData;
 <i class="no-highlight">4</i>&nbsp;import nl.fam_krijgsman.zovoc.data.TeamData;
-<i class="no-highlight">5</i>&nbsp;import nl.fam_krijgsman.zovoc.model.*;
-<i class="no-highlight">6</i>&nbsp;
-<i class="no-highlight">7</i>&nbsp;import java.awt.event.ActionEvent;
-<i class="no-highlight">8</i>&nbsp;import java.awt.event.ActionListener;
-<i class="no-highlight">9</i>&nbsp;import java.util.List;
-<i class="no-highlight">10</i>&nbsp;
-<b class="nc"><i class="no-highlight">11</i>&nbsp;class BeheerController {</b>
-<i class="no-highlight">12</i>&nbsp;    private final BeheerView beheerView;
-<i class="no-highlight">13</i>&nbsp;    private final BeheerModel beheerModel;
-<i class="no-highlight">14</i>&nbsp;
-<b class="nc"><i class="no-highlight">15</i>&nbsp;    public BeheerController(BeheerView beheerView, BeheerModel beheerModel) {</b>
-<b class="nc"><i class="no-highlight">16</i>&nbsp;        this.beheerView = beheerView;</b>
-<b class="nc"><i class="no-highlight">17</i>&nbsp;        this.beheerModel = beheerModel;</b>
-<i class="no-highlight">18</i>&nbsp;
-<i class="no-highlight">19</i>&nbsp;        //koppel acties aan menu items
-<b class="nc"><i class="no-highlight">20</i>&nbsp;        this.beheerView.getZovocMenuBar().getLedenMenuItem().addActionListener(new MenuListener());</b>
-<b class="nc"><i class="no-highlight">21</i>&nbsp;        this.beheerView.getZovocMenuBar().getTeamMenuItem().addActionListener(new MenuListener());</b>
-<b class="nc"><i class="no-highlight">22</i>&nbsp;        this.beheerView.getZovocMenuBar().getExitMenuItem().addActionListener(new MenuListener());</b>
-<i class="no-highlight">23</i>&nbsp;
-<i class="no-highlight">24</i>&nbsp;        //Data vullen teams en leden
-<i class="no-highlight">25</i>&nbsp;        //Teams zijn randvoorwaardelijk voor leden
-<b class="nc"><i class="no-highlight">26</i>&nbsp;        List&lt;Team&gt; teams = TeamData.maakTeamLijst();</b>
-<b class="nc"><i class="no-highlight">27</i>&nbsp;        for (Team team: teams) {</b>
-<b class="nc"><i class="no-highlight">28</i>&nbsp;            this.beheerModel.addTeam(team);</b>
-<b class="nc"><i class="no-highlight">29</i>&nbsp;        }</b>
-<b class="nc"><i class="no-highlight">30</i>&nbsp;        List&lt;Lid&gt; leden = LidData.maakLidLijstMetTeam(this.beheerModel.getTeams());</b>
-<b class="nc"><i class="no-highlight">31</i>&nbsp;        for (Lid lid: leden) {</b>
-<b class="nc"><i class="no-highlight">32</i>&nbsp;            this.beheerModel.addLid(lid);</b>
-<b class="nc"><i class="no-highlight">33</i>&nbsp;        }</b>
-<i class="no-highlight">34</i>&nbsp;
-<i class="no-highlight">35</i>&nbsp;        //LedenPanel acties
-<b class="nc"><i class="no-highlight">36</i>&nbsp;        this.beheerView.getLedenPanel().getVoegToeLid().addActionListener(new LedenViewListener());</b>
-<b class="nc"><i class="no-highlight">37</i>&nbsp;        this.beheerView.getLedenPanel().getVerwijderLid().addActionListener(new LedenViewListener());</b>
-<b class="nc"><i class="no-highlight">38</i>&nbsp;        this.beheerView.getLedenPanel().getLedenTable().setModel(beheerModel.getLedenModel());</b>
-<b class="nc"><i class="no-highlight">39</i>&nbsp;        this.beheerView.getLedenPanel().makeLedenTable();</b>
-<b class="nc"><i class="no-highlight">40</i>&nbsp;        fillLedenTeamBox();</b>
-<i class="no-highlight">41</i>&nbsp;
-<i class="no-highlight">42</i>&nbsp;        //Lid toevoegen acties
-<b class="nc"><i class="no-highlight">43</i>&nbsp;        this.beheerView.getAddLidPanel().getToevoegButton().addActionListener(new AddLedenViewListener());</b>
-<b class="nc"><i class="no-highlight">44</i>&nbsp;        this.beheerView.getAddLidPanel().getCancelButton().addActionListener(new AddLedenViewListener());</b>
-<i class="no-highlight">45</i>&nbsp;
-<i class="no-highlight">46</i>&nbsp;
-<i class="no-highlight">47</i>&nbsp;        //TeamPanel acties
-<b class="nc"><i class="no-highlight">48</i>&nbsp;        this.beheerView.getTeamPanel().getVoegToeTeam().addActionListener(new TeamViewListener());</b>
-<b class="nc"><i class="no-highlight">49</i>&nbsp;        this.beheerView.getTeamPanel().getVerwijderTeam().addActionListener(new TeamViewListener());</b>
-<b class="nc"><i class="no-highlight">50</i>&nbsp;        this.beheerView.getTeamPanel().getTeamTable().setModel(beheerModel.getTeamModel());</b>
-<b class="nc"><i class="no-highlight">51</i>&nbsp;        this.beheerView.getTeamPanel().makeTeamTable();</b>
-<i class="no-highlight">52</i>&nbsp;
-<i class="no-highlight">53</i>&nbsp;        //Team toevoegen acties
-<b class="nc"><i class="no-highlight">54</i>&nbsp;        this.beheerView.getAddTeamPanel().getToevoegButton().addActionListener(new AddTeamViewListener());</b>
-<b class="nc"><i class="no-highlight">55</i>&nbsp;        this.beheerView.getAddTeamPanel().getCancelButton().addActionListener(new AddTeamViewListener());</b>
-<i class="no-highlight">56</i>&nbsp;    }
-<i class="no-highlight">57</i>&nbsp;
-<b class="nc"><i class="no-highlight">58</i>&nbsp;    class MenuListener implements ActionListener {</b>
-<i class="no-highlight">59</i>&nbsp;        @Override
-<i class="no-highlight">60</i>&nbsp;        public void actionPerformed(ActionEvent e) {
-<b class="nc"><i class="no-highlight">61</i>&nbsp;            if (e.getSource().equals(beheerView.getZovocMenuBar().getLedenMenuItem())) {</b>
-<b class="nc"><i class="no-highlight">62</i>&nbsp;                beheerView.switchPanel(beheerView.getLedenPanel());</b>
-<b class="nc"><i class="no-highlight">63</i>&nbsp;                fillLedenTeamBox();</b>
-<b class="nc"><i class="no-highlight">64</i>&nbsp;            } else if (e.getSource().equals(beheerView.getZovocMenuBar().getTeamMenuItem())) {</b>
-<b class="nc"><i class="no-highlight">65</i>&nbsp;                beheerView.switchPanel(beheerView.getTeamPanel());</b>
-<b class="nc"><i class="no-highlight">66</i>&nbsp;            } else if (e.getSource().equals(beheerView.getZovocMenuBar().getExitMenuItem())) {</b>
-<b class="nc"><i class="no-highlight">67</i>&nbsp;                System.exit(0);</b>
-<i class="no-highlight">68</i>&nbsp;            }
-<i class="no-highlight">69</i>&nbsp;        }
-<i class="no-highlight">70</i>&nbsp;    }
-<i class="no-highlight">71</i>&nbsp;
-<b class="nc"><i class="no-highlight">72</i>&nbsp;    class LedenViewListener implements ActionListener {</b>
-<i class="no-highlight">73</i>&nbsp;        @Override
-<i class="no-highlight">74</i>&nbsp;        public void actionPerformed(ActionEvent e) {
-<b class="nc"><i class="no-highlight">75</i>&nbsp;            if (e.getSource().equals(beheerView.getLedenPanel().getVoegToeLid())) {</b>
-<b class="nc"><i class="no-highlight">76</i>&nbsp;                beheerView.switchPanel(beheerView.getAddLidPanel());</b>
-<b class="nc"><i class="no-highlight">77</i>&nbsp;            } else if (e.getSource().equals(beheerView.getLedenPanel().getVerwijderLid())) {</b>
-<b class="nc"><i class="no-highlight">78</i>&nbsp;                int rowIndex = beheerView.getLedenPanel().getLedenTable().getSelectedRow();</b>
-<b class="nc"><i class="no-highlight">79</i>&nbsp;                if ((rowIndex != -1) &amp;&amp; (rowIndex &lt; beheerModel.getLeden().size())) {</b>
-<b class="nc"><i class="no-highlight">80</i>&nbsp;                    beheerModel.getLedenModel().removeLid(rowIndex);</b>
-<b class="nc"><i class="no-highlight">81</i>&nbsp;                    beheerView.switchPanel(beheerView.getLedenPanel());</b>
-<i class="no-highlight">82</i>&nbsp;                } else {
-<b class="nc"><i class="no-highlight">83</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Selecteer eerst een rij.&quot;);</b>
-<i class="no-highlight">84</i>&nbsp;                }
-<i class="no-highlight">85</i>&nbsp;            }
-<i class="no-highlight">86</i>&nbsp;        }
-<i class="no-highlight">87</i>&nbsp;    }
-<i class="no-highlight">88</i>&nbsp;
-<b class="nc"><i class="no-highlight">89</i>&nbsp;    class AddLedenViewListener implements ActionListener {</b>
-<i class="no-highlight">90</i>&nbsp;        @Override
-<i class="no-highlight">91</i>&nbsp;        public void actionPerformed(ActionEvent e) {
-<b class="nc"><i class="no-highlight">92</i>&nbsp;            if (e.getSource().equals(beheerView.getAddLidPanel().getToevoegButton())) {</b>
-<b class="nc"><i class="no-highlight">93</i>&nbsp;                String achterNaam = beheerView.getAddLidPanel().getAchterNaamField();</b>
-<b class="nc"><i class="no-highlight">94</i>&nbsp;                String voorNaam = beheerView.getAddLidPanel().getVoorNaamField();</b>
-<b class="nc"><i class="no-highlight">95</i>&nbsp;                String tussenVoegsel = beheerView.getAddLidPanel().getTussenVoegselField();</b>
-<b class="nc"><i class="no-highlight">96</i>&nbsp;                String telefoonNummer = beheerView.getAddLidPanel().getTelefoonField();</b>
-<b class="nc"><i class="no-highlight">97</i>&nbsp;                String email = beheerView.getAddLidPanel().getEmailField();</b>
-<b class="nc"><i class="no-highlight">98</i>&nbsp;                String geboorteJaarString = beheerView.getAddLidPanel().getGeboorteJaarField();</b>
-<b class="nc"><i class="no-highlight">99</i>&nbsp;                eGeslacht geslacht = beheerView.getAddLidPanel().getGeslacht();</b>
-<i class="no-highlight">100</i>&nbsp;
-<b class="nc"><i class="no-highlight">101</i>&nbsp;                if (achterNaam.isEmpty() &amp;&amp; voorNaam.isEmpty() &amp;&amp; geboorteJaarString.isEmpty()) {</b>
-<b class="nc"><i class="no-highlight">102</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Achter-, voornaam of geboorte jaar is nog leeg.&quot;);</b>
-<b class="nc"><i class="no-highlight">103</i>&nbsp;                } else if (!TelefoonNummer.isValideTelefoonNummer(telefoonNummer)) {</b>
-<b class="nc"><i class="no-highlight">104</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Dat is geen geldig telefoonnummer.&quot;);</b>
-<b class="nc"><i class="no-highlight">105</i>&nbsp;                } else if (!Email.isValideEmail(email)) {</b>
-<b class="nc"><i class="no-highlight">106</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Dat is geen geldig email adres.&quot;);</b>
-<i class="no-highlight">107</i>&nbsp;                } else {
-<i class="no-highlight">108</i>&nbsp;                    try {
-<b class="nc"><i class="no-highlight">109</i>&nbsp;                        Integer geboorteJaar = Integer.parseInt(geboorteJaarString);</b>
-<b class="nc"><i class="no-highlight">110</i>&nbsp;                        beheerModel.addLid(new Lid(achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email, geboorteJaar, geslacht));</b>
-<b class="nc"><i class="no-highlight">111</i>&nbsp;                        beheerView.getAddLidPanel().clearTextFields();</b>
-<b class="nc"><i class="no-highlight">112</i>&nbsp;                        beheerView.switchPanel(beheerView.getLedenPanel());</b>
-<b class="nc"><i class="no-highlight">113</i>&nbsp;                    } catch (NumberFormatException nfe) {</b>
-<b class="nc"><i class="no-highlight">114</i>&nbsp;                        beheerView.displayErrorMessage(&quot;Dat is geen valide geboorte jaar.&quot;);</b>
-<b class="nc"><i class="no-highlight">115</i>&nbsp;                    }</b>
-<i class="no-highlight">116</i>&nbsp;                }
-<b class="nc"><i class="no-highlight">117</i>&nbsp;            } else if (e.getSource().equals(beheerView.getAddLidPanel().getCancelButton())) {</b>
-<b class="nc"><i class="no-highlight">118</i>&nbsp;                beheerView.switchPanel(beheerView.getLedenPanel());</b>
-<i class="no-highlight">119</i>&nbsp;            }
-<i class="no-highlight">120</i>&nbsp;        }
-<i class="no-highlight">121</i>&nbsp;    }
-<i class="no-highlight">122</i>&nbsp;
-<b class="nc"><i class="no-highlight">123</i>&nbsp;    class TeamViewListener implements ActionListener {</b>
-<i class="no-highlight">124</i>&nbsp;        @Override
-<i class="no-highlight">125</i>&nbsp;        public void actionPerformed(ActionEvent e) {
-<b class="nc"><i class="no-highlight">126</i>&nbsp;            if (e.getSource().equals(beheerView.getTeamPanel().getVoegToeTeam())) {</b>
-<b class="nc"><i class="no-highlight">127</i>&nbsp;                beheerView.switchPanel(beheerView.getAddTeamPanel());</b>
-<b class="nc"><i class="no-highlight">128</i>&nbsp;            } else if (e.getSource().equals(beheerView.getTeamPanel().getVerwijderTeam())) {</b>
-<b class="nc"><i class="no-highlight">129</i>&nbsp;                int rowIndex = beheerView.getTeamPanel().getTeamTable().getSelectedRow();</b>
-<b class="nc"><i class="no-highlight">130</i>&nbsp;                if ((rowIndex != -1) &amp;&amp; (rowIndex &lt; beheerModel.getTeams().size())) {</b>
-<b class="nc"><i class="no-highlight">131</i>&nbsp;                    beheerModel.removeTeamFromLid(beheerModel.getTeams().get(rowIndex));</b>
-<b class="nc"><i class="no-highlight">132</i>&nbsp;                    beheerModel.getTeamModel().removeTeam(rowIndex);</b>
-<b class="nc"><i class="no-highlight">133</i>&nbsp;                    beheerView.switchPanel(beheerView.getTeamPanel());</b>
-<i class="no-highlight">134</i>&nbsp;                } else {
-<b class="nc"><i class="no-highlight">135</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Selecteer eerst een rij.&quot;);</b>
-<i class="no-highlight">136</i>&nbsp;                }
-<i class="no-highlight">137</i>&nbsp;            }
-<i class="no-highlight">138</i>&nbsp;        }
-<i class="no-highlight">139</i>&nbsp;    }
-<i class="no-highlight">140</i>&nbsp;
-<b class="nc"><i class="no-highlight">141</i>&nbsp;    class AddTeamViewListener implements ActionListener {</b>
-<i class="no-highlight">142</i>&nbsp;        @Override
-<i class="no-highlight">143</i>&nbsp;        public void actionPerformed(ActionEvent e) {
-<b class="nc"><i class="no-highlight">144</i>&nbsp;            if (e.getSource().equals(beheerView.getAddTeamPanel().getToevoegButton())) {</b>
-<b class="nc"><i class="no-highlight">145</i>&nbsp;                String naam = beheerView.getAddTeamPanel().getTeamField();</b>
-<b class="nc"><i class="no-highlight">146</i>&nbsp;                if (naam.isEmpty()) {</b>
-<b class="nc"><i class="no-highlight">147</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Teamnaam moet gevuld zijn&quot;);</b>
-<i class="no-highlight">148</i>&nbsp;                } else {
-<b class="nc"><i class="no-highlight">149</i>&nbsp;                    eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();</b>
-<b class="nc"><i class="no-highlight">150</i>&nbsp;                    eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();</b>
-<b class="nc"><i class="no-highlight">151</i>&nbsp;                    beheerModel.addTeam(new Team(naam, klasse, geslacht));</b>
-<b class="nc"><i class="no-highlight">152</i>&nbsp;                    beheerView.getAddTeamPanel().clearTextFields();</b>
-<b class="nc"><i class="no-highlight">153</i>&nbsp;                    beheerView.switchPanel(beheerView.getTeamPanel());</b>
-<i class="no-highlight">154</i>&nbsp;                }
-<b class="nc"><i class="no-highlight">155</i>&nbsp;            } else if (e.getSource().equals(beheerView.getAddTeamPanel().getCancelButton())) {</b>
-<b class="nc"><i class="no-highlight">156</i>&nbsp;                beheerView.switchPanel(beheerView.getTeamPanel());</b>
-<i class="no-highlight">157</i>&nbsp;            }
-<i class="no-highlight">158</i>&nbsp;        }
-<i class="no-highlight">159</i>&nbsp;    }
-<i class="no-highlight">160</i>&nbsp;
-<i class="no-highlight">161</i>&nbsp;    public void fillLedenTeamBox() {
-<b class="nc"><i class="no-highlight">162</i>&nbsp;        this.beheerView.getLedenPanel().getTeamBox().removeAllItems();</b>
-<b class="nc"><i class="no-highlight">163</i>&nbsp;        for (Team team : this.beheerModel.getTeams()) {</b>
-<b class="nc"><i class="no-highlight">164</i>&nbsp;            this.beheerView.getLedenPanel().getTeamBox().addItem(team.getNaam());</b>
-<b class="nc"><i class="no-highlight">165</i>&nbsp;        }</b>
-<i class="no-highlight">166</i>&nbsp;    }
-<i class="no-highlight">167</i>&nbsp;}
+<i class="no-highlight">5</i>&nbsp;import nl.fam_krijgsman.zovoc.model.Lid;
+<i class="no-highlight">6</i>&nbsp;import nl.fam_krijgsman.zovoc.model.Team;
+<i class="no-highlight">7</i>&nbsp;import nl.fam_krijgsman.zovoc.model.eGeslacht;
+<i class="no-highlight">8</i>&nbsp;import nl.fam_krijgsman.zovoc.model.eKlasse;
+<i class="no-highlight">9</i>&nbsp;
+<i class="no-highlight">10</i>&nbsp;import java.awt.event.ActionEvent;
+<i class="no-highlight">11</i>&nbsp;import java.awt.event.ActionListener;
+<i class="no-highlight">12</i>&nbsp;import java.util.List;
+<i class="no-highlight">13</i>&nbsp;
+<b class="nc"><i class="no-highlight">14</i>&nbsp;class BeheerController {</b>
+<i class="no-highlight">15</i>&nbsp;    private final BeheerView beheerView;
+<i class="no-highlight">16</i>&nbsp;    private final BeheerModel beheerModel;
+<i class="no-highlight">17</i>&nbsp;
+<b class="nc"><i class="no-highlight">18</i>&nbsp;    public BeheerController(BeheerView beheerView, BeheerModel beheerModel) {</b>
+<b class="nc"><i class="no-highlight">19</i>&nbsp;        this.beheerView = beheerView;</b>
+<b class="nc"><i class="no-highlight">20</i>&nbsp;        this.beheerModel = beheerModel;</b>
+<i class="no-highlight">21</i>&nbsp;
+<i class="no-highlight">22</i>&nbsp;        //koppel acties aan menu items
+<b class="nc"><i class="no-highlight">23</i>&nbsp;        this.beheerView.getZovocMenuBar().getLedenMenuItem().addActionListener(new MenuListener());</b>
+<b class="nc"><i class="no-highlight">24</i>&nbsp;        this.beheerView.getZovocMenuBar().getTeamMenuItem().addActionListener(new MenuListener());</b>
+<b class="nc"><i class="no-highlight">25</i>&nbsp;        this.beheerView.getZovocMenuBar().getExitMenuItem().addActionListener(new MenuListener());</b>
+<i class="no-highlight">26</i>&nbsp;
+<i class="no-highlight">27</i>&nbsp;        //Data vullen teams en leden
+<i class="no-highlight">28</i>&nbsp;        //Teams zijn randvoorwaardelijk voor leden
+<b class="nc"><i class="no-highlight">29</i>&nbsp;        List&lt;Team&gt; teams = TeamData.maakTeamLijst();</b>
+<b class="nc"><i class="no-highlight">30</i>&nbsp;        for (Team team : teams) {</b>
+<b class="nc"><i class="no-highlight">31</i>&nbsp;            this.beheerModel.addTeam(team);</b>
+<b class="nc"><i class="no-highlight">32</i>&nbsp;        }</b>
+<b class="nc"><i class="no-highlight">33</i>&nbsp;        List&lt;Lid&gt; leden = LidData.maakLidLijstMetTeam(this.beheerModel.getTeams());</b>
+<b class="nc"><i class="no-highlight">34</i>&nbsp;        for (Lid lid : leden) {</b>
+<b class="nc"><i class="no-highlight">35</i>&nbsp;            this.beheerModel.addLid(lid);</b>
+<b class="nc"><i class="no-highlight">36</i>&nbsp;        }</b>
+<i class="no-highlight">37</i>&nbsp;
+<i class="no-highlight">38</i>&nbsp;        //LedenPanel acties
+<b class="nc"><i class="no-highlight">39</i>&nbsp;        this.beheerView.getLedenPanel().getVoegToeLid().addActionListener(new LedenViewListener());</b>
+<b class="nc"><i class="no-highlight">40</i>&nbsp;        this.beheerView.getLedenPanel().getVerwijderLid().addActionListener(new LedenViewListener());</b>
+<b class="nc"><i class="no-highlight">41</i>&nbsp;        this.beheerView.getLedenPanel().getLedenTable().setModel(beheerModel.getLedenModel());</b>
+<b class="nc"><i class="no-highlight">42</i>&nbsp;        this.beheerView.getLedenPanel().makeLedenTable();</b>
+<b class="nc"><i class="no-highlight">43</i>&nbsp;        fillLedenTeamBox();</b>
+<i class="no-highlight">44</i>&nbsp;
+<i class="no-highlight">45</i>&nbsp;        //Lid toevoegen acties
+<b class="nc"><i class="no-highlight">46</i>&nbsp;        this.beheerView.getAddLidPanel().getToevoegButton().addActionListener(new AddLedenViewListener());</b>
+<b class="nc"><i class="no-highlight">47</i>&nbsp;        this.beheerView.getAddLidPanel().getCancelButton().addActionListener(new AddLedenViewListener());</b>
+<i class="no-highlight">48</i>&nbsp;
+<i class="no-highlight">49</i>&nbsp;
+<i class="no-highlight">50</i>&nbsp;        //TeamPanel acties
+<b class="nc"><i class="no-highlight">51</i>&nbsp;        this.beheerView.getTeamPanel().getVoegToeTeam().addActionListener(new TeamViewListener());</b>
+<b class="nc"><i class="no-highlight">52</i>&nbsp;        this.beheerView.getTeamPanel().getVerwijderTeam().addActionListener(new TeamViewListener());</b>
+<b class="nc"><i class="no-highlight">53</i>&nbsp;        this.beheerView.getTeamPanel().getTeamTable().setModel(beheerModel.getTeamModel());</b>
+<b class="nc"><i class="no-highlight">54</i>&nbsp;        this.beheerView.getTeamPanel().makeTeamTable();</b>
+<i class="no-highlight">55</i>&nbsp;
+<i class="no-highlight">56</i>&nbsp;        //Team toevoegen acties
+<b class="nc"><i class="no-highlight">57</i>&nbsp;        this.beheerView.getAddTeamPanel().getToevoegButton().addActionListener(new AddTeamViewListener());</b>
+<b class="nc"><i class="no-highlight">58</i>&nbsp;        this.beheerView.getAddTeamPanel().getCancelButton().addActionListener(new AddTeamViewListener());</b>
+<i class="no-highlight">59</i>&nbsp;    }
+<i class="no-highlight">60</i>&nbsp;
+<b class="nc"><i class="no-highlight">61</i>&nbsp;    class MenuListener implements ActionListener {</b>
+<i class="no-highlight">62</i>&nbsp;        @Override
+<i class="no-highlight">63</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i class="no-highlight">64</i>&nbsp;            if (e.getSource().equals(beheerView.getZovocMenuBar().getLedenMenuItem())) {</b>
+<b class="nc"><i class="no-highlight">65</i>&nbsp;                beheerView.switchPanel(beheerView.getLedenPanel());</b>
+<b class="nc"><i class="no-highlight">66</i>&nbsp;                fillLedenTeamBox();</b>
+<b class="nc"><i class="no-highlight">67</i>&nbsp;            } else if (e.getSource().equals(beheerView.getZovocMenuBar().getTeamMenuItem())) {</b>
+<b class="nc"><i class="no-highlight">68</i>&nbsp;                beheerView.switchPanel(beheerView.getTeamPanel());</b>
+<b class="nc"><i class="no-highlight">69</i>&nbsp;            } else if (e.getSource().equals(beheerView.getZovocMenuBar().getExitMenuItem())) {</b>
+<b class="nc"><i class="no-highlight">70</i>&nbsp;                System.exit(0);</b>
+<i class="no-highlight">71</i>&nbsp;            }
+<i class="no-highlight">72</i>&nbsp;        }
+<i class="no-highlight">73</i>&nbsp;    }
+<i class="no-highlight">74</i>&nbsp;
+<b class="nc"><i class="no-highlight">75</i>&nbsp;    class LedenViewListener implements ActionListener {</b>
+<i class="no-highlight">76</i>&nbsp;        @Override
+<i class="no-highlight">77</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i class="no-highlight">78</i>&nbsp;            if (e.getSource().equals(beheerView.getLedenPanel().getVoegToeLid())) {</b>
+<b class="nc"><i class="no-highlight">79</i>&nbsp;                beheerView.switchPanel(beheerView.getAddLidPanel());</b>
+<b class="nc"><i class="no-highlight">80</i>&nbsp;            } else if (e.getSource().equals(beheerView.getLedenPanel().getVerwijderLid())) {</b>
+<b class="nc"><i class="no-highlight">81</i>&nbsp;                int rowIndex = beheerView.getLedenPanel().getLedenTable().getSelectedRow();</b>
+<b class="nc"><i class="no-highlight">82</i>&nbsp;                if ((rowIndex != -1) &amp;&amp; (rowIndex &lt; beheerModel.getLeden().size())) {</b>
+<b class="nc"><i class="no-highlight">83</i>&nbsp;                    beheerModel.getLedenModel().removeLid(rowIndex);</b>
+<b class="nc"><i class="no-highlight">84</i>&nbsp;                    beheerView.switchPanel(beheerView.getLedenPanel());</b>
+<i class="no-highlight">85</i>&nbsp;                } else {
+<b class="nc"><i class="no-highlight">86</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Selecteer eerst een rij.&quot;);</b>
+<i class="no-highlight">87</i>&nbsp;                }
+<i class="no-highlight">88</i>&nbsp;            }
+<i class="no-highlight">89</i>&nbsp;        }
+<i class="no-highlight">90</i>&nbsp;    }
+<i class="no-highlight">91</i>&nbsp;
+<b class="nc"><i class="no-highlight">92</i>&nbsp;    class AddLedenViewListener implements ActionListener {</b>
+<i class="no-highlight">93</i>&nbsp;        @Override
+<i class="no-highlight">94</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i class="no-highlight">95</i>&nbsp;            if (e.getSource().equals(beheerView.getAddLidPanel().getToevoegButton())) {</b>
+<b class="nc"><i class="no-highlight">96</i>&nbsp;                String achterNaam = beheerView.getAddLidPanel().getAchterNaamField();</b>
+<b class="nc"><i class="no-highlight">97</i>&nbsp;                String voorNaam = beheerView.getAddLidPanel().getVoorNaamField();</b>
+<b class="nc"><i class="no-highlight">98</i>&nbsp;                String tussenVoegsel = beheerView.getAddLidPanel().getTussenVoegselField();</b>
+<b class="nc"><i class="no-highlight">99</i>&nbsp;                String telefoonNummer = beheerView.getAddLidPanel().getTelefoonField();</b>
+<b class="nc"><i class="no-highlight">100</i>&nbsp;                String email = beheerView.getAddLidPanel().getEmailField();</b>
+<b class="nc"><i class="no-highlight">101</i>&nbsp;                String geboorteJaarString = beheerView.getAddLidPanel().getGeboorteJaarField();</b>
+<b class="nc"><i class="no-highlight">102</i>&nbsp;                eGeslacht geslacht = beheerView.getAddLidPanel().getGeslacht();</b>
+<i class="no-highlight">103</i>&nbsp;
+<i class="no-highlight">104</i>&nbsp;                try {
+<b class="nc"><i class="no-highlight">105</i>&nbsp;                    Integer geboorteJaar = Integer.parseInt(geboorteJaarString);</b>
+<b class="nc"><i class="no-highlight">106</i>&nbsp;                    beheerModel.addLid(new Lid(achterNaam, voorNaam, tussenVoegsel, telefoonNummer, email, geboorteJaar, geslacht));</b>
+<b class="nc"><i class="no-highlight">107</i>&nbsp;                    beheerView.getAddLidPanel().clearTextFields();</b>
+<b class="nc"><i class="no-highlight">108</i>&nbsp;                    beheerView.switchPanel(beheerView.getLedenPanel());</b>
+<b class="nc"><i class="no-highlight">109</i>&nbsp;                } catch (NumberFormatException nfe) {</b>
+<b class="nc"><i class="no-highlight">110</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Dat is geen valide geboorte jaar.&quot;);</b>
+<b class="nc"><i class="no-highlight">111</i>&nbsp;                } catch (IllegalArgumentException iae) {</b>
+<b class="nc"><i class="no-highlight">112</i>&nbsp;                    beheerView.displayErrorMessage(iae.getMessage());</b>
+<b class="nc"><i class="no-highlight">113</i>&nbsp;                }</b>
+<i class="no-highlight">114</i>&nbsp;
+<b class="nc"><i class="no-highlight">115</i>&nbsp;            } else if (e.getSource().equals(beheerView.getAddLidPanel().getCancelButton())) {</b>
+<b class="nc"><i class="no-highlight">116</i>&nbsp;                beheerView.switchPanel(beheerView.getLedenPanel());</b>
+<i class="no-highlight">117</i>&nbsp;            }
+<i class="no-highlight">118</i>&nbsp;        }
+<i class="no-highlight">119</i>&nbsp;    }
+<i class="no-highlight">120</i>&nbsp;
+<b class="nc"><i class="no-highlight">121</i>&nbsp;    class TeamViewListener implements ActionListener {</b>
+<i class="no-highlight">122</i>&nbsp;        @Override
+<i class="no-highlight">123</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i class="no-highlight">124</i>&nbsp;            if (e.getSource().equals(beheerView.getTeamPanel().getVoegToeTeam())) {</b>
+<b class="nc"><i class="no-highlight">125</i>&nbsp;                beheerView.switchPanel(beheerView.getAddTeamPanel());</b>
+<b class="nc"><i class="no-highlight">126</i>&nbsp;            } else if (e.getSource().equals(beheerView.getTeamPanel().getVerwijderTeam())) {</b>
+<b class="nc"><i class="no-highlight">127</i>&nbsp;                int rowIndex = beheerView.getTeamPanel().getTeamTable().getSelectedRow();</b>
+<b class="nc"><i class="no-highlight">128</i>&nbsp;                if ((rowIndex != -1) &amp;&amp; (rowIndex &lt; beheerModel.getTeams().size())) {</b>
+<b class="nc"><i class="no-highlight">129</i>&nbsp;                    beheerModel.removeTeamFromLid(beheerModel.getTeams().get(rowIndex));</b>
+<b class="nc"><i class="no-highlight">130</i>&nbsp;                    beheerModel.getTeamModel().removeTeam(rowIndex);</b>
+<b class="nc"><i class="no-highlight">131</i>&nbsp;                    beheerView.switchPanel(beheerView.getTeamPanel());</b>
+<i class="no-highlight">132</i>&nbsp;                } else {
+<b class="nc"><i class="no-highlight">133</i>&nbsp;                    beheerView.displayErrorMessage(&quot;Selecteer eerst een rij.&quot;);</b>
+<i class="no-highlight">134</i>&nbsp;                }
+<i class="no-highlight">135</i>&nbsp;            }
+<i class="no-highlight">136</i>&nbsp;        }
+<i class="no-highlight">137</i>&nbsp;    }
+<i class="no-highlight">138</i>&nbsp;
+<b class="nc"><i class="no-highlight">139</i>&nbsp;    class AddTeamViewListener implements ActionListener {</b>
+<i class="no-highlight">140</i>&nbsp;        @Override
+<i class="no-highlight">141</i>&nbsp;        public void actionPerformed(ActionEvent e) {
+<b class="nc"><i class="no-highlight">142</i>&nbsp;            if (e.getSource().equals(beheerView.getAddTeamPanel().getToevoegButton())) {</b>
+<b class="nc"><i class="no-highlight">143</i>&nbsp;                String naam = beheerView.getAddTeamPanel().getTeamField();</b>
+<i class="no-highlight">144</i>&nbsp;
+<i class="no-highlight">145</i>&nbsp;                try {
+<b class="nc"><i class="no-highlight">146</i>&nbsp;                    eKlasse klasse = beheerView.getAddTeamPanel().getKlasse();</b>
+<b class="nc"><i class="no-highlight">147</i>&nbsp;                    eGeslacht geslacht = beheerView.getAddTeamPanel().getGeslacht();</b>
+<b class="nc"><i class="no-highlight">148</i>&nbsp;                    beheerModel.addTeam(new Team(naam, klasse, geslacht));</b>
+<b class="nc"><i class="no-highlight">149</i>&nbsp;                    beheerView.getAddTeamPanel().clearTextFields();</b>
+<b class="nc"><i class="no-highlight">150</i>&nbsp;                    beheerView.switchPanel(beheerView.getTeamPanel());</b>
+<b class="nc"><i class="no-highlight">151</i>&nbsp;                } catch (IllegalArgumentException iae) {</b>
+<b class="nc"><i class="no-highlight">152</i>&nbsp;                    beheerView.displayErrorMessage(iae.getMessage());</b>
+<b class="nc"><i class="no-highlight">153</i>&nbsp;                }</b>
+<b class="nc"><i class="no-highlight">154</i>&nbsp;            } else if (e.getSource().equals(beheerView.getAddTeamPanel().getCancelButton())) {</b>
+<b class="nc"><i class="no-highlight">155</i>&nbsp;                beheerView.switchPanel(beheerView.getTeamPanel());</b>
+<i class="no-highlight">156</i>&nbsp;            }
+<i class="no-highlight">157</i>&nbsp;        }
+<i class="no-highlight">158</i>&nbsp;    }
+<i class="no-highlight">159</i>&nbsp;
+<i class="no-highlight">160</i>&nbsp;    public void fillLedenTeamBox() {
+<b class="nc"><i class="no-highlight">161</i>&nbsp;        this.beheerView.getLedenPanel().getTeamBox().removeAllItems();</b>
+<b class="nc"><i class="no-highlight">162</i>&nbsp;        for (Team team : this.beheerModel.getTeams()) {</b>
+<b class="nc"><i class="no-highlight">163</i>&nbsp;            this.beheerView.getLedenPanel().getTeamBox().addItem(team.getNaam());</b>
+<b class="nc"><i class="no-highlight">164</i>&nbsp;        }</b>
+<i class="no-highlight">165</i>&nbsp;    }
+<i class="no-highlight">166</i>&nbsp;}
 </div>
 </pre>
 </div>
@@ -368,7 +367,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2021-07-27 23:01</div>
+    <div style="float:right;">generated on 2021-07-29 23:04</div>
 </div>
 </body>
 </html>
