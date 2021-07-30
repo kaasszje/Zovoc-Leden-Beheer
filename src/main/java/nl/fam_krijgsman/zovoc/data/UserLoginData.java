@@ -12,7 +12,7 @@ public class UserLoginData {
         userLogins.put("zovocuser","zovocpassword");
         userLogins.put("admin","password");
         userLogins.put("martijn","test");
-        userLogins.put("edward", "edward");
+        userLogins.put("test", "test");
         return userLogins;
     }
 
