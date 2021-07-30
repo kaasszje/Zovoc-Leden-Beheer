@@ -1,5 +1,7 @@
 package nl.fam_krijgsman.zovoc.model;
 
+import java.time.Year;
+
 public class Lid {
     private String achterNaam, voorNaam, tussenVoegsel;
     private Email email;
@@ -97,7 +99,13 @@ public class Lid {
     }
 
     public void setGeboorteJaar(int geboorteJaar) {
-        this.geboorteJaar = geboorteJaar;
+        // geboorte jaar moet kleiner zijn dan huidige datum
+        int currentYear = Year.now().getValue();
+        if (currentYear > geboorteJaar) {
+            this.geboorteJaar = geboorteJaar;
+        } else {
+            throw new IllegalArgumentException("Geboorte jaar moet voor huidige jaar liggen");
+        }
     }
 
     public eGeslacht getGeslacht() {

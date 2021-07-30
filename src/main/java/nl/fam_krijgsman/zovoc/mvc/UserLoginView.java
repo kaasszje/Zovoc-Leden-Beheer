@@ -7,64 +7,68 @@ import java.awt.event.FocusListener;
 import java.util.Objects;
 
 class UserLoginView extends JFrame {
-    private ImageIcon logo, icon;
-    private JButton loginButton;
-    private JTextField userField;
-    private JPasswordField passField;
-    private JLabel userLabel, passLabel, logoLabel;
-    private JPanel topPanel, centerPanel, bottomPanel;
+    private final ImageIcon logo;
+    private final ImageIcon icon;
+    private final JButton loginButton;
+    private final JTextField userField;
+    private final JPasswordField passField;
+    private final JLabel userLabel;
+    private final JLabel passLabel;
+    private final JLabel logoLabel;
+    private final JPanel topPanel;
+    private final JPanel centerPanel;
+    private final JPanel bottomPanel;
 
     public UserLoginView() {
 
-        topPanel = new JPanel();
+        this.topPanel = new JPanel();
 
         //Create logo fot label en setup label
-        logo = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/Zovoc_logo.png")));
-        icon = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/favicon.png")));
+        this.logo = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/Zovoc_logo.png")));
+        this.icon = new ImageIcon(Objects.requireNonNull(UserLoginView.class.getResource("/Images/favicon.png")));
 
-        logoLabel = new JLabel();
-        logoLabel.setIcon(logo);
-        logoLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.logoLabel = new JLabel();
+        this.logoLabel.setIcon(logo);
+        this.logoLabel.setHorizontalAlignment(JLabel.CENTER);
 
         //Add logo to topPanel
-        topPanel.add(logoLabel);
+        this.topPanel.add(logoLabel);
 
         //Create center panel
-        centerPanel = new JPanel();
-        centerPanel.setLayout(new GridLayout(2, 2));
-        centerPanel.setSize(100, 50);
+        this.centerPanel = new JPanel();
+        this.centerPanel.setLayout(new GridLayout(2, 2));
+        this.centerPanel.setSize(100, 50);
 
-        userLabel = new JLabel("Gebruikersnaam:");
-        userLabel.setSize(30, 25);
-        userLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.userLabel = new JLabel("Gebruikersnaam:");
+        this.userLabel.setSize(30, 25);
+        this.userLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        passLabel = new JLabel("Wachtwoord:");
-        passLabel.setSize(30, 25);
-        passLabel.setHorizontalAlignment(JLabel.CENTER);
+        this.passLabel = new JLabel("Wachtwoord:");
+        this.passLabel.setSize(30, 25);
+        this.passLabel.setHorizontalAlignment(JLabel.CENTER);
 
-        userField = new JTextField("", 30);
-        userField.setHorizontalAlignment(JTextField.CENTER);
+        this.userField = new JTextField("", 30);
+        this.userField.setHorizontalAlignment(JTextField.CENTER);
 
-        passField = new JPasswordField("", 30);
-        passField.setHorizontalAlignment(JPasswordField.CENTER);
+        this.passField = new JPasswordField("", 30);
+        this.passField.setHorizontalAlignment(JPasswordField.CENTER);
 
-        centerPanel.add(userLabel);
-        centerPanel.add(userField);
+        this.centerPanel.add(userLabel);
+        this.centerPanel.add(userField);
 
-        centerPanel.add(passLabel);
-        centerPanel.add(passField);
+        this.centerPanel.add(passLabel);
+        this.centerPanel.add(passField);
 
-        centerPanel.setSize(100, 50);
+        this.centerPanel.setSize(100, 50);
 
-        loginButton = new JButton("Login");
-        loginButton.setHorizontalAlignment(JButton.CENTER);
-        loginButton.setSize(30, 20);
+        this.loginButton = new JButton("Login");
+        this.loginButton.setHorizontalAlignment(JButton.CENTER);
+        this.loginButton.setSize(30, 20);
 
 
-        bottomPanel = new JPanel();
-        bottomPanel.setLayout(new FlowLayout());
-        bottomPanel.add(loginButton);
-
+        this.bottomPanel = new JPanel();
+        this.bottomPanel.setLayout(new FlowLayout());
+        this.bottomPanel.add(loginButton);
 
         //Setup frame
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

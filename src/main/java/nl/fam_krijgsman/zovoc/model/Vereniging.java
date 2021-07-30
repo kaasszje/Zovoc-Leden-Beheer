@@ -4,25 +4,25 @@ import java.util.ArrayList;
 
 public class Vereniging implements LidDao, TeamDao {
     private final String naam;
-    private ArrayList<Lid> leden;
-    private ArrayList<Team> teams;
+    private final ArrayList<Lid> leden;
+    private final ArrayList<Team> teams;
 
     public Vereniging(String naam) {
         this.naam = naam;
-        leden = new ArrayList<>();
-        teams = new ArrayList<>();
+        this.leden = new ArrayList<>();
+        this.teams = new ArrayList<>();
     }
 
     public String getNaam() {
-        return naam;
+        return this.naam;
     }
 
     public ArrayList<Lid> getLeden() {
-        return leden;
+        return this.leden;
     }
 
     public ArrayList<Team> getTeams() {
-        return teams;
+        return this.teams;
     }
 
     private Lid findLid(Lid lid) {
@@ -30,7 +30,7 @@ public class Vereniging implements LidDao, TeamDao {
     }
 
     public Lid findLid(String achterNaam, String voorNaam) {
-        for (Lid lid : leden) {
+        for (Lid lid : this.leden) {
             if ((lid.getAchterNaam().equals(achterNaam)) && (lid.getVoorNaam().equals(voorNaam))) {
                 return lid;
             }
@@ -41,7 +41,7 @@ public class Vereniging implements LidDao, TeamDao {
     public boolean addLid(Lid lid) {
         //controlleer of lid al bestaat
         if (findLid(lid) == null) {
-            leden.add(lid);
+            this.leden.add(lid);
             return true;
         }
         //lid bestond al
@@ -51,7 +51,7 @@ public class Vereniging implements LidDao, TeamDao {
     public boolean removeLid(Lid lid) {
         //controlleer of lid voorkomt
         if (findLid(lid) != null) {
-            leden.remove(lid);
+            this.leden.remove(lid);
             return true;
         }
         //lid bestond nog niet
@@ -63,7 +63,7 @@ public class Vereniging implements LidDao, TeamDao {
     }
 
     public Team findTeam(String naam) {
-        for (Team team: teams) {
+        for (Team team : this.teams) {
             if (team.getNaam().equals(naam)) {
                 return team;
             }
@@ -74,7 +74,7 @@ public class Vereniging implements LidDao, TeamDao {
     public boolean addTeam(Team team) {
         //controlleer of team al bestaat
         if (findTeam(team) == null) {
-            teams.add(team);
+            this.teams.add(team);
             return true;
         }
         // team bestond all
@@ -92,6 +92,6 @@ public class Vereniging implements LidDao, TeamDao {
     }
 
     public int aantalLeden() {
-        return leden.size();
+        return this.leden.size();
     }
 }

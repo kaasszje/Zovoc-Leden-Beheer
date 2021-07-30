@@ -15,15 +15,15 @@ public class Team {
     }
 
     public String getNaam() {
-        return naam;
+        return this.naam;
     }
 
     public eKlasse getKlasse() {
-        return klasse;
+        return this.klasse;
     }
 
     public eGeslacht getGeslacht() {
-        return geslacht;
+        return this.geslacht;
     }
 
     public void setKlasse(eKlasse klasse) {

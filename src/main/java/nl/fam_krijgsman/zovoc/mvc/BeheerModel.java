@@ -25,17 +25,17 @@ class BeheerModel extends Vereniging {
 
         @Override
         public String getColumnName(int column) {
-            return columnNames[column];
+            return this.columnNames[column];
         }
 
         @Override
         public Class<?> getColumnClass(int columnIndex) {
-            return columnClass[columnIndex];
+            return this.columnClass[columnIndex];
         }
 
         @Override
         public int getColumnCount() {
-            return columnNames.length;
+            return this.columnNames.length;
         }
     }
 
@@ -148,16 +148,20 @@ class BeheerModel extends Vereniging {
                 try {
                     row.setTelefoonNummer((String) aValue);
                 } catch (IllegalArgumentException e) {
-                    JOptionPane.showMessageDialog(null, "Dit is geen valide telefoonnummer.");
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             } else if (columnIndex == 4) {
                 try {
                     row.setEmail((String) aValue);
                 } catch (IllegalArgumentException e) {
-                    JOptionPane.showMessageDialog(null, "Dit is geen valide email adres.");
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
             } else if (columnIndex == 5) {
+                try {
                     row.setGeboorteJaar((Integer) aValue);
+                } catch (IllegalArgumentException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                }
             } else if (columnIndex == 6) {
                 row.setGeslacht((eGeslacht) aValue);
             } else if (columnIndex == 7) {

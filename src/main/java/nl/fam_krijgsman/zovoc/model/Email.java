@@ -7,7 +7,7 @@ public class Email {
     private String email;
 
     public Email(String email) {
-        setEmail(email);
+        this.setEmail(email);
     }
 
     public String getEmail() {

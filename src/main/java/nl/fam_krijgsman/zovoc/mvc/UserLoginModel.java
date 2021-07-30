@@ -9,13 +9,12 @@ class UserLoginModel {
     private String userName;
 
     public UserLoginModel() {
-        //add test data
-        userLogins = new HashMap<>();
+        this.userLogins = new HashMap<>();
     }
 
     public final boolean isValidLogin(String user, String password) {
         try {
-            return userLogins.get(user).equals(password);
+            return this.userLogins.get(user).equals(password);
         } catch (NullPointerException e) {
             return false;
         }
@@ -26,11 +25,11 @@ class UserLoginModel {
     }
 
     public Boolean getLoggedIn() {
-        return isLoggedIn;
+        return this.isLoggedIn;
     }
 
     public String getUserName() {
-        return userName;
+        return this.userName;
     }
 
     public void setUserName(String userName) {
