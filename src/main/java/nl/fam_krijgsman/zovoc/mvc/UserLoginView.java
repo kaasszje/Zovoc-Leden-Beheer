@@ -42,10 +42,8 @@ class UserLoginView extends JFrame {
         passLabel.setSize(30, 25);
         passLabel.setHorizontalAlignment(JLabel.CENTER);
 
-
         userField = new JTextField("", 30);
         userField.setHorizontalAlignment(JTextField.CENTER);
-
 
         passField = new JPasswordField("", 30);
         passField.setHorizontalAlignment(JPasswordField.CENTER);

@@ -58,7 +58,6 @@ public class LidData {
             if (team.getGeslacht().equals(eGeslacht.MIX)) {
                 // Een mix team bestaat uit mannen en vrouwen
                 int randomInt = (int)Math.round(Math.random());
-                System.out.println("RandomInt = " + randomInt);
                 if (randomInt == 1) {
                     geslacht = eGeslacht.MAN;
                 } else {
