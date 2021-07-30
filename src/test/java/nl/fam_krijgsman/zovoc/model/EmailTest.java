@@ -13,27 +13,27 @@ class EmailTest {
 
     @BeforeEach
     void init() {
-        email = new Email("user@domain.com");
+        this.email = new Email("user@domain.com");
     }
 
     @Test
     @DisplayName("Valideer gezet email adres")
     void getEmail() {
-        assertEquals("user@domain.com", email.getEmail());
+        assertEquals("user@domain.com", this.email.getEmail());
     }
 
     @Test
     @DisplayName("Valideer correcte setEmail")
     void setEmailValide() {
         String validEmail = "user.name@domain.com";
-        assertDoesNotThrow(() -> email.setEmail(validEmail));
+        assertDoesNotThrow(() -> this.email.setEmail(validEmail));
     }
 
     @Test
     @DisplayName("Valideer incorrecte setEmail")
     void setEmailInValid() {
         String invalidEmail = ".username@yahoo.com";
-        assertThrows(IllegalArgumentException.class, () -> email.setEmail(invalidEmail));
+        assertThrows(IllegalArgumentException.class, () -> this.email.setEmail(invalidEmail));
     }
 
     @ParameterizedTest

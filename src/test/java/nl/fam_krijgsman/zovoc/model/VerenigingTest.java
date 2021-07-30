@@ -1,6 +1,9 @@
 package nl.fam_krijgsman.zovoc.model;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -11,39 +14,39 @@ class VerenigingTest {
 
     @BeforeEach
     void init() {
-        lid = new Lid("Krijgsman", "Martijn", "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
-        team = new Team("Test team", eKlasse.PROMOTIE, eGeslacht.MAN);
-        vereniging = new Vereniging("test");
+        this.lid = new Lid("Krijgsman", "Martijn", "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
+        this.team = new Team("Test team", eKlasse.PROMOTIE, eGeslacht.MAN);
+        this.vereniging = new Vereniging("test");
     }
 
     @Test
     @DisplayName("Zoek toegevoegd lid")
     void findLidFound() {
-        vereniging.addLid(lid);
-        assertEquals(lid, vereniging.findLid(lid.getAchterNaam(), lid.getVoorNaam()));
+        this.vereniging.addLid(lid);
+        assertEquals(lid, this.vereniging.findLid(this.lid.getAchterNaam(), this.lid.getVoorNaam()));
     }
 
     @Test
     @DisplayName("Zoek niet bestaand lid")
     void FindLidNotFound() {
-        //assertNull(vereniging.findLid("ik besta", "niet"));
+        assertNull(this.vereniging.findLid("ik besta", "niet"));
     }
 
     @Test
     @DisplayName("Voeg lid toe wat al bestaat")
     void addLid() {
         //voeg lid toe die al vastaat moet niet kunnen
-        vereniging.addLid(lid);
+        this.vereniging.addLid(this.lid);
         //2e keer zelf lid toevoegen
-        assertFalse(vereniging.addLid(lid));
+        assertFalse(this.vereniging.addLid(this.lid));
     }
 
     @Test
     @DisplayName("Verwijder niet bestaand lid")
     void removeLidNotExisting() {
         Assertions.assertAll(
-                () -> assertEquals(0, vereniging.getLeden().size()),
-                () -> assertFalse(vereniging.removeLid(lid))
+                () -> assertEquals(0, this.vereniging.getLeden().size()),
+                () -> assertFalse(this.vereniging.removeLid(lid))
         );
     }
 
@@ -52,48 +55,48 @@ class VerenigingTest {
     void removeLidExisting() {
         Assertions.assertAll(
                 // nieuwe verening zonder leden
-                () -> assertEquals(0, vereniging.getLeden().size()),
+                () -> assertEquals(0, this.vereniging.getLeden().size()),
                 // voeg lid toe
-                () -> assertTrue(vereniging.addLid(lid)),
+                () -> assertTrue(this.vereniging.addLid(this.lid)),
                 // moet nu 1 lid zijn
-                () -> assertEquals(1, vereniging.getLeden().size()),
+                () -> assertEquals(1, this.vereniging.getLeden().size()),
                 // verwijder lid
-                () -> assertTrue(vereniging.removeLid(lid)),
+                () -> assertTrue(this.vereniging.removeLid(this.lid)),
                 // nu weer 0 leden
-                () -> assertEquals(0, vereniging.getLeden().size())
+                () -> assertEquals(0, this.vereniging.getLeden().size())
         );
     }
 
     @Test
     @DisplayName("Zoek niet bestaand team")
     void findTeamNotExisting() {
-        assertNull(vereniging.findTeam("ik besta lekker niet"));
+        assertNull(this.vereniging.findTeam("ik besta lekker niet"));
     }
 
     @Test
     @DisplayName("Zoek bestaand team")
     void findTeamExisting() {
-        vereniging.addTeam(team);
-        assertEquals(team, vereniging.findTeam(team.getNaam()));
+        this.vereniging.addTeam(this.team);
+        assertEquals(this.team, this.vereniging.findTeam(this.team.getNaam()));
     }
 
     @Test
     @DisplayName("Team toevoegen")
     void addTeamExisting() {
-        vereniging.addTeam(team);
-        assertFalse(vereniging.addTeam(team));
+        this.vereniging.addTeam(this.team);
+        assertFalse(this.vereniging.addTeam(this.team));
     }
 
     @Test
     @DisplayName("Nieuw team toevoegen")
     void addTeamNew() {
-        assertTrue(vereniging.addTeam(team));
+        assertTrue(this.vereniging.addTeam(this.team));
     }
 
     @Test
     @DisplayName("Verwijderd niet bestaand team")
     void removeTeamNotExisting() {
-        assertFalse(vereniging.removeTeam(team));
+        assertFalse(this.vereniging.removeTeam(this.team));
     }
 
     @Test
@@ -101,15 +104,15 @@ class VerenigingTest {
     void removeTeamExisting() {
         Assertions.assertAll(
                 // Nieuwe vereniging dus 0 teams
-                () -> assertEquals(0, vereniging.getTeams().size()),
+                () -> assertEquals(0, this.vereniging.getTeams().size()),
                 // Voeg 1 team toe
-                () -> assertTrue(vereniging.addTeam(team)),
+                () -> assertTrue(this.vereniging.addTeam(this.team)),
                 // Nu 1 team
-                () -> assertEquals(1, vereniging.getTeams().size()),
+                () -> assertEquals(1, this.vereniging.getTeams().size()),
                 // Verwijder team
-                () -> assertTrue(vereniging.removeTeam(team)),
+                () -> assertTrue(this.vereniging.removeTeam(this.team)),
                 // Nu weer 0 teams
-                () -> assertEquals(0, vereniging.getTeams().size())
+                () -> assertEquals(0, this.vereniging.getTeams().size())
         );
     }
 
@@ -118,36 +121,36 @@ class VerenigingTest {
     void aantalLeden() {
         // voeg 10 teams toe
         for (int i = 0; i < 10; i++) {
-            lid = new Lid("nummer-" + i, "naam-" + i, "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
-            vereniging.addLid(lid);
+            this.lid = new Lid("nummer-" + i, "naam-" + i, "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
+            this.vereniging.addLid(lid);
         }
-        assertEquals(10, vereniging.aantalLeden());
+        assertEquals(10, this.vereniging.aantalLeden());
     }
 
 
     @Test
     @DisplayName("Valideer naam")
     void getNaam() {
-        assertEquals("test", vereniging.getNaam());
+        assertEquals("test", this.vereniging.getNaam());
     }
 
     @Test
     @DisplayName("Valideer leden")
     void getLeden() {
         for (int i = 0; i < 10; i++) {
-            lid = new Lid("nummer-" + i, "naam-" + i, "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
-            vereniging.addLid(lid);
+            this.lid = new Lid("nummer-" + i, "naam-" + i, "", "0612345678", "user@example.com", 1981, eGeslacht.MAN);
+            this.vereniging.addLid(lid);
         }
-        assertEquals(10, vereniging.getLeden().size());
+        assertEquals(10, this.vereniging.getLeden().size());
     }
 
     @Test
     @DisplayName("Valideer teams")
     void getTeams() {
         for (int i = 0; i < 10; i++) {
-            team = new Team("team" + i, eKlasse.SENIOR, eGeslacht.VROUW);
-            vereniging.addTeam(team);
+            this.team = new Team("team" + i, eKlasse.SENIOR, eGeslacht.VROUW);
+            this.vereniging.addTeam(this.team);
         }
-        assertEquals(10, vereniging.getTeams().size());
+        assertEquals(10, this.vereniging.getTeams().size());
     }
 }

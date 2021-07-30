@@ -13,26 +13,26 @@ class TelefoonNummerTest {
 
     @BeforeEach
     void init() {
-        telefoonNummer = new TelefoonNummer("0791234567");
+        this.telefoonNummer = new TelefoonNummer("0791234567");
     }
 
 
     @Test
     void getTelefoonNummer() {
-        assertEquals("0791234567", telefoonNummer.getTelefoonNummer());
+        assertEquals("0791234567", this.telefoonNummer.getTelefoonNummer());
     }
 
     @Test
     void setTelefoonNummerValid() {
         String validTelefoonNummer = "0612345678";
-        assertDoesNotThrow(() -> telefoonNummer.setTelefoonNummer(validTelefoonNummer));
+        assertDoesNotThrow(() -> this.telefoonNummer.setTelefoonNummer(validTelefoonNummer));
     }
 
     @Test
     @DisplayName("Zet invalide telefoonnummer")
     void setTelefoonNummerInValid() {
         String invalidTelefoonNummer = "1234567";
-        assertThrows(IllegalArgumentException.class, () -> telefoonNummer.setTelefoonNummer(invalidTelefoonNummer));
+        assertThrows(IllegalArgumentException.class, () -> this.telefoonNummer.setTelefoonNummer(invalidTelefoonNummer));
     }
 
     @ParameterizedTest
