@@ -53,10 +53,21 @@ public class LidData {
 
     private static void addLeden(ArrayList<Lid> leden, Team team, Integer startJaar) {
         Lid lid;
+        eGeslacht geslacht = team.getGeslacht();
         for (int i=0;i<8;i++){
+            if (team.getGeslacht().equals(eGeslacht.MIX)) {
+                // Een mix team bestaat uit mannen en vrouwen
+                int randomInt = (int)Math.round(Math.random());
+                System.out.println("RandomInt = " + randomInt);
+                if (randomInt == 1) {
+                    geslacht = eGeslacht.MAN;
+                } else {
+                    geslacht = eGeslacht.VROUW;
+                }
+            }
             lid = new Lid(team.getNaam()+" "+team.getGeslacht().toString() + i, team.getKlasse().toString() + i,  "",
                     "06123123" + i + i, "voornaam" + i + ".achternaam" + i + "@example.com",
-                    (startJaar + i), team.getGeslacht());
+                    (startJaar + i), geslacht);
             lid.setTeam(team);
             leden.add(lid);
         }

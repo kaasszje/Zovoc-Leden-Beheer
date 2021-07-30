@@ -15,7 +15,7 @@ public class Lid {
         this.setTelefoonNummer(telefoonNummer);
         this.setEmail(email);
         this.geboorteJaar = geboorteJaar;
-        this.geslacht = geslacht;
+        this.setGeslacht(geslacht);
     }
 
     public String getAchterNaam() {
@@ -105,6 +105,9 @@ public class Lid {
     }
 
     public void setGeslacht(eGeslacht geslacht) {
+        if (geslacht.equals(eGeslacht.MIX)) {
+            throw new IllegalArgumentException("Een persoon kan geen mix geslacht hebben.");
+        }
         this.geslacht = geslacht;
     }
 }

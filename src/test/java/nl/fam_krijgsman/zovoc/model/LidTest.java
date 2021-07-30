@@ -151,7 +151,7 @@ class LidTest {
     @Test
     @DisplayName("Valideer get email-adres")
     void getEmail() {
-        String validEmail = "test@example.com"; 
+        String validEmail = "test@example.com";
         lid.setEmail(validEmail);
         assertEquals("test@example.com", lid.getEmail());
     }
@@ -179,7 +179,7 @@ class LidTest {
     @Test
     @DisplayName("Valideer team")
     void getTeam() {
-        Team team = new Team("testteam", eKlasse.SENIOR, eGeslacht.VROUW );
+        Team team = new Team("testteam", eKlasse.SENIOR, eGeslacht.VROUW);
         lid.setGeslacht(eGeslacht.VROUW);
         lid.setTeam(team);
         assertEquals(team, lid.getTeam());
@@ -197,5 +197,11 @@ class LidTest {
     void getGeslacht() {
         lid.setGeslacht(eGeslacht.VROUW);
         assertEquals(eGeslacht.VROUW, lid.getGeslacht());
+    }
+
+    @Test
+    @DisplayName("Probeer invalide geslacht toe te kennen.")
+    void setGeslachtMix() {
+        assertThrows(IllegalArgumentException.class, () -> lid.setGeslacht(eGeslacht.MIX));
     }
 }
