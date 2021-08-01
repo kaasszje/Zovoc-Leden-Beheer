@@ -1,18 +1,26 @@
 package nl.fam_krijgsman.zovoc.data;
 
+import nl.fam_krijgsman.zovoc.mvc.Password;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class UserLoginData {
 
-    public static Map<String, String> maakTestUsers() {
-        Map<String,String> userLogins = new HashMap<>();
+    public static Map<String, Password> maakTestUsers() {
+        Map<String,Password> userLogins = new HashMap<>();
 
-        // Add test logins
-        userLogins.put("zovocuser","zovocpassword");
-        userLogins.put("admin","password");
-        userLogins.put("martijn","test");
-        userLogins.put("test", "test");
+        try {
+            // Add test logins
+            userLogins.put("zovocuser", new Password("zovocpassword"));
+            userLogins.put("admin", new Password("password"));
+            userLogins.put("martijn", new Password("test"));
+            userLogins.put("test", new Password("test"));
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("Bad algorithm");
+        }
+
         return userLogins;
     }
 

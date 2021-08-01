@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 class UserLoginModel {
-    private Map<String, String> userLogins;
+    private Map<String, Password> userLogins;
     private Boolean isLoggedIn = false;
     private String userName;
 
@@ -14,13 +14,13 @@ class UserLoginModel {
 
     public final boolean isValidLogin(String user, String password) {
         try {
-            return this.userLogins.get(user).equals(password);
-        } catch (NullPointerException e) {
+            return this.userLogins.get(user).isValidPassword(password);
+        } catch (Exception e) {
             return false;
         }
     }
 
-    public void setUserLogins(Map<String, String> userLogins) {
+    public void setUserLogins(Map<String, Password> userLogins) {
         this.userLogins = userLogins;
     }
 

@@ -3,6 +3,7 @@ package nl.fam_krijgsman.zovoc.mvc;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,12 +12,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class UserLoginModelTest {
 
     @Test
-    void isValidLogin() {
+    void isValidLogin() throws NoSuchAlgorithmException {
         // test 1 niet bestaande gebruiker
         UserLoginModel userLoginModel = new UserLoginModel();
-        HashMap<String,String> userLogins = new HashMap<>();
+        HashMap<String,Password> userLogins = new HashMap<>();
         for (int i=0;i<10;i++){
-            userLogins.put("test"+i, "test"+i);
+            userLogins.put("test"+i, new Password("test"+i));
         }
         userLoginModel.setUserLogins(userLogins);
 
