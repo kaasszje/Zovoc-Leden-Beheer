@@ -1,11 +1,14 @@
 package nl.fam_krijgsman.zovoc.model;
 
+import nl.fam_krijgsman.zovoc.exception.LidAllreadyExistsException;
+import nl.fam_krijgsman.zovoc.exception.LidNotFoundException;
+
 import java.util.List;
 
-interface LidDao {
+public interface LidDao {
     List<Lid> getLeden();
-    Lid findLid(String achternaam, String voornaam);
-    boolean addLid(Lid lid);
-    boolean removeLid(Lid lid);
+    Lid findLid(String achterNaam, String voorNaam) throws LidNotFoundException;
+    void addLid(Lid lid) throws LidAllreadyExistsException;
+    void removeLid(Lid lid) throws LidNotFoundException;
     int aantalLeden();
 }

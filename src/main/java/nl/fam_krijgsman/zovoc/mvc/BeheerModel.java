@@ -1,5 +1,7 @@
 package nl.fam_krijgsman.zovoc.mvc;
 
+import nl.fam_krijgsman.zovoc.exception.LidAllreadyExistsException;
+import nl.fam_krijgsman.zovoc.exception.LidNotFoundException;
 import nl.fam_krijgsman.zovoc.model.*;
 
 import javax.swing.*;
@@ -7,13 +9,13 @@ import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
 import java.util.List;
 
-class BeheerModel extends Vereniging {
-    private final static String VERENIGING_NAAM = "Zovoc";
-    private final TeamModel teamModel = new TeamModel();
-    private final LedenModel ledenModel = new LedenModel();
+class BeheerModel {
+    private final TeamModel teamModel;
+    private final LedenModel ledenModel;
 
     public BeheerModel() {
-        super(VERENIGING_NAAM); //Default naam
+        teamModel = new TeamModel();
+        ledenModel = new LedenModel();
     }
 
     abstract class ModelHandler extends AbstractTableModel {
@@ -106,7 +108,7 @@ class BeheerModel extends Vereniging {
 
         @Override
         public Team findTeam(String naam) {
-            for (Team team: teams) {
+            for (Team team : teams) {
                 if (team.getNaam().equals(naam)) {
                     return team;
                 }
@@ -145,17 +147,19 @@ class BeheerModel extends Vereniging {
         return ledenModel;
     }
 
-    class LedenModel extends ModelHandler {
+    class LedenModel extends ModelHandler implements LidDao {
+        private ArrayList<Lid> leden;
 
         public LedenModel() {
             super(new String[]{"Achternaam", "Voornaam", "TussenVoegsel", "TelefoonNummer", "e-mail", "GeboorteJaar", "Geslacht", "Team"}
                     , new Class[]{String.class, String.class, String.class, String.class, String.class, Integer.class, eGeslacht.class, Team.class}
             );
+            leden = new ArrayList<>();
         }
 
         @Override
         public Object getValueAt(int rowIndex, int columnIndex) {
-            Lid row = getLeden().get(rowIndex);
+            Lid row = this.leden.get(rowIndex);
             if (columnIndex == 0) {
                 return row.getAchterNaam();
             } else if (columnIndex == 1) {
@@ -182,12 +186,12 @@ class BeheerModel extends Vereniging {
 
         @Override
         public int getRowCount() {
-            return getLeden().size();
+            return this.leden.size();
         }
 
         @Override
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-            Lid row = getLeden().get(rowIndex);
+            Lid row = this.leden.get(rowIndex);
             if (columnIndex == 2) {
                 row.setTussenVoegsel((String) aValue);
             } else if (columnIndex == 3) {
@@ -203,12 +207,12 @@ class BeheerModel extends Vereniging {
                     JOptionPane.showMessageDialog(null, "Dit is geen valide email adres.");
                 }
             } else if (columnIndex == 5) {
-                    row.setGeboorteJaar((Integer) aValue);
+                row.setGeboorteJaar((Integer) aValue);
             } else if (columnIndex == 6) {
                 row.setGeslacht((eGeslacht) aValue);
             } else if (columnIndex == 7) {
                 try {
-                    row.setTeam(findTeam((String) aValue));
+                    row.setTeam(teamModel.findTeam((String) aValue));
                 } catch (IllegalArgumentException e) {
                     JOptionPane.showMessageDialog(null, "Dit is geen team voor een " + row.getGeslacht() + " uit " + row.getGeboorteJaar() + ".");
                 }
@@ -221,17 +225,60 @@ class BeheerModel extends Vereniging {
         }
 
         public boolean removeLid(int index) {
-            if (getLeden().get(index) != null) {
-                getLeden().remove(index);
+            if (this.leden.get(index) != null) {
+                this.leden.remove(index);
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public List<Lid> getLeden() {
+            return this.leden;
+        }
+
+        @Override
+        public Lid findLid(String achterNaam, String voorNaam) {
+            for (Lid lid : leden) {
+                if ((lid.getAchterNaam().equals(achterNaam)) && (lid.getVoorNaam().equals(voorNaam))) {
+                    return lid;
+                }
+            }
+            return null;
+        }
+
+        private Lid findLid(Lid lid) {
+            return this.findLid(lid.getAchterNaam(), lid.getVoorNaam());
+        }
+
+        @Override
+        public void addLid(Lid lid) throws LidAllreadyExistsException {
+            if (findLid(lid) == null) {
+                leden.add(lid);
+            } else {
+                throw new LidAllreadyExistsException("Lid bestaat al");
+            }
+        }
+
+        @Override
+        public void removeLid(Lid lid) throws LidNotFoundException {
+            Lid toDeleteLid = this.findLid(lid);
+            if (toDeleteLid != null) {
+                this.leden.remove(toDeleteLid);
+            } else {
+                throw new LidNotFoundException("Lid niet gevonden");
+            }
+        }
+
+        @Override
+        public int aantalLeden() {
+            return this.leden.size();
         }
     }
 
     //Als een team verwijderd wordt moet het team leeg gezet worden bij de leden uit het team
     public void removeTeamFromLid(Team team) {
-        for (Lid lid : getLeden()) {
+        for (Lid lid : ledenModel.getLeden()) {
             try {
                 if (lid.getTeam().equals(team)) {
                     lid.setTeam(null);
